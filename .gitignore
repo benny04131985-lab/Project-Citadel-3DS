@@ -1,0 +1,64 @@
+# Generated builds
+build/
+Build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
+# Nintendo 3DS outputs
+*.3dsx
+*.cia
+*.smdh
+*.bnr
+*.elf
+
+# Compiled objects and libraries
+*.o
+*.a
+*.lib
+*.dll
+*.exe
+*.pdb
+
+# Logs and dumps
+*.log
+*.dmp
+
+# Original game data
+DATA/
+RES/
+SOUND/
+res/
+*.sf2
+*.xmi
+*.mid
+*.midi
+*.res
+*.dat
+*.gam
+*.ark
+*.crf
+*.kpf
+
+# Local/editor files
+.vscode/
+.idea/
+*.user
+*.suo
+*.swp
+*~
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc
+
+# Local preservation and patch staging
+_PROTECTED_BASELINES/
+Citadel_3D_*_PATCH/
+BEFORE_*/
+FAILED_*/
+RECOVERY_*/
+VX*_BASELINE_SOURCE/
