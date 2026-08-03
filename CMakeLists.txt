@@ -413,6 +413,66 @@ add_executable(systemshock
 	${MAC_SRC}
 )
 
+# PROJECT CITADEL C3D R0 DIRECTQUAD1: assemble and embed the native
+# Citro3D textured-quad vertex shader.
+if(NINTENDO_3DS)
+    find_program(CITADEL_PICASSO_EXECUTABLE NAMES picasso)
+    find_program(CITADEL_SHADER_PYTHON_EXECUTABLE NAMES python3 python)
+
+    if(NOT CITADEL_PICASSO_EXECUTABLE)
+        message(FATAL_ERROR
+            "Project Citadel C3D R0 requires picasso in PATH")
+    endif()
+
+    if(NOT CITADEL_SHADER_PYTHON_EXECUTABLE)
+        message(FATAL_ERROR
+            "Project Citadel C3D R0 requires python3 or python in PATH")
+    endif()
+
+    set(CITADEL_C3D_DIRECTQUAD_SHADER_SOURCE
+        "${CMAKE_SOURCE_DIR}/src/MacSrc/citadel_directquad_vshader.v.pica")
+    set(CITADEL_C3D_DIRECTQUAD_SHADER_BINARY
+        "${CMAKE_BINARY_DIR}/generated/citadel_directquad_vshader.shbin")
+    set(CITADEL_C3D_DIRECTQUAD_SHADER_HEADER
+        "${CMAKE_BINARY_DIR}/generated/citadel_directquad_vshader_shbin.h")
+    set(CITADEL_C3D_DIRECTQUAD_EMBEDDER
+        "${CMAKE_SOURCE_DIR}/tools/citadel_embed_binary.py")
+
+    add_custom_command(
+        OUTPUT "${CITADEL_C3D_DIRECTQUAD_SHADER_HEADER}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory
+                "${CMAKE_BINARY_DIR}/generated"
+        COMMAND "${CITADEL_PICASSO_EXECUTABLE}"
+                -o "${CITADEL_C3D_DIRECTQUAD_SHADER_BINARY}"
+                "${CITADEL_C3D_DIRECTQUAD_SHADER_SOURCE}"
+        COMMAND "${CITADEL_SHADER_PYTHON_EXECUTABLE}"
+                "${CITADEL_C3D_DIRECTQUAD_EMBEDDER}"
+                "${CITADEL_C3D_DIRECTQUAD_SHADER_BINARY}"
+                "${CITADEL_C3D_DIRECTQUAD_SHADER_HEADER}"
+                "citadel_directquad_vshader_shbin"
+        DEPENDS
+            "${CITADEL_C3D_DIRECTQUAD_SHADER_SOURCE}"
+            "${CITADEL_C3D_DIRECTQUAD_EMBEDDER}"
+        COMMENT "Project Citadel C3D R0: assembling direct-quad shader"
+        VERBATIM
+    )
+
+    add_custom_target(citadel_c3d_directquad_shader ALL
+        DEPENDS "${CITADEL_C3D_DIRECTQUAD_SHADER_HEADER}")
+
+    add_dependencies(systemshock citadel_c3d_directquad_shader)
+
+    target_include_directories(systemshock PRIVATE
+        "${CMAKE_BINARY_DIR}/generated")
+
+    set_source_files_properties(
+        src/MacSrc/Shock.c
+        PROPERTIES
+        OBJECT_DEPENDS "${CITADEL_C3D_DIRECTQUAD_SHADER_HEADER}"
+    )
+endif()
+
+
 
 # PROJECT CITADEL V16.1: generate splash and launch packaging.
 if(NINTENDO_3DS)

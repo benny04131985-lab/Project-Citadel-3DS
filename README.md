@@ -71,3 +71,14 @@ report.
 
 The diagnostic system has no overlay or menu and performs no per-frame SD-card
 writes.
+
+## v1.0.2 — Final Software Renderer Hotfix
+
+The R2C Citro3D transport path is the final optimized software-renderer
+baseline. Hardware measurements on New Nintendo 3DS averaged
+**33.286 FPS in mono** and
+**18.451 FPS in true stereo**, with zero
+transport mismatches, zero fallbacks, and zero GPU upload/draw failures.
+
+The game world remains software rendered in this stable hotfix. Native Citro3D
+world geometry is being developed separately and is not part of v1.0.2.

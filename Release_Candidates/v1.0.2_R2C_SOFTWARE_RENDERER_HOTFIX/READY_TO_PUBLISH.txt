@@ -1,0 +1,4 @@
+This folder contains the exact hardware-tested R2C release candidate.
+
+Review the repository diff, commit it, push it, and create the GitHub release
+only after confirming the staged binary SHA-256. No game data is included.

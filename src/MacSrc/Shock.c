@@ -56,6 +56,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <3ds.h>
 #include <citro2d.h>
 #include <citro3d.h>
+#include "citadel_directquad_vshader_shbin.h"
 #include <unistd.h>
 
 #pragma pop_macro("KEY_RIGHT")
@@ -87,6 +88,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #warning "PROJECT CITADEL 3D S3: ship polish and quiet diagnostics are ACTIVE"
 #warning "PROJECT CITADEL VX1.1-SPLASH-SYNTH-A: startup GPU ownership round trip is ACTIVE"
 #warning "PROJECT CITADEL V17-SHIP: T7 HOME fix + persistent gameplay layout are ACTIVE"
+#warning "PROJECT CITADEL C3D R0 DIRECTQUAD1: native live textured quads are ACTIVE"
+#warning "PROJECT CITADEL C3D R2C PINGPONGTILED1: overlapped cropped texture sets are ACTIVE"
 
 //--------------------
 //  Globals
@@ -151,6 +154,24 @@ static bool citadel_legacy_view_override = false;
 #define CITADEL_GPU_CONTENT_WIDTH    640
 #define CITADEL_GPU_CONTENT_HEIGHT   480
 
+
+/* PROJECT CITADEL C3D R2B CROPPEDTILED1 */
+#define CITADEL_GPU_CROPPED_TEXTURE_WIDTH  512
+#define CITADEL_GPU_CROPPED_TEXTURE_HEIGHT 256
+#define CITADEL_GPU_CROPPED_TEXTURE_PIXELS \
+    (CITADEL_GPU_CROPPED_TEXTURE_WIDTH * \
+     CITADEL_GPU_CROPPED_TEXTURE_HEIGHT)
+#define CITADEL_GPU_CROPPED_TEXTURE_BYTES \
+    (CITADEL_GPU_CROPPED_TEXTURE_PIXELS * sizeof(u16))
+
+#define CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH   400
+#define CITADEL_GPU_CROPPED_TOP_LEGACY_WIDTH  320
+#define CITADEL_GPU_CROPPED_TOP_HEIGHT        240
+#define CITADEL_GPU_CROPPED_BOTTOM_WIDTH      320
+#define CITADEL_GPU_CROPPED_BOTTOM_HEIGHT     240
+#define CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH 160
+#define CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT 120
+
 #define CITADEL_GPU_TEXTURE_PIXELS \
     (CITADEL_GPU_TEXTURE_WIDTH * CITADEL_GPU_TEXTURE_HEIGHT)
 #define CITADEL_GPU_STAGING_BYTES \
@@ -177,6 +198,162 @@ static u16 citadel_gpu_palette565[256];
 static unsigned int citadel_gpu_presented_frames = 0;
 static unsigned int citadel_gpu_upload_failures = 0;
 static unsigned int citadel_gpu_draw_failures = 0;
+
+/* PROJECT CITADEL C3D R0 DIRECTQUAD1 */
+static bool citadel_gpu_directquad_initialized = false;
+static bool citadel_gpu_directquad_program_initialized = false;
+static DVLB_s *citadel_gpu_directquad_dvlb = NULL;
+static shaderProgram_s citadel_gpu_directquad_program;
+static int citadel_gpu_directquad_projection_uniform = -1;
+static C3D_Mtx citadel_gpu_directquad_top_projection;
+static C3D_Mtx citadel_gpu_directquad_bottom_projection;
+
+/* PROJECT CITADEL C3D R1 TRANSPORTPROFILE1 */
+typedef struct citadel_c3d_profile_frame_s {
+    u64 pre_present_ticks;
+    u64 frame_begin_ticks;
+    u64 upload_total_ticks;
+    u64 palette_ticks;
+    u64 left_build_ticks;
+    u64 left_swizzle_ticks;
+    u64 right_acquire_ticks;
+    u64 right_build_ticks;
+    u64 right_swizzle_ticks;
+    u64 draw_submit_ticks;
+    u64 frame_end_ticks;
+    u64 present_total_ticks;
+    u64 cycle_total_ticks;
+} citadel_c3d_profile_frame;
+
+typedef struct citadel_c3d_profile_bucket_s {
+    u64 frames;
+    u64 pre_present_ticks;
+    u64 frame_begin_ticks;
+    u64 upload_total_ticks;
+    u64 palette_ticks;
+    u64 left_build_ticks;
+    u64 left_swizzle_ticks;
+    u64 right_acquire_ticks;
+    u64 right_build_ticks;
+    u64 right_swizzle_ticks;
+    u64 draw_submit_ticks;
+    u64 frame_end_ticks;
+    u64 present_total_ticks;
+    u64 cycle_total_ticks;
+    u64 maximum_cycle_ticks;
+    u64 maximum_present_ticks;
+} citadel_c3d_profile_bucket;
+
+static bool citadel_c3d_profile_frame_active = false;
+static u64 citadel_c3d_profile_present_started_tick = 0;
+static u64 citadel_c3d_profile_previous_end_tick = 0;
+static citadel_c3d_profile_frame citadel_c3d_profile_current;
+static citadel_c3d_profile_bucket citadel_c3d_profile_mono;
+static citadel_c3d_profile_bucket citadel_c3d_profile_stereo;
+
+
+/* PROJECT CITADEL C3D R2A DIRECTTILED1 */
+static bool citadel_gpu_directtiled_enabled = true;
+static bool citadel_gpu_directtiled_validation_attempted = false;
+static bool citadel_gpu_directtiled_validated = false;
+static unsigned long citadel_gpu_directtiled_validation_mismatches = 0;
+static unsigned long citadel_gpu_directtiled_left_frames = 0;
+static unsigned long citadel_gpu_directtiled_right_frames = 0;
+static unsigned long citadel_gpu_directtiled_fallback_eye_passes = 0;
+static int citadel_gpu_directtiled_x_source[CITADEL_GPU_CONTENT_WIDTH];
+static size_t citadel_gpu_directtiled_y_offset[CITADEL_GPU_CONTENT_HEIGHT];
+static int citadel_gpu_directtiled_map_width = 0;
+static int citadel_gpu_directtiled_map_height = 0;
+static int citadel_gpu_directtiled_map_pitch = 0;
+
+
+/* PROJECT CITADEL C3D R2B CROPPEDTILED1 */
+typedef struct citadel_gpu_cropped_map_s {
+    bool valid;
+    int source_width;
+    int source_height;
+    int source_pitch;
+    int source_x;
+    int source_y;
+    int source_w;
+    int source_h;
+    int destination_w;
+    int destination_h;
+    int texture_left;
+    int texture_top;
+    int texture_right;
+    int texture_bottom;
+    int source_x_map[CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH];
+    size_t source_y_offset[CITADEL_GPU_CROPPED_TOP_HEIGHT];
+    int reference_texture_x[CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH];
+    int reference_texture_y[CITADEL_GPU_CROPPED_TOP_HEIGHT];
+} citadel_gpu_cropped_map;
+
+static bool citadel_gpu_croppedtiled_enabled = true;
+static bool citadel_gpu_croppedtiled_current_split = false;
+static bool citadel_gpu_cropped_top_left_initialized = false;
+static bool citadel_gpu_cropped_top_right_initialized = false;
+static bool citadel_gpu_cropped_bottom_initialized = false;
+
+/*
+ * PROJECT CITADEL C3D R2C PINGPONGTILED1
+ *
+ * Set zero is initialized and managed by the hardware-proven R2B code.
+ * Set one is the additional inactive/write set. The pointer aliases preserve
+ * every R2B builder, validator, and draw call unchanged while allowing R2C to
+ * select which complete texture set those routines operate on.
+ */
+static C3D_Tex citadel_gpu_cropped_top_left_texture_sets[2];
+static C3D_Tex citadel_gpu_cropped_top_right_texture_sets[2];
+static C3D_Tex citadel_gpu_cropped_bottom_texture_sets[2];
+
+static C3D_Tex *citadel_gpu_cropped_top_left_texture_live =
+    &citadel_gpu_cropped_top_left_texture_sets[0];
+static C3D_Tex *citadel_gpu_cropped_top_right_texture_live =
+    &citadel_gpu_cropped_top_right_texture_sets[0];
+static C3D_Tex *citadel_gpu_cropped_bottom_texture_live =
+    &citadel_gpu_cropped_bottom_texture_sets[0];
+
+#define citadel_gpu_cropped_top_left_texture \
+    (*citadel_gpu_cropped_top_left_texture_live)
+#define citadel_gpu_cropped_top_right_texture \
+    (*citadel_gpu_cropped_top_right_texture_live)
+#define citadel_gpu_cropped_bottom_texture \
+    (*citadel_gpu_cropped_bottom_texture_live)
+
+static bool citadel_gpu_croppedtiled_legacy_left_validated = false;
+static bool citadel_gpu_croppedtiled_split_left_validated = false;
+static bool citadel_gpu_croppedtiled_legacy_right_validated = false;
+static bool citadel_gpu_croppedtiled_split_right_validated = false;
+static unsigned long citadel_gpu_croppedtiled_validation_mismatches = 0;
+static unsigned long citadel_gpu_croppedtiled_fallback_eye_passes = 0;
+static unsigned long citadel_gpu_croppedtiled_top_left_frames = 0;
+static unsigned long citadel_gpu_croppedtiled_top_right_frames = 0;
+static unsigned long citadel_gpu_croppedtiled_bottom_frames = 0;
+static u64 citadel_gpu_croppedtiled_pixels_generated = 0;
+
+static citadel_gpu_cropped_map citadel_gpu_cropped_top_legacy_map;
+static citadel_gpu_cropped_map citadel_gpu_cropped_top_split_map;
+static citadel_gpu_cropped_map citadel_gpu_cropped_inventory_map;
+static citadel_gpu_cropped_map citadel_gpu_cropped_left_mfd_map;
+static citadel_gpu_cropped_map citadel_gpu_cropped_right_mfd_map;
+
+
+/* PROJECT CITADEL C3D R2C PINGPONGTILED1 */
+static bool citadel_gpu_pingpongtiled_enabled = false;
+static bool citadel_gpu_pingpongtiled_second_set_initialized = false;
+static int citadel_gpu_pingpongtiled_draw_set = 0;
+static int citadel_gpu_pingpongtiled_selected_set = 0;
+static unsigned long citadel_gpu_pingpongtiled_preframe_uploads = 0;
+static unsigned long citadel_gpu_pingpongtiled_inframe_uploads = 0;
+static unsigned long citadel_gpu_pingpongtiled_preframe_failures = 0;
+static unsigned long citadel_gpu_pingpongtiled_set_switches = 0;
+static unsigned long citadel_gpu_pingpongtiled_set0_draws = 0;
+static unsigned long citadel_gpu_pingpongtiled_set1_draws = 0;
+
+static void citadel_gpu_pingpongtiled_select_set(int set_index);
+
+
 
 /* V14Y: current Shock surface dimensions used for crop remapping. */
 static int citadel_gpu_source_width = 0;
@@ -1000,6 +1177,650 @@ static void citadel_sdl_shutdown_once(void)
     SDL_Quit();
 }
 
+
+
+static double citadel_c3d_profile_ticks_to_ms(u64 ticks)
+{
+    return ((double)ticks * 1000.0) / (double)SYSCLOCK_ARM11;
+}
+
+static double citadel_c3d_profile_average_ms(u64 ticks, u64 frames)
+{
+    if (frames == 0)
+        return 0.0;
+    return citadel_c3d_profile_ticks_to_ms(ticks) / (double)frames;
+}
+
+static void citadel_c3d_profile_begin_frame(void)
+{
+    const u64 now = svcGetSystemTick();
+    memset(&citadel_c3d_profile_current, 0,
+           sizeof(citadel_c3d_profile_current));
+    if (citadel_c3d_profile_previous_end_tick != 0 &&
+        now >= citadel_c3d_profile_previous_end_tick) {
+        citadel_c3d_profile_current.pre_present_ticks =
+            now - citadel_c3d_profile_previous_end_tick;
+    }
+    citadel_c3d_profile_present_started_tick = now;
+    citadel_c3d_profile_frame_active = true;
+}
+
+static void citadel_c3d_profile_discard_frame(void)
+{
+    citadel_c3d_profile_previous_end_tick = svcGetSystemTick();
+    citadel_c3d_profile_present_started_tick = 0;
+    citadel_c3d_profile_frame_active = false;
+    memset(&citadel_c3d_profile_current, 0,
+           sizeof(citadel_c3d_profile_current));
+}
+
+static void citadel_c3d_profile_finish_frame(bool stereo_active)
+{
+    citadel_c3d_profile_bucket *bucket;
+    const u64 now = svcGetSystemTick();
+
+    if (!citadel_c3d_profile_frame_active)
+        return;
+
+    if (now >= citadel_c3d_profile_present_started_tick)
+        citadel_c3d_profile_current.present_total_ticks =
+            now - citadel_c3d_profile_present_started_tick;
+
+    citadel_c3d_profile_current.cycle_total_ticks =
+        citadel_c3d_profile_current.pre_present_ticks +
+        citadel_c3d_profile_current.present_total_ticks;
+
+    bucket = stereo_active
+        ? &citadel_c3d_profile_stereo
+        : &citadel_c3d_profile_mono;
+
+    ++bucket->frames;
+    bucket->pre_present_ticks += citadel_c3d_profile_current.pre_present_ticks;
+    bucket->frame_begin_ticks += citadel_c3d_profile_current.frame_begin_ticks;
+    bucket->upload_total_ticks += citadel_c3d_profile_current.upload_total_ticks;
+    bucket->palette_ticks += citadel_c3d_profile_current.palette_ticks;
+    bucket->left_build_ticks += citadel_c3d_profile_current.left_build_ticks;
+    bucket->left_swizzle_ticks += citadel_c3d_profile_current.left_swizzle_ticks;
+    bucket->right_acquire_ticks += citadel_c3d_profile_current.right_acquire_ticks;
+    bucket->right_build_ticks += citadel_c3d_profile_current.right_build_ticks;
+    bucket->right_swizzle_ticks += citadel_c3d_profile_current.right_swizzle_ticks;
+    bucket->draw_submit_ticks += citadel_c3d_profile_current.draw_submit_ticks;
+    bucket->frame_end_ticks += citadel_c3d_profile_current.frame_end_ticks;
+    bucket->present_total_ticks += citadel_c3d_profile_current.present_total_ticks;
+    bucket->cycle_total_ticks += citadel_c3d_profile_current.cycle_total_ticks;
+
+    if (citadel_c3d_profile_current.cycle_total_ticks >
+        bucket->maximum_cycle_ticks)
+        bucket->maximum_cycle_ticks =
+            citadel_c3d_profile_current.cycle_total_ticks;
+
+    if (citadel_c3d_profile_current.present_total_ticks >
+        bucket->maximum_present_ticks)
+        bucket->maximum_present_ticks =
+            citadel_c3d_profile_current.present_total_ticks;
+
+    citadel_c3d_profile_previous_end_tick = now;
+    citadel_c3d_profile_present_started_tick = 0;
+    citadel_c3d_profile_frame_active = false;
+}
+
+static void citadel_c3d_profile_log_bucket(
+    const char *mode,
+    const citadel_c3d_profile_bucket *bucket)
+{
+    if (mode == NULL || bucket == NULL)
+        return;
+
+    v5_log("GPU C3D R1 PROFILE mode=%s frames=%llu "
+           "avg_cycle_ms=%0.3f max_cycle_ms=%0.3f "
+           "avg_pre_present_ms=%0.3f avg_present_ms=%0.3f "
+           "max_present_ms=%0.3f",
+           mode,
+           (unsigned long long)bucket->frames,
+           citadel_c3d_profile_average_ms(
+               bucket->cycle_total_ticks, bucket->frames),
+           citadel_c3d_profile_ticks_to_ms(bucket->maximum_cycle_ticks),
+           citadel_c3d_profile_average_ms(
+               bucket->pre_present_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->present_total_ticks, bucket->frames),
+           citadel_c3d_profile_ticks_to_ms(bucket->maximum_present_ticks));
+
+    v5_log("GPU C3D R1 PROFILE mode=%s "
+           "avg_frame_begin_ms=%0.3f avg_upload_total_ms=%0.3f "
+           "avg_draw_submit_ms=%0.3f avg_frame_end_ms=%0.3f",
+           mode,
+           citadel_c3d_profile_average_ms(
+               bucket->frame_begin_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->upload_total_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->draw_submit_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->frame_end_ticks, bucket->frames));
+
+    v5_log("GPU C3D R1 PROFILE mode=%s "
+           "avg_palette_ms=%0.3f avg_left_croppedtiled_ms=%0.3f "
+           "avg_left_fallback_swizzle_ms=%0.3f avg_right_acquire_ms=%0.3f "
+           "avg_right_croppedtiled_ms=%0.3f avg_right_fallback_swizzle_ms=%0.3f",
+           mode,
+           citadel_c3d_profile_average_ms(
+               bucket->palette_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->left_build_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->left_swizzle_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->right_acquire_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->right_build_ticks, bucket->frames),
+           citadel_c3d_profile_average_ms(
+               bucket->right_swizzle_ticks, bucket->frames));
+}
+
+
+#define CITADEL_C3D_PROFILE_LOG_PATH \
+    "sdmc:/3ds/SystemShock3D/C3D_R2C_PINGPONGTILEDPROFILE.log"
+
+/* PROJECT CITADEL C3D R1B PROFILELOCK1 */
+static void citadel_c3d_profile_write_bucket_file(
+    FILE *file,
+    const char *mode,
+    const citadel_c3d_profile_bucket *bucket)
+{
+    if (file == NULL || mode == NULL || bucket == NULL)
+        return;
+
+    fprintf(file,
+            "PROFILE mode=%s frames=%llu "
+            "avg_cycle_ms=%0.3f max_cycle_ms=%0.3f "
+            "avg_pre_present_ms=%0.3f avg_present_ms=%0.3f "
+            "max_present_ms=%0.3f\n",
+            mode,
+            (unsigned long long)bucket->frames,
+            citadel_c3d_profile_average_ms(
+                bucket->cycle_total_ticks, bucket->frames),
+            citadel_c3d_profile_ticks_to_ms(
+                bucket->maximum_cycle_ticks),
+            citadel_c3d_profile_average_ms(
+                bucket->pre_present_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->present_total_ticks, bucket->frames),
+            citadel_c3d_profile_ticks_to_ms(
+                bucket->maximum_present_ticks));
+
+    fprintf(file,
+            "PROFILE mode=%s "
+            "avg_frame_begin_ms=%0.3f "
+            "avg_upload_total_ms=%0.3f "
+            "avg_draw_submit_ms=%0.3f "
+            "avg_frame_end_ms=%0.3f\n",
+            mode,
+            citadel_c3d_profile_average_ms(
+                bucket->frame_begin_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->upload_total_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->draw_submit_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->frame_end_ticks, bucket->frames));
+
+    fprintf(file,
+            "PROFILE mode=%s "
+            "avg_palette_ms=%0.3f "
+            "avg_left_croppedtiled_ms=%0.3f "
+            "avg_left_fallback_swizzle_ms=%0.3f "
+            "avg_right_acquire_ms=%0.3f "
+            "avg_right_croppedtiled_ms=%0.3f "
+            "avg_right_fallback_swizzle_ms=%0.3f\n",
+            mode,
+            citadel_c3d_profile_average_ms(
+                bucket->palette_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->left_build_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->left_swizzle_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->right_acquire_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->right_build_ticks, bucket->frames),
+            citadel_c3d_profile_average_ms(
+                bucket->right_swizzle_ticks, bucket->frames));
+}
+
+static void citadel_c3d_profile_write_startup_file(void)
+{
+    FILE *file = fopen(CITADEL_C3D_PROFILE_LOG_PATH, "w");
+
+    if (file == NULL)
+        return;
+
+    fprintf(file,
+            "============================================================\n");
+    fprintf(file,
+            "PROJECT CITADEL C3D R2C PINGPONGTILED1 ACTIVE\n");
+    fprintf(file,
+            "============================================================\n");
+    fprintf(file, "Build: %s %s\n", __DATE__, __TIME__);
+    fprintf(file, "Output path: %s\n", CITADEL_C3D_PROFILE_LOG_PATH);
+    fprintf(file,
+            "Timer frequency: %u ticks/sec\n",
+            (unsigned int)SYSCLOCK_ARM11);
+    fprintf(file, "Per-frame file writes: NO\n");
+    fprintf(file, "Shutdown summary pending: YES\n");
+    fprintf(file,
+            "============================================================\n");
+    fflush(file);
+    fclose(file);
+}
+
+static void citadel_c3d_profile_write_summary_file(void)
+{
+    FILE *file = fopen(CITADEL_C3D_PROFILE_LOG_PATH, "a");
+
+    if (file == NULL)
+        return;
+
+    fprintf(file, "\n");
+    fprintf(file,
+            "==================== SESSION SUMMARY =======================\n");
+    fprintf(file,
+            "Profiler: CITADEL-C3D-R1-TRANSPORTPROFILE1\n");
+    fprintf(file,
+            "Direct presenter: CITADEL-C3D-R0-DIRECTQUAD1\n");
+    fprintf(file,
+            "Transport: CITADEL-C3D-R2A-DIRECTTILED1\n");
+    fprintf(file,
+            "Transport substrate: CITADEL-C3D-R2B-CROPPEDTILED1\n");
+    fprintf(file,
+            "Transport active: CITADEL-C3D-R2C-PINGPONGTILED1\n");
+    fprintf(file,
+            "Cropped-tiled enabled at shutdown: %s\n",
+            citadel_gpu_croppedtiled_enabled ? "YES" : "NO");
+    fprintf(file,
+            "Cropped validations: legacy_left=%s split_left=%s "
+            "legacy_right=%s split_right=%s mismatches=%lu\n",
+            citadel_gpu_croppedtiled_legacy_left_validated
+                ? "PASS" : "PENDING",
+            citadel_gpu_croppedtiled_split_left_validated
+                ? "PASS" : "PENDING",
+            citadel_gpu_croppedtiled_legacy_right_validated
+                ? "PASS" : "PENDING",
+            citadel_gpu_croppedtiled_split_right_validated
+                ? "PASS" : "PENDING",
+            citadel_gpu_croppedtiled_validation_mismatches);
+    fprintf(file,
+            "Cropped frame passes: top_left=%lu top_right=%lu "
+            "bottom=%lu fallback=%lu pixels=%llu\n",
+            citadel_gpu_croppedtiled_top_left_frames,
+            citadel_gpu_croppedtiled_top_right_frames,
+            citadel_gpu_croppedtiled_bottom_frames,
+            citadel_gpu_croppedtiled_fallback_eye_passes,
+            (unsigned long long)
+                citadel_gpu_croppedtiled_pixels_generated);
+    fprintf(file,
+            "Ping-pong overlap enabled at shutdown: %s "
+            "second_set=%s selected_set=%d draw_set=%d\n",
+            citadel_gpu_pingpongtiled_enabled ? "YES" : "NO",
+            citadel_gpu_pingpongtiled_second_set_initialized
+                ? "YES" : "NO",
+            citadel_gpu_pingpongtiled_selected_set,
+            citadel_gpu_pingpongtiled_draw_set);
+    fprintf(file,
+            "Ping-pong passes: preframe_uploads=%lu "
+            "inframe_uploads=%lu preframe_failures=%lu "
+            "switches=%lu set0_draws=%lu set1_draws=%lu\n",
+            citadel_gpu_pingpongtiled_preframe_uploads,
+            citadel_gpu_pingpongtiled_inframe_uploads,
+            citadel_gpu_pingpongtiled_preframe_failures,
+            citadel_gpu_pingpongtiled_set_switches,
+            citadel_gpu_pingpongtiled_set0_draws,
+            citadel_gpu_pingpongtiled_set1_draws);
+    fprintf(file,
+            "Direct-tiled enabled at shutdown: %s\n",
+            citadel_gpu_directtiled_enabled ? "YES" : "NO");
+    fprintf(file,
+            "Direct-tiled validation: %s mismatches=%lu\n",
+            citadel_gpu_directtiled_validated ? "PASS" : "FAIL",
+            citadel_gpu_directtiled_validation_mismatches);
+    fprintf(file,
+            "Direct-tiled eye passes: left=%lu right=%lu "
+            "fallback=%lu\n",
+            citadel_gpu_directtiled_left_frames,
+            citadel_gpu_directtiled_right_frames,
+            citadel_gpu_directtiled_fallback_eye_passes);
+    fprintf(file,
+            "Presented frames observed by GPU logger: %u\n",
+            citadel_gpu_presented_frames);
+    fprintf(file, "Upload failures: %u\n", citadel_gpu_upload_failures);
+    fprintf(file, "Draw failures: %u\n", citadel_gpu_draw_failures);
+
+    citadel_c3d_profile_write_bucket_file(
+        file,
+        "MONO_SINGLE_EYE",
+        &citadel_c3d_profile_mono);
+
+    citadel_c3d_profile_write_bucket_file(
+        file,
+        "STEREO_DUAL_EYE",
+        &citadel_c3d_profile_stereo);
+
+    fprintf(file, "Clean Shutdown: YES\n");
+    fprintf(file,
+            "============================================================\n");
+    fflush(file);
+    fclose(file);
+}
+
+static void citadel_c3d_profile_log_summary(void)
+{
+    v5_log("GPU C3D R1 TRANSPORTPROFILE1 SUMMARY "
+           "timer_hz=%u no_per_frame_file_writes=1",
+           (unsigned int)SYSCLOCK_ARM11);
+    citadel_c3d_profile_log_bucket(
+        "MONO_SINGLE_EYE", &citadel_c3d_profile_mono);
+    citadel_c3d_profile_log_bucket(
+        "STEREO_DUAL_EYE", &citadel_c3d_profile_stereo);
+}
+
+static void citadel_gpu_directquad_shutdown(void)
+{
+    if (citadel_gpu_directquad_program_initialized) {
+        shaderProgramFree(&citadel_gpu_directquad_program);
+        citadel_gpu_directquad_program_initialized = false;
+    }
+
+    if (citadel_gpu_directquad_dvlb != NULL) {
+        DVLB_Free(citadel_gpu_directquad_dvlb);
+        citadel_gpu_directquad_dvlb = NULL;
+    }
+
+    citadel_gpu_directquad_projection_uniform = -1;
+    citadel_gpu_directquad_initialized = false;
+}
+
+static bool citadel_gpu_directquad_initialize(void)
+{
+    citadel_gpu_directquad_dvlb =
+        DVLB_ParseFile(
+            (u32 *)citadel_directquad_vshader_shbin,
+            citadel_directquad_vshader_shbin_size);
+
+    if (citadel_gpu_directquad_dvlb == NULL) {
+        v5_log("GPU C3D R0 DIRECTQUAD INIT FAIL stage=DVLB_ParseFile");
+        return false;
+    }
+
+    shaderProgramInit(&citadel_gpu_directquad_program);
+    citadel_gpu_directquad_program_initialized = true;
+
+    shaderProgramSetVsh(
+        &citadel_gpu_directquad_program,
+        &citadel_gpu_directquad_dvlb->DVLE[0]);
+
+    citadel_gpu_directquad_projection_uniform =
+        shaderInstanceGetUniformLocation(
+            citadel_gpu_directquad_program.vertexShader,
+            "projection");
+
+    if (citadel_gpu_directquad_projection_uniform < 0) {
+        v5_log("GPU C3D R0 DIRECTQUAD INIT FAIL stage=projection-uniform");
+        citadel_gpu_directquad_shutdown();
+        return false;
+    }
+
+    /* Match Citro2D's proven top-left-origin screen matrices exactly. */
+    Mtx_OrthoTilt(
+        &citadel_gpu_directquad_top_projection,
+        0.0f, 400.0f, 240.0f, 0.0f, 1.0f, -1.0f, true);
+    Mtx_OrthoTilt(
+        &citadel_gpu_directquad_bottom_projection,
+        0.0f, 320.0f, 240.0f, 0.0f, 1.0f, -1.0f, true);
+
+    citadel_gpu_directquad_initialized = true;
+
+    v5_log("GPU C3D R0 DIRECTQUAD INIT SUCCESS shader_bytes=%u",
+           citadel_directquad_vshader_shbin_size);
+    return true;
+}
+
+static bool citadel_gpu_directquad_begin_scene(
+    C3D_RenderTarget *target,
+    bool bottom_screen)
+{
+    C3D_AttrInfo *attribute_info;
+    C3D_TexEnv *environment;
+    int stage;
+
+    if (!citadel_gpu_directquad_initialized || target == NULL)
+        return false;
+
+    C3D_FrameDrawOn(target);
+    C3D_BindProgram(&citadel_gpu_directquad_program);
+
+    attribute_info = C3D_GetAttrInfo();
+    AttrInfo_Init(attribute_info);
+    AttrInfo_AddLoader(attribute_info, 0, GPU_FLOAT, 3);
+    AttrInfo_AddLoader(attribute_info, 1, GPU_FLOAT, 2);
+
+    C3D_FVUnifMtx4x4(
+        GPU_VERTEX_SHADER,
+        citadel_gpu_directquad_projection_uniform,
+        bottom_screen
+            ? &citadel_gpu_directquad_bottom_projection
+            : &citadel_gpu_directquad_top_projection);
+
+    environment = C3D_GetTexEnv(0);
+    C3D_TexEnvInit(environment);
+    C3D_TexEnvSrc(
+        environment,
+        C3D_Both,
+        GPU_TEXTURE0,
+        GPU_TEXTURE0,
+        GPU_TEXTURE0);
+    C3D_TexEnvFunc(environment, C3D_Both, GPU_REPLACE);
+
+    for (stage = 1; stage < 6; ++stage) {
+        environment = C3D_GetTexEnv(stage);
+        C3D_TexEnvInit(environment);
+        C3D_TexEnvSrc(
+            environment,
+            C3D_Both,
+            GPU_PREVIOUS,
+            GPU_PREVIOUS,
+            GPU_PREVIOUS);
+        C3D_TexEnvFunc(environment, C3D_Both, GPU_REPLACE);
+    }
+
+    C3D_DepthTest(false, GPU_ALWAYS, GPU_WRITE_ALL);
+    C3D_CullFace(GPU_CULL_NONE);
+    return true;
+}
+
+static void citadel_gpu_directquad_send_vertex(
+    float x, float y, float depth, float u, float v)
+{
+    C3D_ImmSendAttrib(x, y, depth, 0.0f);
+    C3D_ImmSendAttrib(u, v, 0.0f, 0.0f);
+}
+
+static bool citadel_gpu_directquad_draw_region(
+    C3D_Tex *texture,
+    int source_x,
+    int source_y,
+    int source_w,
+    int source_h,
+    float destination_x,
+    float destination_y,
+    float destination_w,
+    float destination_h,
+    float depth)
+{
+    int source_right;
+    int source_bottom;
+    int texture_left;
+    int texture_right;
+    int texture_top;
+    int texture_bottom;
+    float u_left;
+    float u_right;
+    float v_top;
+    float v_bottom;
+    float x_left;
+    float x_right;
+    float y_top;
+    float y_bottom;
+
+    if (!citadel_gpu_directquad_initialized ||
+        texture == NULL || texture->data == NULL ||
+        source_w <= 0 || source_h <= 0 ||
+        destination_w <= 0.0f || destination_h <= 0.0f ||
+        citadel_gpu_source_width <= 0 ||
+        citadel_gpu_source_height <= 0)
+        return false;
+
+    if (source_x < 0)
+        source_x = 0;
+    if (source_y < 0)
+        source_y = 0;
+
+    source_right = source_x + source_w;
+    source_bottom = source_y + source_h;
+
+    if (source_right > citadel_gpu_source_width)
+        source_right = citadel_gpu_source_width;
+    if (source_bottom > citadel_gpu_source_height)
+        source_bottom = citadel_gpu_source_height;
+
+    if (source_right <= source_x || source_bottom <= source_y)
+        return false;
+
+    texture_left =
+        (source_x * CITADEL_GPU_CONTENT_WIDTH) /
+        citadel_gpu_source_width;
+    texture_top =
+        (source_y * CITADEL_GPU_CONTENT_HEIGHT) /
+        citadel_gpu_source_height;
+    texture_right =
+        ((source_right * CITADEL_GPU_CONTENT_WIDTH) +
+         citadel_gpu_source_width - 1) /
+        citadel_gpu_source_width;
+    texture_bottom =
+        ((source_bottom * CITADEL_GPU_CONTENT_HEIGHT) +
+         citadel_gpu_source_height - 1) /
+        citadel_gpu_source_height;
+
+    if (texture_left < 0)
+        texture_left = 0;
+    if (texture_top < 0)
+        texture_top = 0;
+    if (texture_right > CITADEL_GPU_CONTENT_WIDTH)
+        texture_right = CITADEL_GPU_CONTENT_WIDTH;
+    if (texture_bottom > CITADEL_GPU_CONTENT_HEIGHT)
+        texture_bottom = CITADEL_GPU_CONTENT_HEIGHT;
+
+    if (texture_right <= texture_left || texture_bottom <= texture_top)
+        return false;
+
+    u_left = (float)texture_left / (float)CITADEL_GPU_TEXTURE_WIDTH;
+    u_right = (float)texture_right / (float)CITADEL_GPU_TEXTURE_WIDTH;
+    v_top = 1.0f -
+        ((float)texture_top / (float)CITADEL_GPU_TEXTURE_HEIGHT);
+    v_bottom = 1.0f -
+        ((float)texture_bottom / (float)CITADEL_GPU_TEXTURE_HEIGHT);
+
+    x_left = destination_x;
+    x_right = destination_x + destination_w;
+    y_top = destination_y;
+    y_bottom = destination_y + destination_h;
+
+    C3D_TexBind(0, texture);
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_top, depth, u_left, v_top);
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_bottom, depth, u_left, v_bottom);
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_top, depth, u_right, v_top);
+
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_top, depth, u_right, v_top);
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_bottom, depth, u_left, v_bottom);
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_bottom, depth, u_right, v_bottom);
+
+    C3D_ImmDrawEnd();
+    return true;
+}
+
+
+static bool citadel_gpu_directquad_draw_texel_region(
+    C3D_Tex *texture,
+    int texture_width,
+    int texture_height,
+    int source_x,
+    int source_y,
+    int source_w,
+    int source_h,
+    float destination_x,
+    float destination_y,
+    float destination_w,
+    float destination_h,
+    float depth)
+{
+    float u_left;
+    float u_right;
+    float v_top;
+    float v_bottom;
+    float x_left;
+    float x_right;
+    float y_top;
+    float y_bottom;
+
+    if (!citadel_gpu_directquad_initialized ||
+        texture == NULL || texture->data == NULL ||
+        texture_width <= 0 || texture_height <= 0 ||
+        source_x < 0 || source_y < 0 ||
+        source_w <= 0 || source_h <= 0 ||
+        source_x + source_w > texture_width ||
+        source_y + source_h > texture_height ||
+        destination_w <= 0.0f || destination_h <= 0.0f)
+        return false;
+
+    u_left = (float)source_x / (float)texture_width;
+    u_right = (float)(source_x + source_w) / (float)texture_width;
+    v_top = 1.0f - ((float)source_y / (float)texture_height);
+    v_bottom =
+        1.0f - ((float)(source_y + source_h) / (float)texture_height);
+
+    x_left = destination_x;
+    x_right = destination_x + destination_w;
+    y_top = destination_y;
+    y_bottom = destination_y + destination_h;
+
+    C3D_TexBind(0, texture);
+    C3D_ImmDrawBegin(GPU_TRIANGLES);
+
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_top, depth, u_left, v_top);
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_bottom, depth, u_left, v_bottom);
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_top, depth, u_right, v_top);
+
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_top, depth, u_right, v_top);
+    citadel_gpu_directquad_send_vertex(
+        x_left, y_bottom, depth, u_left, v_bottom);
+    citadel_gpu_directquad_send_vertex(
+        x_right, y_bottom, depth, u_right, v_bottom);
+
+    C3D_ImmDrawEnd();
+    return true;
+}
+
 static void citadel_gpu_shutdown(void)
 {
     if (citadel_gpu_shutdown_complete)
@@ -1012,6 +1833,8 @@ static void citadel_gpu_shutdown(void)
            citadel_gpu_presented_frames,
            citadel_gpu_upload_failures,
            citadel_gpu_draw_failures);
+    citadel_c3d_profile_log_summary();
+    citadel_c3d_profile_write_summary_file();
 
     if (citadel_v16_splash_sheet != NULL) {
         C2D_SpriteSheetFree(citadel_v16_splash_sheet);
@@ -1067,6 +1890,40 @@ static void citadel_gpu_shutdown(void)
         citadel_gpu_v15g_rgba8_staging = NULL;
     }
 
+
+    /* R2C owns only set one; the existing R2B shutdown deletes set zero. */
+    if (citadel_gpu_pingpongtiled_second_set_initialized) {
+        C3D_TexDelete(&citadel_gpu_cropped_bottom_texture_sets[1]);
+        C3D_TexDelete(&citadel_gpu_cropped_top_right_texture_sets[1]);
+        C3D_TexDelete(&citadel_gpu_cropped_top_left_texture_sets[1]);
+        citadel_gpu_pingpongtiled_second_set_initialized = false;
+    }
+
+    citadel_gpu_pingpongtiled_enabled = false;
+    citadel_gpu_cropped_top_left_texture_live =
+        &citadel_gpu_cropped_top_left_texture_sets[0];
+    citadel_gpu_cropped_top_right_texture_live =
+        &citadel_gpu_cropped_top_right_texture_sets[0];
+    citadel_gpu_cropped_bottom_texture_live =
+        &citadel_gpu_cropped_bottom_texture_sets[0];
+    citadel_gpu_pingpongtiled_selected_set = 0;
+
+
+    if (citadel_gpu_cropped_bottom_initialized) {
+        C3D_TexDelete(&citadel_gpu_cropped_bottom_texture);
+        citadel_gpu_cropped_bottom_initialized = false;
+    }
+
+    if (citadel_gpu_cropped_top_right_initialized) {
+        C3D_TexDelete(&citadel_gpu_cropped_top_right_texture);
+        citadel_gpu_cropped_top_right_initialized = false;
+    }
+
+    if (citadel_gpu_cropped_top_left_initialized) {
+        C3D_TexDelete(&citadel_gpu_cropped_top_left_texture);
+        citadel_gpu_cropped_top_left_initialized = false;
+    }
+
     if (citadel_gpu_right_texture_initialized) {
         C3D_TexDelete(&citadel_gpu_right_texture);
         citadel_gpu_right_texture_initialized = false;
@@ -1081,6 +1938,8 @@ static void citadel_gpu_shutdown(void)
         linearFree(citadel_gpu_staging);
         citadel_gpu_staging = NULL;
     }
+
+    citadel_gpu_directquad_shutdown();
 
     if (citadel_gpu_c2d_initialized) {
         C2D_Fini();
@@ -1243,6 +2102,13 @@ static bool citadel_gpu_initialize(void)
     citadel_gpu_c2d_initialized = true;
     C2D_Prepare();
 
+    if (!citadel_gpu_directquad_initialize()) {
+        v5_log("GPU INIT FAIL stage=C3D-directquad");
+        citadel_gpu_shutdown();
+        citadel_gpu_shutdown_complete = false;
+        return false;
+    }
+
     /* S1: enable the physical stereoscopic top LCD. */
     gfxSet3D(true);
 
@@ -1322,6 +2188,214 @@ static bool citadel_gpu_initialize(void)
     C3D_TexSetFilter(&citadel_gpu_right_texture, GPU_NEAREST, GPU_NEAREST);
     C3D_TexSetWrap(&citadel_gpu_right_texture,
                    GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
+
+
+    /* R2B output-sized texture set. Failure keeps the proven R2A path. */
+    if (!C3D_TexInit(&citadel_gpu_cropped_top_left_texture,
+                     CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                     CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                     GPU_RGB565)) {
+        citadel_gpu_croppedtiled_enabled = false;
+        v5_log("GPU C3D R2B INIT FALLBACK stage=top-left-texture");
+    } else {
+        citadel_gpu_cropped_top_left_initialized = true;
+        C3D_TexSetFilter(&citadel_gpu_cropped_top_left_texture,
+                         GPU_NEAREST, GPU_NEAREST);
+        C3D_TexSetWrap(&citadel_gpu_cropped_top_left_texture,
+                       GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
+        memset(citadel_gpu_cropped_top_left_texture.data,
+               0,
+               CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+        GSPGPU_FlushDataCache(
+            citadel_gpu_cropped_top_left_texture.data,
+            CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    }
+
+    if (citadel_gpu_croppedtiled_enabled &&
+        !C3D_TexInit(&citadel_gpu_cropped_top_right_texture,
+                     CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                     CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                     GPU_RGB565)) {
+        citadel_gpu_croppedtiled_enabled = false;
+        v5_log("GPU C3D R2B INIT FALLBACK stage=top-right-texture");
+    } else if (citadel_gpu_croppedtiled_enabled) {
+        citadel_gpu_cropped_top_right_initialized = true;
+        C3D_TexSetFilter(&citadel_gpu_cropped_top_right_texture,
+                         GPU_NEAREST, GPU_NEAREST);
+        C3D_TexSetWrap(&citadel_gpu_cropped_top_right_texture,
+                       GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
+        memset(citadel_gpu_cropped_top_right_texture.data,
+               0,
+               CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+        GSPGPU_FlushDataCache(
+            citadel_gpu_cropped_top_right_texture.data,
+            CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    }
+
+    if (citadel_gpu_croppedtiled_enabled &&
+        !C3D_TexInit(&citadel_gpu_cropped_bottom_texture,
+                     CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                     CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                     GPU_RGB565)) {
+        citadel_gpu_croppedtiled_enabled = false;
+        v5_log("GPU C3D R2B INIT FALLBACK stage=bottom-texture");
+    } else if (citadel_gpu_croppedtiled_enabled) {
+        citadel_gpu_cropped_bottom_initialized = true;
+        C3D_TexSetFilter(&citadel_gpu_cropped_bottom_texture,
+                         GPU_NEAREST, GPU_NEAREST);
+        C3D_TexSetWrap(&citadel_gpu_cropped_bottom_texture,
+                       GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
+        memset(citadel_gpu_cropped_bottom_texture.data,
+               0,
+               CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+        GSPGPU_FlushDataCache(
+            citadel_gpu_cropped_bottom_texture.data,
+            CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    }
+
+    if (!citadel_gpu_croppedtiled_enabled) {
+        if (citadel_gpu_cropped_bottom_initialized) {
+            C3D_TexDelete(&citadel_gpu_cropped_bottom_texture);
+            citadel_gpu_cropped_bottom_initialized = false;
+        }
+        if (citadel_gpu_cropped_top_right_initialized) {
+            C3D_TexDelete(&citadel_gpu_cropped_top_right_texture);
+            citadel_gpu_cropped_top_right_initialized = false;
+        }
+        if (citadel_gpu_cropped_top_left_initialized) {
+            C3D_TexDelete(&citadel_gpu_cropped_top_left_texture);
+            citadel_gpu_cropped_top_left_initialized = false;
+        }
+    } else {
+        v5_log("GPU C3D R2B CROPPEDTILED INIT SUCCESS "
+               "textures=3 size=%dx%d bytes_each=%u",
+               CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+               CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+               (unsigned int)CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    }
+
+
+
+    /*
+     * R2C second output-sized set. Allocation failure is non-fatal: R2B keeps
+     * its proven single-set FrameBegin-before-write ordering.
+     */
+    if (citadel_gpu_croppedtiled_enabled) {
+        bool r2c_left_initialized = false;
+        bool r2c_right_initialized = false;
+        bool r2c_bottom_initialized = false;
+
+        if (C3D_TexInit(
+                &citadel_gpu_cropped_top_left_texture_sets[1],
+                CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                GPU_RGB565)) {
+            r2c_left_initialized = true;
+        } else {
+            v5_log("GPU C3D R2C INIT FALLBACK stage=set1-top-left");
+        }
+
+        if (r2c_left_initialized &&
+            C3D_TexInit(
+                &citadel_gpu_cropped_top_right_texture_sets[1],
+                CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                GPU_RGB565)) {
+            r2c_right_initialized = true;
+        } else if (r2c_left_initialized) {
+            v5_log("GPU C3D R2C INIT FALLBACK stage=set1-top-right");
+        }
+
+        if (r2c_left_initialized && r2c_right_initialized &&
+            C3D_TexInit(
+                &citadel_gpu_cropped_bottom_texture_sets[1],
+                CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                GPU_RGB565)) {
+            r2c_bottom_initialized = true;
+        } else if (r2c_left_initialized && r2c_right_initialized) {
+            v5_log("GPU C3D R2C INIT FALLBACK stage=set1-bottom");
+        }
+
+        if (r2c_left_initialized &&
+            r2c_right_initialized &&
+            r2c_bottom_initialized) {
+            C3D_TexSetFilter(
+                &citadel_gpu_cropped_top_left_texture_sets[1],
+                GPU_NEAREST,
+                GPU_NEAREST);
+            C3D_TexSetWrap(
+                &citadel_gpu_cropped_top_left_texture_sets[1],
+                GPU_CLAMP_TO_EDGE,
+                GPU_CLAMP_TO_EDGE);
+            C3D_TexSetFilter(
+                &citadel_gpu_cropped_top_right_texture_sets[1],
+                GPU_NEAREST,
+                GPU_NEAREST);
+            C3D_TexSetWrap(
+                &citadel_gpu_cropped_top_right_texture_sets[1],
+                GPU_CLAMP_TO_EDGE,
+                GPU_CLAMP_TO_EDGE);
+            C3D_TexSetFilter(
+                &citadel_gpu_cropped_bottom_texture_sets[1],
+                GPU_NEAREST,
+                GPU_NEAREST);
+            C3D_TexSetWrap(
+                &citadel_gpu_cropped_bottom_texture_sets[1],
+                GPU_CLAMP_TO_EDGE,
+                GPU_CLAMP_TO_EDGE);
+
+            memset(
+                citadel_gpu_cropped_top_left_texture_sets[1].data,
+                0,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+            memset(
+                citadel_gpu_cropped_top_right_texture_sets[1].data,
+                0,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+            memset(
+                citadel_gpu_cropped_bottom_texture_sets[1].data,
+                0,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+
+            GSPGPU_FlushDataCache(
+                citadel_gpu_cropped_top_left_texture_sets[1].data,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+            GSPGPU_FlushDataCache(
+                citadel_gpu_cropped_top_right_texture_sets[1].data,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+            GSPGPU_FlushDataCache(
+                citadel_gpu_cropped_bottom_texture_sets[1].data,
+                CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+
+            citadel_gpu_pingpongtiled_second_set_initialized = true;
+            citadel_gpu_pingpongtiled_enabled = true;
+            citadel_gpu_pingpongtiled_draw_set = 0;
+            citadel_gpu_pingpongtiled_select_set(0);
+
+            v5_log("GPU C3D R2C PINGPONGTILED INIT SUCCESS "
+                   "sets=2 textures_per_set=3 extra_bytes=%u",
+                   (unsigned int)(3u *
+                       CITADEL_GPU_CROPPED_TEXTURE_BYTES));
+        } else {
+            if (r2c_bottom_initialized)
+                C3D_TexDelete(
+                    &citadel_gpu_cropped_bottom_texture_sets[1]);
+            if (r2c_right_initialized)
+                C3D_TexDelete(
+                    &citadel_gpu_cropped_top_right_texture_sets[1]);
+            if (r2c_left_initialized)
+                C3D_TexDelete(
+                    &citadel_gpu_cropped_top_left_texture_sets[1]);
+
+            citadel_gpu_pingpongtiled_second_set_initialized = false;
+            citadel_gpu_pingpongtiled_enabled = false;
+            citadel_gpu_pingpongtiled_select_set(0);
+
+            v5_log("GPU C3D R2C PINGPONGTILED FALLBACK "
+                   "action=R2B_SINGLE_SET_RETAINED");
+        }
+    }
 
     citadel_gpu_staging =
         (u16 *)linearAlloc(CITADEL_GPU_STAGING_BYTES);
@@ -1708,6 +2782,930 @@ static void citadel_gpu_swizzle_staging_to_texture(C3D_Tex *texture)
                                                      (unsigned int)y)] = source_row[x];
     }
     GSPGPU_FlushDataCache(texture->data, CITADEL_GPU_STAGING_BYTES);
+}
+
+
+/*
+ * CITADEL-C3D-R2A-DIRECTTILED1
+ *
+ * The old path wrote every converted RGB565 pixel to a linear 1024x512
+ * staging image, cleared the complete 1 MiB texture, then read the useful
+ * 640x480 pixels back and scattered them into PICA Morton order.
+ *
+ * This path precomputes the fixed destination-to-source scale maps and writes
+ * each final RGB565 texel directly to its sequential Morton slot. Unused
+ * texture padding remains untouched; it was cleared at texture creation and
+ * is never sampled by the proven presenter.
+ */
+static void citadel_gpu_directtiled_prepare_maps(int source_width,
+                                                  int source_height,
+                                                  int source_pitch)
+{
+    int destination;
+
+    if (source_width == citadel_gpu_directtiled_map_width &&
+        source_height == citadel_gpu_directtiled_map_height &&
+        source_pitch == citadel_gpu_directtiled_map_pitch)
+        return;
+
+    for (destination = 0;
+         destination < CITADEL_GPU_CONTENT_WIDTH;
+         ++destination) {
+        int source =
+            (destination * source_width) /
+            CITADEL_GPU_CONTENT_WIDTH;
+        if (source >= source_width)
+            source = source_width - 1;
+        citadel_gpu_directtiled_x_source[destination] = source;
+    }
+
+    for (destination = 0;
+         destination < CITADEL_GPU_CONTENT_HEIGHT;
+         ++destination) {
+        int source =
+            (destination * source_height) /
+            CITADEL_GPU_CONTENT_HEIGHT;
+        if (source >= source_height)
+            source = source_height - 1;
+        citadel_gpu_directtiled_y_offset[destination] =
+            (size_t)source * (size_t)source_pitch;
+    }
+
+    citadel_gpu_directtiled_map_width = source_width;
+    citadel_gpu_directtiled_map_height = source_height;
+    citadel_gpu_directtiled_map_pitch = source_pitch;
+}
+
+static unsigned long citadel_gpu_directtiled_compare_staging(
+    C3D_Tex *texture,
+    int *first_x,
+    int *first_y,
+    u16 *first_expected,
+    u16 *first_actual)
+{
+    const u16 *texture_pixels;
+    unsigned long mismatches = 0;
+    int y;
+
+    if (first_x != NULL)
+        *first_x = -1;
+    if (first_y != NULL)
+        *first_y = -1;
+    if (first_expected != NULL)
+        *first_expected = 0;
+    if (first_actual != NULL)
+        *first_actual = 0;
+
+    if (texture == NULL || texture->data == NULL ||
+        citadel_gpu_staging == NULL)
+        return ~0ul;
+
+    texture_pixels = (const u16 *)texture->data;
+
+    for (y = 0; y < CITADEL_GPU_CONTENT_HEIGHT; ++y) {
+        const u16 *expected_row =
+            citadel_gpu_staging +
+            ((size_t)y * (size_t)CITADEL_GPU_TEXTURE_WIDTH);
+        int x;
+
+        for (x = 0; x < CITADEL_GPU_CONTENT_WIDTH; ++x) {
+            const u16 expected = expected_row[x];
+            const u16 actual =
+                texture_pixels[citadel_gpu_tiled_offset(
+                    (unsigned int)x,
+                    (unsigned int)y)];
+
+            if (expected != actual) {
+                if (mismatches == 0) {
+                    if (first_x != NULL)
+                        *first_x = x;
+                    if (first_y != NULL)
+                        *first_y = y;
+                    if (first_expected != NULL)
+                        *first_expected = expected;
+                    if (first_actual != NULL)
+                        *first_actual = actual;
+                }
+                ++mismatches;
+            }
+        }
+    }
+
+    return mismatches;
+}
+
+static uint32_t citadel_gpu_build_direct_tiled_indexed(
+    C3D_Tex *texture,
+    const u8 *source_pixels,
+    int source_width,
+    int source_height,
+    int source_pitch,
+    bool right_eye)
+{
+    u16 *texture_pixels;
+    uint32_t diagnostic_hash = 0;
+    unsigned int tile_y;
+
+    if (texture == NULL || texture->data == NULL ||
+        source_pixels == NULL || source_width <= 0 ||
+        source_height <= 0 || source_pitch < source_width)
+        return 0;
+
+    citadel_gpu_directtiled_prepare_maps(
+        source_width,
+        source_height,
+        source_pitch);
+
+    texture_pixels = (u16 *)texture->data;
+
+    for (tile_y = 0;
+         tile_y < (CITADEL_GPU_CONTENT_HEIGHT / 8);
+         ++tile_y) {
+        unsigned int tile_x;
+
+        for (tile_x = 0;
+             tile_x < (CITADEL_GPU_CONTENT_WIDTH / 8);
+             ++tile_x) {
+            const size_t tile_base =
+                (((size_t)tile_y *
+                  (size_t)(CITADEL_GPU_TEXTURE_WIDTH / 8)) +
+                 (size_t)tile_x) * 64u;
+            unsigned int morton;
+
+            for (morton = 0; morton < 64; ++morton) {
+                const unsigned int local_x =
+                    (morton & 1u) |
+                    ((morton >> 1) & 2u) |
+                    ((morton >> 2) & 4u);
+                const unsigned int local_y =
+                    ((morton >> 1) & 1u) |
+                    ((morton >> 2) & 2u) |
+                    ((morton >> 3) & 4u);
+                const unsigned int destination_x =
+                    tile_x * 8u + local_x;
+                const unsigned int destination_y =
+                    tile_y * 8u + local_y;
+                const size_t source_offset =
+                    citadel_gpu_directtiled_y_offset[destination_y] +
+                    (size_t)citadel_gpu_directtiled_x_source[destination_x];
+                const u16 converted =
+                    citadel_gpu_palette565[source_pixels[source_offset]];
+
+                texture_pixels[tile_base + morton] = converted;
+            }
+        }
+    }
+
+    GSPGPU_FlushDataCache(texture->data, CITADEL_GPU_STAGING_BYTES);
+
+    if (!right_eye &&
+        !citadel_gpu_directtiled_validation_attempted) {
+        uint32_t reference_hash;
+        unsigned long mismatches;
+        int first_x = -1;
+        int first_y = -1;
+        u16 first_expected = 0;
+        u16 first_actual = 0;
+
+        citadel_gpu_directtiled_validation_attempted = true;
+
+        reference_hash = citadel_gpu_build_linear_indexed(
+            source_pixels,
+            source_width,
+            source_height,
+            source_pitch);
+        diagnostic_hash = reference_hash;
+
+        mismatches = citadel_gpu_directtiled_compare_staging(
+            texture,
+            &first_x,
+            &first_y,
+            &first_expected,
+            &first_actual);
+
+        citadel_gpu_directtiled_validation_mismatches = mismatches;
+
+        if (mismatches != 0) {
+            citadel_gpu_directtiled_enabled = false;
+            citadel_gpu_directtiled_validated = false;
+            ++citadel_gpu_directtiled_fallback_eye_passes;
+
+            citadel_gpu_swizzle_staging_to_texture(texture);
+
+            v5_log("GPU C3D R2A DIRECTTILED VALIDATION FAIL "
+                   "mismatches=%lu first={%d,%d} "
+                   "expected=0x%04X actual=0x%04X "
+                   "action=LEGACY_TRANSPORT_RESTORED",
+                   mismatches,
+                   first_x,
+                   first_y,
+                   (unsigned int)first_expected,
+                   (unsigned int)first_actual);
+
+            return reference_hash;
+        }
+
+        citadel_gpu_directtiled_validated = true;
+        v5_log("GPU C3D R2A DIRECTTILED VALIDATION PASS "
+               "pixels=%u padding_clear_per_frame=REMOVED "
+               "scale_divisions_per_frame=PRECOMPUTED",
+               (unsigned int)(CITADEL_GPU_CONTENT_WIDTH *
+                              CITADEL_GPU_CONTENT_HEIGHT));
+    }
+
+    if (right_eye)
+        ++citadel_gpu_directtiled_right_frames;
+    else
+        ++citadel_gpu_directtiled_left_frames;
+
+    return diagnostic_hash;
+}
+
+
+/*
+ * CITADEL-C3D-R2B-CROPPEDTILED1
+ *
+ * R2A proved direct indexed-to-Morton conversion. R2B keeps that exact color
+ * conversion but prepares only final LCD pixels in three 512x256 textures.
+ * Source maps reproduce the R2A full-texture crop followed by nearest GPU
+ * sampling at pixel centers. First-use validation compares every generated
+ * output pixel against the hardware-proven R2A full texture.
+ */
+static inline size_t citadel_gpu_croppedtiled_offset(unsigned int x,
+                                                      unsigned int y)
+{
+    const unsigned int tiles_per_row =
+        CITADEL_GPU_CROPPED_TEXTURE_WIDTH / 8;
+    const unsigned int tile_x = x >> 3;
+    const unsigned int tile_y = y >> 3;
+    const size_t tile_base =
+        ((size_t)tile_y * (size_t)tiles_per_row +
+         (size_t)tile_x) * 64u;
+
+    return tile_base + (size_t)citadel_gpu_morton8(x, y);
+}
+
+static void citadel_gpu_croppedtiled_prepare_map(
+    citadel_gpu_cropped_map *map,
+    int source_width,
+    int source_height,
+    int source_pitch,
+    SDL_Rect source_rect,
+    int destination_w,
+    int destination_h)
+{
+    int destination;
+    int texture_left;
+    int texture_top;
+    int texture_right;
+    int texture_bottom;
+
+    if (map == NULL || source_width <= 0 || source_height <= 0 ||
+        source_pitch < source_width || destination_w <= 0 ||
+        destination_h <= 0 ||
+        destination_w > CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH ||
+        destination_h > CITADEL_GPU_CROPPED_TOP_HEIGHT)
+        return;
+
+    if (map->valid &&
+        map->source_width == source_width &&
+        map->source_height == source_height &&
+        map->source_pitch == source_pitch &&
+        map->source_x == source_rect.x &&
+        map->source_y == source_rect.y &&
+        map->source_w == source_rect.w &&
+        map->source_h == source_rect.h &&
+        map->destination_w == destination_w &&
+        map->destination_h == destination_h)
+        return;
+
+    texture_left =
+        (source_rect.x * CITADEL_GPU_CONTENT_WIDTH) /
+        source_width;
+    texture_top =
+        (source_rect.y * CITADEL_GPU_CONTENT_HEIGHT) /
+        source_height;
+    texture_right =
+        (((source_rect.x + source_rect.w) *
+          CITADEL_GPU_CONTENT_WIDTH) +
+         source_width - 1) /
+        source_width;
+    texture_bottom =
+        (((source_rect.y + source_rect.h) *
+          CITADEL_GPU_CONTENT_HEIGHT) +
+         source_height - 1) /
+        source_height;
+
+    if (texture_left < 0)
+        texture_left = 0;
+    if (texture_top < 0)
+        texture_top = 0;
+    if (texture_right > CITADEL_GPU_CONTENT_WIDTH)
+        texture_right = CITADEL_GPU_CONTENT_WIDTH;
+    if (texture_bottom > CITADEL_GPU_CONTENT_HEIGHT)
+        texture_bottom = CITADEL_GPU_CONTENT_HEIGHT;
+
+    if (texture_right <= texture_left ||
+        texture_bottom <= texture_top) {
+        map->valid = false;
+        return;
+    }
+
+    for (destination = 0; destination < destination_w; ++destination) {
+        const u64 numerator =
+            (u64)(2 * destination + 1) *
+            (u64)(texture_right - texture_left);
+        int texture_x =
+            texture_left +
+            (int)(numerator / (u64)(2 * destination_w));
+        int source_x;
+
+        if (texture_x >= texture_right)
+            texture_x = texture_right - 1;
+
+        source_x =
+            (texture_x * source_width) /
+            CITADEL_GPU_CONTENT_WIDTH;
+        if (source_x >= source_width)
+            source_x = source_width - 1;
+
+        map->reference_texture_x[destination] = texture_x;
+        map->source_x_map[destination] = source_x;
+    }
+
+    for (destination = 0; destination < destination_h; ++destination) {
+        const u64 numerator =
+            (u64)(2 * destination + 1) *
+            (u64)(texture_bottom - texture_top);
+        int texture_y =
+            texture_top +
+            (int)(numerator / (u64)(2 * destination_h));
+        int source_y;
+
+        if (texture_y >= texture_bottom)
+            texture_y = texture_bottom - 1;
+
+        source_y =
+            (texture_y * source_height) /
+            CITADEL_GPU_CONTENT_HEIGHT;
+        if (source_y >= source_height)
+            source_y = source_height - 1;
+
+        map->reference_texture_y[destination] = texture_y;
+        map->source_y_offset[destination] =
+            (size_t)source_y * (size_t)source_pitch;
+    }
+
+    map->source_width = source_width;
+    map->source_height = source_height;
+    map->source_pitch = source_pitch;
+    map->source_x = source_rect.x;
+    map->source_y = source_rect.y;
+    map->source_w = source_rect.w;
+    map->source_h = source_rect.h;
+    map->destination_w = destination_w;
+    map->destination_h = destination_h;
+    map->texture_left = texture_left;
+    map->texture_top = texture_top;
+    map->texture_right = texture_right;
+    map->texture_bottom = texture_bottom;
+    map->valid = true;
+}
+
+static bool citadel_gpu_croppedtiled_write_region(
+    C3D_Tex *texture,
+    int destination_x,
+    int destination_y,
+    int destination_w,
+    int destination_h,
+    const u8 *source_pixels,
+    const citadel_gpu_cropped_map *map)
+{
+    u16 *texture_pixels;
+    int tile_y;
+
+    if (texture == NULL || texture->data == NULL ||
+        source_pixels == NULL || map == NULL || !map->valid ||
+        destination_x < 0 || destination_y < 0 ||
+        destination_w <= 0 || destination_h <= 0 ||
+        destination_w != map->destination_w ||
+        destination_h != map->destination_h ||
+        destination_x + destination_w >
+            CITADEL_GPU_CROPPED_TEXTURE_WIDTH ||
+        destination_y + destination_h >
+            CITADEL_GPU_CROPPED_TEXTURE_HEIGHT ||
+        (destination_x & 7) != 0 || (destination_y & 7) != 0 ||
+        (destination_w & 7) != 0 || (destination_h & 7) != 0)
+        return false;
+
+    texture_pixels = (u16 *)texture->data;
+
+    for (tile_y = 0; tile_y < destination_h / 8; ++tile_y) {
+        int tile_x;
+
+        for (tile_x = 0; tile_x < destination_w / 8; ++tile_x) {
+            const unsigned int physical_tile_x =
+                (unsigned int)(destination_x / 8 + tile_x);
+            const unsigned int physical_tile_y =
+                (unsigned int)(destination_y / 8 + tile_y);
+            const size_t tile_base =
+                (((size_t)physical_tile_y *
+                  (size_t)(CITADEL_GPU_CROPPED_TEXTURE_WIDTH / 8)) +
+                 (size_t)physical_tile_x) * 64u;
+            unsigned int morton;
+
+            for (morton = 0; morton < 64; ++morton) {
+                const unsigned int local_x =
+                    (morton & 1u) |
+                    ((morton >> 1) & 2u) |
+                    ((morton >> 2) & 4u);
+                const unsigned int local_y =
+                    ((morton >> 1) & 1u) |
+                    ((morton >> 2) & 2u) |
+                    ((morton >> 3) & 4u);
+                const int output_x = tile_x * 8 + (int)local_x;
+                const int output_y = tile_y * 8 + (int)local_y;
+                const size_t source_offset =
+                    map->source_y_offset[output_y] +
+                    (size_t)map->source_x_map[output_x];
+
+                texture_pixels[tile_base + morton] =
+                    citadel_gpu_palette565[source_pixels[source_offset]];
+            }
+        }
+    }
+
+    citadel_gpu_croppedtiled_pixels_generated +=
+        (u64)destination_w * (u64)destination_h;
+    return true;
+}
+
+static unsigned long citadel_gpu_croppedtiled_compare_region(
+    const C3D_Tex *cropped_texture,
+    int cropped_x,
+    int cropped_y,
+    int width,
+    int height,
+    const citadel_gpu_cropped_map *map,
+    const C3D_Tex *reference_texture,
+    int *first_x,
+    int *first_y,
+    u16 *first_expected,
+    u16 *first_actual)
+{
+    const u16 *cropped_pixels;
+    const u16 *reference_pixels;
+    unsigned long mismatches = 0;
+    int y;
+
+    if (cropped_texture == NULL || cropped_texture->data == NULL ||
+        reference_texture == NULL || reference_texture->data == NULL ||
+        map == NULL || !map->valid)
+        return ~0ul;
+
+    cropped_pixels = (const u16 *)cropped_texture->data;
+    reference_pixels = (const u16 *)reference_texture->data;
+
+    for (y = 0; y < height; ++y) {
+        int x;
+
+        for (x = 0; x < width; ++x) {
+            const u16 actual = cropped_pixels[
+                citadel_gpu_croppedtiled_offset(
+                    (unsigned int)(cropped_x + x),
+                    (unsigned int)(cropped_y + y))];
+            const u16 expected = reference_pixels[
+                citadel_gpu_tiled_offset(
+                    (unsigned int)map->reference_texture_x[x],
+                    (unsigned int)map->reference_texture_y[y])];
+
+            if (actual != expected) {
+                if (mismatches == 0) {
+                    if (first_x != NULL)
+                        *first_x = x;
+                    if (first_y != NULL)
+                        *first_y = y;
+                    if (first_expected != NULL)
+                        *first_expected = expected;
+                    if (first_actual != NULL)
+                        *first_actual = actual;
+                }
+                ++mismatches;
+            }
+        }
+    }
+
+    return mismatches;
+}
+
+static SDL_Rect citadel_gpu_croppedtiled_top_source(
+    SDL_Surface *surface,
+    bool split_layout)
+{
+    SDL_Rect result;
+
+    if (split_layout) {
+        return citadel_scale_reference_rect(
+            surface,
+            CITADEL_REF_GAME_X,
+            CITADEL_REF_GAME_Y,
+            CITADEL_REF_GAME_W,
+            CITADEL_REF_GAME_H);
+    }
+
+    result.x = 0;
+    result.y = 0;
+    result.w = surface->w;
+    result.h = surface->h;
+    return result;
+}
+
+
+
+/* PROJECT CITADEL C3D R2C PINGPONGTILED1 */
+static void citadel_gpu_pingpongtiled_select_set(int set_index)
+{
+    if (set_index != 1)
+        set_index = 0;
+
+    citadel_gpu_cropped_top_left_texture_live =
+        &citadel_gpu_cropped_top_left_texture_sets[set_index];
+    citadel_gpu_cropped_top_right_texture_live =
+        &citadel_gpu_cropped_top_right_texture_sets[set_index];
+    citadel_gpu_cropped_bottom_texture_live =
+        &citadel_gpu_cropped_bottom_texture_sets[set_index];
+    citadel_gpu_pingpongtiled_selected_set = set_index;
+}
+
+static bool citadel_gpu_croppedtiled_build_left(
+    SDL_Surface *surface,
+    bool split_layout,
+    uint32_t *linear_hash)
+{
+    const u8 *source_pixels;
+    SDL_Rect top_source;
+    int top_width;
+    bool needs_validation;
+    unsigned long mismatches = 0;
+    int first_x = -1;
+    int first_y = -1;
+    u16 first_expected = 0;
+    u16 first_actual = 0;
+
+    if (surface == NULL || surface->pixels == NULL ||
+        !citadel_gpu_cropped_top_left_initialized ||
+        !citadel_gpu_cropped_bottom_initialized)
+        return false;
+
+    source_pixels = (const u8 *)surface->pixels;
+    top_source = citadel_gpu_croppedtiled_top_source(
+        surface, split_layout);
+    top_width = split_layout
+        ? CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH
+        : CITADEL_GPU_CROPPED_TOP_LEGACY_WIDTH;
+    needs_validation = split_layout
+        ? !citadel_gpu_croppedtiled_split_left_validated
+        : !citadel_gpu_croppedtiled_legacy_left_validated;
+
+    if (needs_validation && linear_hash != NULL) {
+        *linear_hash = citadel_gpu_build_direct_tiled_indexed(
+            &citadel_gpu_texture,
+            source_pixels,
+            surface->w,
+            surface->h,
+            surface->pitch,
+            false);
+    }
+
+    citadel_gpu_croppedtiled_prepare_map(
+        split_layout
+            ? &citadel_gpu_cropped_top_split_map
+            : &citadel_gpu_cropped_top_legacy_map,
+        surface->w,
+        surface->h,
+        surface->pitch,
+        top_source,
+        top_width,
+        CITADEL_GPU_CROPPED_TOP_HEIGHT);
+
+    if (!citadel_gpu_croppedtiled_write_region(
+            &citadel_gpu_cropped_top_left_texture,
+            0,
+            0,
+            top_width,
+            CITADEL_GPU_CROPPED_TOP_HEIGHT,
+            source_pixels,
+            split_layout
+                ? &citadel_gpu_cropped_top_split_map
+                : &citadel_gpu_cropped_top_legacy_map))
+        return false;
+
+    GSPGPU_FlushDataCache(
+        citadel_gpu_cropped_top_left_texture.data,
+        CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    ++citadel_gpu_croppedtiled_top_left_frames;
+
+    if (split_layout) {
+        SDL_Rect inventory_source = citadel_scale_reference_rect(
+            surface,
+            CITADEL_REF_INVENTORY_X,
+            CITADEL_REF_INVENTORY_Y,
+            CITADEL_REF_INVENTORY_W,
+            CITADEL_REF_INVENTORY_H);
+        SDL_Rect left_mfd_source = citadel_scale_reference_rect(
+            surface,
+            CITADEL_REF_LEFT_MFD_X,
+            CITADEL_REF_MFD_Y,
+            CITADEL_REF_LEFT_MFD_W,
+            CITADEL_REF_MFD_H);
+        SDL_Rect right_mfd_source = citadel_scale_reference_rect(
+            surface,
+            CITADEL_REF_RIGHT_MFD_X,
+            CITADEL_REF_MFD_Y,
+            CITADEL_REF_RIGHT_MFD_W,
+            CITADEL_REF_MFD_H);
+
+        citadel_gpu_croppedtiled_prepare_map(
+            &citadel_gpu_cropped_inventory_map,
+            surface->w,
+            surface->h,
+            surface->pitch,
+            inventory_source,
+            CITADEL_GPU_CROPPED_BOTTOM_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT);
+        citadel_gpu_croppedtiled_prepare_map(
+            &citadel_gpu_cropped_left_mfd_map,
+            surface->w,
+            surface->h,
+            surface->pitch,
+            left_mfd_source,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT);
+        citadel_gpu_croppedtiled_prepare_map(
+            &citadel_gpu_cropped_right_mfd_map,
+            surface->w,
+            surface->h,
+            surface->pitch,
+            right_mfd_source,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT);
+
+        if (!citadel_gpu_croppedtiled_write_region(
+                &citadel_gpu_cropped_bottom_texture,
+                0,
+                0,
+                CITADEL_GPU_CROPPED_BOTTOM_WIDTH,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+                source_pixels,
+                &citadel_gpu_cropped_inventory_map) ||
+            !citadel_gpu_croppedtiled_write_region(
+                &citadel_gpu_cropped_bottom_texture,
+                0,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+                source_pixels,
+                &citadel_gpu_cropped_left_mfd_map) ||
+            !citadel_gpu_croppedtiled_write_region(
+                &citadel_gpu_cropped_bottom_texture,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+                CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+                source_pixels,
+                &citadel_gpu_cropped_right_mfd_map))
+            return false;
+
+        GSPGPU_FlushDataCache(
+            citadel_gpu_cropped_bottom_texture.data,
+            CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+        ++citadel_gpu_croppedtiled_bottom_frames;
+    }
+
+    if (!needs_validation)
+        return true;
+
+    mismatches += citadel_gpu_croppedtiled_compare_region(
+        &citadel_gpu_cropped_top_left_texture,
+        0,
+        0,
+        top_width,
+        CITADEL_GPU_CROPPED_TOP_HEIGHT,
+        split_layout
+            ? &citadel_gpu_cropped_top_split_map
+            : &citadel_gpu_cropped_top_legacy_map,
+        &citadel_gpu_texture,
+        &first_x,
+        &first_y,
+        &first_expected,
+        &first_actual);
+
+    if (split_layout) {
+        mismatches += citadel_gpu_croppedtiled_compare_region(
+            &citadel_gpu_cropped_bottom_texture,
+            0,
+            0,
+            CITADEL_GPU_CROPPED_BOTTOM_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+            &citadel_gpu_cropped_inventory_map,
+            &citadel_gpu_texture,
+            &first_x,
+            &first_y,
+            &first_expected,
+            &first_actual);
+        mismatches += citadel_gpu_croppedtiled_compare_region(
+            &citadel_gpu_cropped_bottom_texture,
+            0,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+            &citadel_gpu_cropped_left_mfd_map,
+            &citadel_gpu_texture,
+            &first_x,
+            &first_y,
+            &first_expected,
+            &first_actual);
+        mismatches += citadel_gpu_croppedtiled_compare_region(
+            &citadel_gpu_cropped_bottom_texture,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_WIDTH,
+            CITADEL_GPU_CROPPED_BOTTOM_HALF_HEIGHT,
+            &citadel_gpu_cropped_right_mfd_map,
+            &citadel_gpu_texture,
+            &first_x,
+            &first_y,
+            &first_expected,
+            &first_actual);
+    }
+
+    citadel_gpu_croppedtiled_validation_mismatches += mismatches;
+
+    if (mismatches != 0) {
+        citadel_gpu_croppedtiled_enabled = false;
+        ++citadel_gpu_croppedtiled_fallback_eye_passes;
+        v5_log("GPU C3D R2B CROPPEDTILED VALIDATION FAIL "
+               "eye=LEFT layout=%s mismatches=%lu "
+               "first={%d,%d} expected=0x%04X actual=0x%04X "
+               "action=R2A_FULL_TEXTURE_RESTORED",
+               split_layout ? "SPLIT" : "LEGACY",
+               mismatches,
+               first_x,
+               first_y,
+               (unsigned int)first_expected,
+               (unsigned int)first_actual);
+        return false;
+    }
+
+    if (split_layout)
+        citadel_gpu_croppedtiled_split_left_validated = true;
+    else
+        citadel_gpu_croppedtiled_legacy_left_validated = true;
+
+    v5_log("GPU C3D R2B CROPPEDTILED VALIDATION PASS "
+           "eye=LEFT layout=%s top_pixels=%u bottom_pixels=%u",
+           split_layout ? "SPLIT" : "LEGACY",
+           (unsigned int)(top_width *
+                          CITADEL_GPU_CROPPED_TOP_HEIGHT),
+           split_layout
+               ? (unsigned int)(CITADEL_GPU_CROPPED_BOTTOM_WIDTH *
+                                CITADEL_GPU_CROPPED_BOTTOM_HEIGHT)
+               : 0u);
+    return true;
+}
+
+static bool citadel_gpu_croppedtiled_build_right(
+    const u8 *source_pixels,
+    int source_width,
+    int source_height,
+    int source_pitch,
+    bool split_layout)
+{
+    SDL_Rect top_source;
+    int top_width;
+    bool needs_validation;
+    unsigned long mismatches = 0;
+    int first_x = -1;
+    int first_y = -1;
+    u16 first_expected = 0;
+    u16 first_actual = 0;
+
+    if (source_pixels == NULL ||
+        !citadel_gpu_cropped_top_right_initialized)
+        return false;
+
+    if (split_layout) {
+        top_source.x =
+            (CITADEL_REF_GAME_X * source_width) /
+            CITADEL_REF_WIDTH;
+        top_source.y =
+            (CITADEL_REF_GAME_Y * source_height) /
+            CITADEL_REF_HEIGHT;
+        top_source.w =
+            (CITADEL_REF_GAME_W * source_width) /
+            CITADEL_REF_WIDTH;
+        top_source.h =
+            (CITADEL_REF_GAME_H * source_height) /
+            CITADEL_REF_HEIGHT;
+    } else {
+        top_source.x = 0;
+        top_source.y = 0;
+        top_source.w = source_width;
+        top_source.h = source_height;
+    }
+
+    top_width = split_layout
+        ? CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH
+        : CITADEL_GPU_CROPPED_TOP_LEGACY_WIDTH;
+    needs_validation = split_layout
+        ? !citadel_gpu_croppedtiled_split_right_validated
+        : !citadel_gpu_croppedtiled_legacy_right_validated;
+
+    if (needs_validation) {
+        (void)citadel_gpu_build_direct_tiled_indexed(
+            &citadel_gpu_right_texture,
+            source_pixels,
+            source_width,
+            source_height,
+            source_pitch,
+            true);
+    }
+
+    citadel_gpu_croppedtiled_prepare_map(
+        split_layout
+            ? &citadel_gpu_cropped_top_split_map
+            : &citadel_gpu_cropped_top_legacy_map,
+        source_width,
+        source_height,
+        source_pitch,
+        top_source,
+        top_width,
+        CITADEL_GPU_CROPPED_TOP_HEIGHT);
+
+    if (!citadel_gpu_croppedtiled_write_region(
+            &citadel_gpu_cropped_top_right_texture,
+            0,
+            0,
+            top_width,
+            CITADEL_GPU_CROPPED_TOP_HEIGHT,
+            source_pixels,
+            split_layout
+                ? &citadel_gpu_cropped_top_split_map
+                : &citadel_gpu_cropped_top_legacy_map))
+        return false;
+
+    GSPGPU_FlushDataCache(
+        citadel_gpu_cropped_top_right_texture.data,
+        CITADEL_GPU_CROPPED_TEXTURE_BYTES);
+    ++citadel_gpu_croppedtiled_top_right_frames;
+
+    if (!needs_validation)
+        return true;
+
+    mismatches = citadel_gpu_croppedtiled_compare_region(
+        &citadel_gpu_cropped_top_right_texture,
+        0,
+        0,
+        top_width,
+        CITADEL_GPU_CROPPED_TOP_HEIGHT,
+        split_layout
+            ? &citadel_gpu_cropped_top_split_map
+            : &citadel_gpu_cropped_top_legacy_map,
+        &citadel_gpu_right_texture,
+        &first_x,
+        &first_y,
+        &first_expected,
+        &first_actual);
+
+    citadel_gpu_croppedtiled_validation_mismatches += mismatches;
+
+    if (mismatches != 0) {
+        citadel_gpu_croppedtiled_enabled = false;
+        ++citadel_gpu_croppedtiled_fallback_eye_passes;
+        v5_log("GPU C3D R2B CROPPEDTILED VALIDATION FAIL "
+               "eye=RIGHT layout=%s mismatches=%lu "
+               "first={%d,%d} expected=0x%04X actual=0x%04X "
+               "action=R2A_FULL_TEXTURE_RESTORED",
+               split_layout ? "SPLIT" : "LEGACY",
+               mismatches,
+               first_x,
+               first_y,
+               (unsigned int)first_expected,
+               (unsigned int)first_actual);
+        return false;
+    }
+
+    if (split_layout)
+        citadel_gpu_croppedtiled_split_right_validated = true;
+    else
+        citadel_gpu_croppedtiled_legacy_right_validated = true;
+
+    v5_log("GPU C3D R2B CROPPEDTILED VALIDATION PASS "
+           "eye=RIGHT layout=%s top_pixels=%u",
+           split_layout ? "SPLIT" : "LEGACY",
+           (unsigned int)(top_width *
+                          CITADEL_GPU_CROPPED_TOP_HEIGHT));
+    return true;
 }
 
 /*
@@ -2551,6 +4549,8 @@ static bool citadel_gpu_upload_surface(SDL_Surface *surface)
     const unsigned char *right_pixels = NULL;
     int right_width = 0, right_height = 0, right_pitch = 0;
     float right_slider = 0.0f;
+    u64 profile_tick = 0;
+    bool cropped_split_layout = false;
 
     if (surface == NULL ||
         surface->pixels == NULL ||
@@ -2635,25 +4635,163 @@ static bool citadel_gpu_upload_surface(SDL_Surface *surface)
                "normal live RGB565 presentation resumed");
     }
 
+    profile_tick = svcGetSystemTick();
     palette_mismatches =
         citadel_gpu_refresh_palette565();
+    if (citadel_c3d_profile_frame_active)
+        citadel_c3d_profile_current.palette_ticks =
+            svcGetSystemTick() - profile_tick;
 
-    linear_hash =
-        citadel_gpu_build_linear_frame(surface);
-    citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_texture);
+    cropped_split_layout = citadel_3ds_use_split_layout();
+    citadel_gpu_croppedtiled_current_split =
+        cropped_split_layout;
+
+    if (citadel_gpu_croppedtiled_enabled &&
+        citadel_gpu_directtiled_enabled &&
+        citadel_gpu_cropped_top_left_initialized &&
+        citadel_gpu_cropped_bottom_initialized) {
+        profile_tick = svcGetSystemTick();
+        linear_hash = 0;
+        if (!citadel_gpu_croppedtiled_build_left(
+                surface,
+                cropped_split_layout,
+                &linear_hash)) {
+            if (citadel_gpu_croppedtiled_enabled)
+                citadel_gpu_croppedtiled_enabled = false;
+
+            ++citadel_gpu_croppedtiled_fallback_eye_passes;
+            linear_hash = citadel_gpu_build_direct_tiled_indexed(
+                &citadel_gpu_texture,
+                (const u8 *)surface->pixels,
+                surface->w,
+                surface->h,
+                surface->pitch,
+                false);
+        }
+        if (citadel_c3d_profile_frame_active) {
+            citadel_c3d_profile_current.left_build_ticks =
+                svcGetSystemTick() - profile_tick;
+            citadel_c3d_profile_current.left_swizzle_ticks = 0;
+        }
+    } else if (citadel_gpu_directtiled_enabled) {
+        ++citadel_gpu_croppedtiled_fallback_eye_passes;
+        profile_tick = svcGetSystemTick();
+        linear_hash = citadel_gpu_build_direct_tiled_indexed(
+            &citadel_gpu_texture,
+            (const u8 *)surface->pixels,
+            surface->w,
+            surface->h,
+            surface->pitch,
+            false);
+        if (citadel_c3d_profile_frame_active) {
+            citadel_c3d_profile_current.left_build_ticks =
+                svcGetSystemTick() - profile_tick;
+            citadel_c3d_profile_current.left_swizzle_ticks = 0;
+        }
+    } else {
+        ++citadel_gpu_directtiled_fallback_eye_passes;
+        ++citadel_gpu_croppedtiled_fallback_eye_passes;
+        profile_tick = svcGetSystemTick();
+        linear_hash = citadel_gpu_build_linear_frame(surface);
+        if (citadel_c3d_profile_frame_active)
+            citadel_c3d_profile_current.left_build_ticks =
+                svcGetSystemTick() - profile_tick;
+
+        profile_tick = svcGetSystemTick();
+        citadel_gpu_swizzle_staging_to_texture(
+            &citadel_gpu_texture);
+        if (citadel_c3d_profile_frame_active)
+            citadel_c3d_profile_current.left_swizzle_ticks =
+                svcGetSystemTick() - profile_tick;
+    }
 
     citadel_gpu_right_frame_active = false;
     citadel_gpu_right_frame_slider = 0.0f;
     if (citadel_gpu_right_texture_initialized &&
-        citadel_3ds_gameplay_controls_active())
+        citadel_3ds_gameplay_controls_active()) {
+        profile_tick = svcGetSystemTick();
         right_pixels = citadel_3ds_stereo_get_right_frame(
             &right_width, &right_height, &right_pitch, &right_slider);
+        if (citadel_c3d_profile_frame_active)
+            citadel_c3d_profile_current.right_acquire_ticks =
+                svcGetSystemTick() - profile_tick;
+    }
 
     if (right_pixels != NULL && right_width == surface->w &&
         right_height == surface->h && right_pitch >= right_width) {
-        (void)citadel_gpu_build_linear_indexed(right_pixels, right_width,
-                                               right_height, right_pitch);
-        citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_right_texture);
+        if (citadel_gpu_croppedtiled_enabled &&
+            citadel_gpu_directtiled_enabled &&
+            citadel_gpu_cropped_top_right_initialized) {
+            profile_tick = svcGetSystemTick();
+            if (!citadel_gpu_croppedtiled_build_right(
+                    right_pixels,
+                    right_width,
+                    right_height,
+                    right_pitch,
+                    cropped_split_layout)) {
+                if (citadel_gpu_croppedtiled_enabled)
+                    citadel_gpu_croppedtiled_enabled = false;
+
+                ++citadel_gpu_croppedtiled_fallback_eye_passes;
+
+                /* Right validation failure switches presentation to R2A.
+                 * Rebuild the left full texture for this same frame.
+                 */
+                linear_hash = citadel_gpu_build_direct_tiled_indexed(
+                    &citadel_gpu_texture,
+                    (const u8 *)surface->pixels,
+                    surface->w,
+                    surface->h,
+                    surface->pitch,
+                    false);
+                (void)citadel_gpu_build_direct_tiled_indexed(
+                    &citadel_gpu_right_texture,
+                    right_pixels,
+                    right_width,
+                    right_height,
+                    right_pitch,
+                    true);
+            }
+            if (citadel_c3d_profile_frame_active) {
+                citadel_c3d_profile_current.right_build_ticks =
+                    svcGetSystemTick() - profile_tick;
+                citadel_c3d_profile_current.right_swizzle_ticks = 0;
+            }
+        } else if (citadel_gpu_directtiled_enabled) {
+            ++citadel_gpu_croppedtiled_fallback_eye_passes;
+            profile_tick = svcGetSystemTick();
+            (void)citadel_gpu_build_direct_tiled_indexed(
+                &citadel_gpu_right_texture,
+                right_pixels,
+                right_width,
+                right_height,
+                right_pitch,
+                true);
+            if (citadel_c3d_profile_frame_active) {
+                citadel_c3d_profile_current.right_build_ticks =
+                    svcGetSystemTick() - profile_tick;
+                citadel_c3d_profile_current.right_swizzle_ticks = 0;
+            }
+        } else {
+            ++citadel_gpu_directtiled_fallback_eye_passes;
+            ++citadel_gpu_croppedtiled_fallback_eye_passes;
+            profile_tick = svcGetSystemTick();
+            (void)citadel_gpu_build_linear_indexed(
+                right_pixels,
+                right_width,
+                right_height,
+                right_pitch);
+            if (citadel_c3d_profile_frame_active)
+                citadel_c3d_profile_current.right_build_ticks =
+                    svcGetSystemTick() - profile_tick;
+
+            profile_tick = svcGetSystemTick();
+            citadel_gpu_swizzle_staging_to_texture(
+                &citadel_gpu_right_texture);
+            if (citadel_c3d_profile_frame_active)
+                citadel_c3d_profile_current.right_swizzle_ticks =
+                    svcGetSystemTick() - profile_tick;
+        }
         citadel_gpu_right_frame_active = true;
         citadel_gpu_right_frame_slider = right_slider;
         if (!citadel_gpu_first_right_upload_logged) {
@@ -2692,6 +4830,7 @@ static bool citadel_gpu_upload_surface(SDL_Surface *surface)
         v5_log("GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d "
                "linear=%dx%d texture=%dx%d "
                "palette=AUTHORITATIVE_EVERY_FRAME "
+               "transport=CROPPED_TILED_PINGPONG_OVERLAP "
                "initial_mismatches=%u hash=0x%08lX",
                surface->w,
                surface->h,
@@ -2719,119 +4858,22 @@ static bool citadel_gpu_draw_region_from_texture(C3D_Tex *texture,
                                                  float destination_h,
                                                  float depth)
 {
-    Tex3DS_SubTexture subtexture;
-    C2D_Image image;
-    C2D_DrawParams parameters;
-    int source_right;
-    int source_bottom;
-    int texture_left;
-    int texture_right;
-    int texture_top;
-    int texture_bottom;
+    const bool ok = citadel_gpu_directquad_draw_region(
+        texture,
+        source_x,
+        source_y,
+        source_w,
+        source_h,
+        destination_x,
+        destination_y,
+        destination_w,
+        destination_h,
+        depth);
 
-    if (texture == NULL || texture->data == NULL ||
-        source_w <= 0 ||
-        source_h <= 0 ||
-        citadel_gpu_source_width <= 0 ||
-        citadel_gpu_source_height <= 0)
-        return false;
-
-    if (source_x < 0)
-        source_x = 0;
-    if (source_y < 0)
-        source_y = 0;
-
-    source_right = source_x + source_w;
-    source_bottom = source_y + source_h;
-
-    if (source_right > citadel_gpu_source_width)
-        source_right = citadel_gpu_source_width;
-    if (source_bottom > citadel_gpu_source_height)
-        source_bottom = citadel_gpu_source_height;
-
-    if (source_right <= source_x || source_bottom <= source_y)
-        return false;
-
-    /*
-     * Translate the original Shock-space crop into the active transport
-     * rectangle. V15J uses a full 640x480 content image, so menu views map
-     * 1:1 into texture space and only the final LCD presentation scales.
-     */
-    texture_left =
-        (source_x * CITADEL_GPU_CONTENT_WIDTH) /
-        citadel_gpu_source_width;
-    texture_top =
-        (source_y * CITADEL_GPU_CONTENT_HEIGHT) /
-        citadel_gpu_source_height;
-
-    texture_right =
-        ((source_right * CITADEL_GPU_CONTENT_WIDTH) +
-         citadel_gpu_source_width - 1) /
-        citadel_gpu_source_width;
-    texture_bottom =
-        ((source_bottom * CITADEL_GPU_CONTENT_HEIGHT) +
-         citadel_gpu_source_height - 1) /
-        citadel_gpu_source_height;
-
-    if (texture_left < 0)
-        texture_left = 0;
-    if (texture_top < 0)
-        texture_top = 0;
-    if (texture_right > CITADEL_GPU_CONTENT_WIDTH)
-        texture_right = CITADEL_GPU_CONTENT_WIDTH;
-    if (texture_bottom > CITADEL_GPU_CONTENT_HEIGHT)
-        texture_bottom = CITADEL_GPU_CONTENT_HEIGHT;
-
-    if (texture_right <= texture_left ||
-        texture_bottom <= texture_top)
-        return false;
-
-    memset(&subtexture, 0, sizeof(subtexture));
-    memset(&parameters, 0, sizeof(parameters));
-
-    subtexture.width =
-        (u16)(texture_right - texture_left);
-    subtexture.height =
-        (u16)(texture_bottom - texture_top);
-
-    subtexture.left =
-        (float)texture_left /
-        (float)CITADEL_GPU_TEXTURE_WIDTH;
-    subtexture.right =
-        (float)texture_right /
-        (float)CITADEL_GPU_TEXTURE_WIDTH;
-
-    /*
-     * Preserve V14X's confirmed orientation. Only the underlying transport
-     * dimensions and Shock-to-transport mapping change in V14Y.
-     */
-    subtexture.top =
-        1.0f -
-        ((float)texture_top /
-         (float)CITADEL_GPU_TEXTURE_HEIGHT);
-    subtexture.bottom =
-        1.0f -
-        ((float)texture_bottom /
-         (float)CITADEL_GPU_TEXTURE_HEIGHT);
-
-    image.tex = texture;
-    image.subtex = &subtexture;
-
-    parameters.pos.x = destination_x;
-    parameters.pos.y = destination_y;
-    parameters.pos.w = destination_w;
-    parameters.pos.h = destination_h;
-    parameters.center.x = 0.0f;
-    parameters.center.y = 0.0f;
-    parameters.depth = depth;
-    parameters.angle = 0.0f;
-
-    if (!C2D_DrawImage(image, &parameters, NULL)) {
+    if (!ok)
         ++citadel_gpu_draw_failures;
-        return false;
-    }
 
-    return true;
+    return ok;
 }
 
 static bool citadel_gpu_draw_region(int source_x, int source_y,
@@ -3127,6 +5169,9 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
     bool right_ok = true;
     bool bottom_ok = true;
     SDL_Rect top_source;
+    u64 profile_tick = 0;
+    bool pingpong_preuploaded = false;
+    int pingpong_prepared_set = -1;
 
     if (!citadel_gpu_ready ||
         citadel_gpu_top_target == NULL ||
@@ -3143,24 +5188,88 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
      * V15A performed citadel_gpu_upload_surface() before this call, creating
      * a live read/write race that a static diagnostic texture could hide.
      */
-    if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
-        ++citadel_gpu_draw_failures;
-        return false;
+    citadel_c3d_profile_begin_frame();
+
+    /*
+     * R2C overlap order:
+     *
+     * The prior GPU frame can only reference citadel_gpu_pingpongtiled_draw_set.
+     * Build this frame into the opposite set before SYNCDRAW, then let
+     * FrameBegin drain the prior frame and submit commands for the new set.
+     */
+    if (!magenta &&
+        citadel_gpu_pingpongtiled_enabled &&
+        citadel_gpu_pingpongtiled_second_set_initialized &&
+        citadel_gpu_croppedtiled_enabled &&
+        !citadel_gpu_v15g_phase_active() &&
+        !citadel_gpu_v15h_phase_active()) {
+        pingpong_prepared_set =
+            1 - citadel_gpu_pingpongtiled_draw_set;
+        citadel_gpu_pingpongtiled_select_set(
+            pingpong_prepared_set);
+
+        profile_tick = svcGetSystemTick();
+        if (citadel_gpu_upload_surface(surface)) {
+            citadel_c3d_profile_current.upload_total_ticks =
+                svcGetSystemTick() - profile_tick;
+            pingpong_preuploaded = true;
+            ++citadel_gpu_pingpongtiled_preframe_uploads;
+
+            if (!citadel_gpu_croppedtiled_enabled)
+                citadel_gpu_pingpongtiled_enabled = false;
+        } else {
+            ++citadel_gpu_pingpongtiled_preframe_failures;
+            citadel_gpu_pingpongtiled_enabled = false;
+            citadel_gpu_pingpongtiled_select_set(0);
+        }
     }
 
-    if (!magenta && !citadel_gpu_upload_surface(surface)) {
-        /*
-         * Do not leave Citro3D in an active-frame state if an unexpected
-         * surface validation/upload failure occurs.
-         */
-        C3D_FrameEnd(0);
+    profile_tick = svcGetSystemTick();
+    if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
+        ++citadel_gpu_draw_failures;
+        citadel_c3d_profile_discard_frame();
         return false;
+    }
+    citadel_c3d_profile_current.frame_begin_ticks =
+        svcGetSystemTick() - profile_tick;
+
+    if (!pingpong_preuploaded) {
+        profile_tick = svcGetSystemTick();
+        if (!magenta && !citadel_gpu_upload_surface(surface)) {
+            /*
+             * R2B fallback ordering writes only after SYNCDRAW has drained
+             * the previous frame, so it remains safe with one texture set.
+             */
+            C3D_FrameEnd(0);
+            citadel_c3d_profile_discard_frame();
+            return false;
+        }
+        if (!magenta) {
+            citadel_c3d_profile_current.upload_total_ticks =
+                svcGetSystemTick() - profile_tick;
+            ++citadel_gpu_pingpongtiled_inframe_uploads;
+        }
+    }
+
+    if (pingpong_preuploaded &&
+        citadel_gpu_croppedtiled_enabled) {
+        if (citadel_gpu_pingpongtiled_draw_set !=
+            pingpong_prepared_set)
+            ++citadel_gpu_pingpongtiled_set_switches;
+        citadel_gpu_pingpongtiled_draw_set =
+            pingpong_prepared_set;
     }
 
     if (!magenta && !citadel_gpu_sync_order_logged) {
-        v5_log("GPU V16.1 SYNC ORDER confirmed: "
-               "FrameBegin(SYNCDRAW) -> direct texture write -> "
-               "forced texture rebind -> draw");
+        if (pingpong_preuploaded) {
+            v5_log("GPU C3D R2C OVERLAP ORDER confirmed: "
+                   "inactive texture write -> FrameBegin(SYNCDRAW) -> "
+                   "forced texture rebind -> draw");
+        } else {
+            v5_log("GPU V16.1 SYNC ORDER confirmed: "
+                   "FrameBegin(SYNCDRAW) -> direct texture write -> "
+                   "forced texture rebind -> draw");
+        }
         citadel_gpu_sync_order_logged = true;
     }
 
@@ -3180,7 +5289,12 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
     if (!magenta &&
         !citadel_gpu_v15g_phase_active() &&
         !citadel_gpu_v15h_phase_active()) {
-        C3D_TexBind(0, &citadel_gpu_texture);
+        C3D_TexBind(
+            0,
+            citadel_gpu_croppedtiled_enabled &&
+                    citadel_gpu_cropped_top_left_initialized
+                ? &citadel_gpu_cropped_top_left_texture
+                : &citadel_gpu_texture);
 
         if (!citadel_gpu_cache_rebind_logged) {
             v5_log("GPU V16.1 CACHE REBIND active: "
@@ -3197,6 +5311,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
         C2D_TargetClear(citadel_gpu_bottom_target,
                         C2D_Color32(24, 24, 24, 255));
         C3D_FrameEnd(0);
+        citadel_c3d_profile_discard_frame();
         ++citadel_gpu_presented_frames;
         citadel_diag_note_frame();
         return true;
@@ -3213,6 +5328,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
             citadel_gpu_v15h_draw_phase();
 
         C3D_FrameEnd(0);
+        citadel_c3d_profile_discard_frame();
         ++citadel_gpu_presented_frames;
         citadel_diag_note_frame();
 
@@ -3232,6 +5348,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
             citadel_gpu_v15g_draw_phase();
 
         C3D_FrameEnd(0);
+        citadel_c3d_profile_discard_frame();
         ++citadel_gpu_presented_frames;
         citadel_diag_note_frame();
 
@@ -3239,165 +5356,249 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
     }
 
     split_layout = citadel_3ds_use_split_layout();
+    profile_tick = svcGetSystemTick();
 
-    C2D_TargetClear(citadel_gpu_top_target,
-                    C2D_Color32(0, 0, 0, 255));
-    C2D_TargetClear(citadel_gpu_top_right_target,
-                    C2D_Color32(0, 0, 0, 255));
-    C2D_TargetClear(citadel_gpu_bottom_target,
-                    C2D_Color32(0, 0, 0, 255));
+    C3D_RenderTargetClear(
+        citadel_gpu_top_target,
+        C3D_CLEAR_ALL,
+        0x000000FF,
+        0);
+    C3D_RenderTargetClear(
+        citadel_gpu_top_right_target,
+        C3D_CLEAR_ALL,
+        0x000000FF,
+        0);
+    C3D_RenderTargetClear(
+        citadel_gpu_bottom_target,
+        C3D_CLEAR_ALL,
+        0x000000FF,
+        0);
 
-    C2D_SceneBegin(citadel_gpu_top_target);
-    C3D_TexBind(0, &citadel_gpu_texture);
+    top_ok = citadel_gpu_directquad_begin_scene(
+        citadel_gpu_top_target,
+        false);
 
-    if (split_layout) {
-        top_source = citadel_scale_reference_rect(
-            surface,
-            CITADEL_REF_GAME_X,
-            CITADEL_REF_GAME_Y,
-            CITADEL_REF_GAME_W,
-            CITADEL_REF_GAME_H);
+    if (citadel_gpu_croppedtiled_enabled &&
+        citadel_gpu_cropped_top_left_initialized &&
+        citadel_gpu_croppedtiled_current_split == split_layout) {
+        const int cropped_top_width = split_layout
+            ? CITADEL_GPU_CROPPED_TOP_SPLIT_WIDTH
+            : CITADEL_GPU_CROPPED_TOP_LEGACY_WIDTH;
 
-        top_ok = citadel_gpu_draw_region(
-            top_source.x,
-            top_source.y,
-            top_source.w,
-            top_source.h,
+        if (split_layout) {
+            top_source = citadel_scale_reference_rect(
+                surface,
+                CITADEL_REF_GAME_X,
+                CITADEL_REF_GAME_Y,
+                CITADEL_REF_GAME_W,
+                CITADEL_REF_GAME_H);
+        } else {
+            top_source.x = 0;
+            top_source.y = 0;
+            top_source.w = surface->w;
+            top_source.h = surface->h;
+        }
+
+        top_ok = top_ok && citadel_gpu_directquad_draw_texel_region(
+            &citadel_gpu_cropped_top_left_texture,
+            CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+            CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+            0,
+            0,
+            cropped_top_width,
+            CITADEL_GPU_CROPPED_TOP_HEIGHT,
+            split_layout ? 0.0f : (float)CITADEL_3DS_GAME_X,
             0.0f,
-            0.0f,
-            (float)CITADEL_3DS_TOP_WIDTH,
+            split_layout
+                ? (float)CITADEL_3DS_TOP_WIDTH
+                : (float)CITADEL_3DS_GAME_WIDTH,
             (float)CITADEL_3DS_TOP_HEIGHT,
             0.0f);
-    } else {
-        top_source.x = 0;
-        top_source.y = 0;
-        top_source.w =
-            surface != NULL ? surface->w : CITADEL_REF_WIDTH;
-        top_source.h =
-            surface != NULL ? surface->h : CITADEL_REF_HEIGHT;
 
-        top_ok = citadel_gpu_draw_region(
-            top_source.x,
-            top_source.y,
-            top_source.w,
-            top_source.h,
-            (float)CITADEL_3DS_GAME_X,
-            (float)CITADEL_3DS_GAME_Y,
-            (float)CITADEL_3DS_GAME_WIDTH,
-            (float)CITADEL_3DS_GAME_HEIGHT,
-            0.0f);
-    }
-
-    /* S2: true right world when available; sealed S1 fallback otherwise. */
-    C2D_SceneBegin(citadel_gpu_top_right_target);
-    C3D_TexBind(0, citadel_gpu_right_frame_active
-        ? &citadel_gpu_right_texture : &citadel_gpu_texture);
-
-    if (split_layout) {
-        right_ok = citadel_gpu_draw_region_from_texture(
-            citadel_gpu_right_frame_active ? &citadel_gpu_right_texture : &citadel_gpu_texture,
-            top_source.x,
-            top_source.y,
-            top_source.w,
-            top_source.h,
+        right_ok = citadel_gpu_directquad_begin_scene(
+            citadel_gpu_top_right_target,
+            false);
+        right_ok = right_ok && citadel_gpu_directquad_draw_texel_region(
+            citadel_gpu_right_frame_active
+                ? &citadel_gpu_cropped_top_right_texture
+                : &citadel_gpu_cropped_top_left_texture,
+            CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+            CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+            0,
+            0,
+            cropped_top_width,
+            CITADEL_GPU_CROPPED_TOP_HEIGHT,
+            split_layout ? 0.0f : (float)CITADEL_3DS_GAME_X,
             0.0f,
-            0.0f,
-            (float)CITADEL_3DS_TOP_WIDTH,
+            split_layout
+                ? (float)CITADEL_3DS_TOP_WIDTH
+                : (float)CITADEL_3DS_GAME_WIDTH,
             (float)CITADEL_3DS_TOP_HEIGHT,
             0.0f);
+
+        bottom_ok = citadel_gpu_directquad_begin_scene(
+            citadel_gpu_bottom_target,
+            true);
+
+        if (split_layout) {
+            bottom_ok = bottom_ok &&
+                citadel_gpu_directquad_draw_texel_region(
+                    &citadel_gpu_cropped_bottom_texture,
+                    CITADEL_GPU_CROPPED_TEXTURE_WIDTH,
+                    CITADEL_GPU_CROPPED_TEXTURE_HEIGHT,
+                    0,
+                    0,
+                    CITADEL_GPU_CROPPED_BOTTOM_WIDTH,
+                    CITADEL_GPU_CROPPED_BOTTOM_HEIGHT,
+                    0.0f,
+                    0.0f,
+                    (float)CITADEL_3DS_BOTTOM_WIDTH,
+                    (float)CITADEL_3DS_BOTTOM_HEIGHT,
+                    0.0f);
+        }
+
+        if (!top_ok || !right_ok || !bottom_ok)
+            ++citadel_gpu_draw_failures;
     } else {
-        right_ok = citadel_gpu_draw_region_from_texture(
-            citadel_gpu_right_frame_active ? &citadel_gpu_right_texture : &citadel_gpu_texture,
-            top_source.x,
-            top_source.y,
-            top_source.w,
-            top_source.h,
-            (float)CITADEL_3DS_GAME_X,
-            (float)CITADEL_3DS_GAME_Y,
-            (float)CITADEL_3DS_GAME_WIDTH,
-            (float)CITADEL_3DS_GAME_HEIGHT,
-            0.0f);
-    }
-
-    if (split_layout) {
-        SDL_Rect inventory_source =
-            citadel_scale_reference_rect(
+        if (split_layout) {
+            top_source = citadel_scale_reference_rect(
                 surface,
-                CITADEL_REF_INVENTORY_X,
-                CITADEL_REF_INVENTORY_Y,
-                CITADEL_REF_INVENTORY_W,
-                CITADEL_REF_INVENTORY_H);
+                CITADEL_REF_GAME_X,
+                CITADEL_REF_GAME_Y,
+                CITADEL_REF_GAME_W,
+                CITADEL_REF_GAME_H);
 
-        SDL_Rect left_mfd_source =
-            citadel_scale_reference_rect(
-                surface,
-                CITADEL_REF_LEFT_MFD_X,
-                CITADEL_REF_MFD_Y,
-                CITADEL_REF_LEFT_MFD_W,
-                CITADEL_REF_MFD_H);
-
-        SDL_Rect right_mfd_source =
-            citadel_scale_reference_rect(
-                surface,
-                CITADEL_REF_RIGHT_MFD_X,
-                CITADEL_REF_MFD_Y,
-                CITADEL_REF_RIGHT_MFD_W,
-                CITADEL_REF_MFD_H);
-
-        C2D_SceneBegin(citadel_gpu_bottom_target);
-        C3D_TexBind(0, &citadel_gpu_texture);
-
-        bottom_ok =
-            citadel_gpu_draw_region(
-                inventory_source.x,
-                inventory_source.y,
-                inventory_source.w,
-                inventory_source.h,
+            top_ok = top_ok && citadel_gpu_draw_region(
+                top_source.x,
+                top_source.y,
+                top_source.w,
+                top_source.h,
                 0.0f,
                 0.0f,
-                320.0f,
-                120.0f,
-                0.0f) &&
-            citadel_gpu_draw_region(
-                left_mfd_source.x,
-                left_mfd_source.y,
-                left_mfd_source.w,
-                left_mfd_source.h,
-                0.0f,
-                120.0f,
-                160.0f,
-                120.0f,
-                0.0f) &&
-            citadel_gpu_draw_region(
-                right_mfd_source.x,
-                right_mfd_source.y,
-                right_mfd_source.w,
-                right_mfd_source.h,
-                160.0f,
-                120.0f,
-                160.0f,
-                120.0f,
+                (float)CITADEL_3DS_TOP_WIDTH,
+                (float)CITADEL_3DS_TOP_HEIGHT,
                 0.0f);
-    } else {
-        /*
-         * Initial menus and SELECT Legacy view must actively submit a black
-         * bottom-screen scene. GAME_LOOP wrappers preserve the player-selected
-         * layout, so a genuine T7 Save/Load wrapper remains on the lower LCD.
-         * Clearing a target without beginning that scene leaves the preceding
-         * gameplay frame visible on the physical LCD.
-         */
-        C2D_SceneBegin(citadel_gpu_bottom_target);
-        bottom_ok =
-            C2D_DrawRectSolid(
-                0.0f,
-                0.0f,
-                0.0f,
-                (float)CITADEL_3DS_BOTTOM_WIDTH,
-                (float)CITADEL_3DS_BOTTOM_HEIGHT,
-                C2D_Color32(0, 0, 0, 255));
+        } else {
+            top_source.x = 0;
+            top_source.y = 0;
+            top_source.w =
+                surface != NULL ? surface->w : CITADEL_REF_WIDTH;
+            top_source.h =
+                surface != NULL ? surface->h : CITADEL_REF_HEIGHT;
+
+            top_ok = top_ok && citadel_gpu_draw_region(
+                top_source.x,
+                top_source.y,
+                top_source.w,
+                top_source.h,
+                (float)CITADEL_3DS_GAME_X,
+                (float)CITADEL_3DS_GAME_Y,
+                (float)CITADEL_3DS_GAME_WIDTH,
+                (float)CITADEL_3DS_GAME_HEIGHT,
+                0.0f);
+        }
+
+        right_ok = citadel_gpu_directquad_begin_scene(
+            citadel_gpu_top_right_target,
+            false);
+
+        right_ok = right_ok && citadel_gpu_draw_region_from_texture(
+            citadel_gpu_right_frame_active
+                ? &citadel_gpu_right_texture
+                : &citadel_gpu_texture,
+            top_source.x,
+            top_source.y,
+            top_source.w,
+            top_source.h,
+            split_layout ? 0.0f : (float)CITADEL_3DS_GAME_X,
+            split_layout ? 0.0f : (float)CITADEL_3DS_GAME_Y,
+            split_layout
+                ? (float)CITADEL_3DS_TOP_WIDTH
+                : (float)CITADEL_3DS_GAME_WIDTH,
+            split_layout
+                ? (float)CITADEL_3DS_TOP_HEIGHT
+                : (float)CITADEL_3DS_GAME_HEIGHT,
+            0.0f);
+
+        bottom_ok = citadel_gpu_directquad_begin_scene(
+            citadel_gpu_bottom_target,
+            true);
+
+        if (split_layout) {
+            SDL_Rect inventory_source =
+                citadel_scale_reference_rect(
+                    surface,
+                    CITADEL_REF_INVENTORY_X,
+                    CITADEL_REF_INVENTORY_Y,
+                    CITADEL_REF_INVENTORY_W,
+                    CITADEL_REF_INVENTORY_H);
+            SDL_Rect left_mfd_source =
+                citadel_scale_reference_rect(
+                    surface,
+                    CITADEL_REF_LEFT_MFD_X,
+                    CITADEL_REF_MFD_Y,
+                    CITADEL_REF_LEFT_MFD_W,
+                    CITADEL_REF_MFD_H);
+            SDL_Rect right_mfd_source =
+                citadel_scale_reference_rect(
+                    surface,
+                    CITADEL_REF_RIGHT_MFD_X,
+                    CITADEL_REF_MFD_Y,
+                    CITADEL_REF_RIGHT_MFD_W,
+                    CITADEL_REF_MFD_H);
+
+            bottom_ok = bottom_ok &&
+                citadel_gpu_draw_region(
+                    inventory_source.x,
+                    inventory_source.y,
+                    inventory_source.w,
+                    inventory_source.h,
+                    0.0f,
+                    0.0f,
+                    320.0f,
+                    120.0f,
+                    0.0f) &&
+                citadel_gpu_draw_region(
+                    left_mfd_source.x,
+                    left_mfd_source.y,
+                    left_mfd_source.w,
+                    left_mfd_source.h,
+                    0.0f,
+                    120.0f,
+                    160.0f,
+                    120.0f,
+                    0.0f) &&
+                citadel_gpu_draw_region(
+                    right_mfd_source.x,
+                    right_mfd_source.y,
+                    right_mfd_source.w,
+                    right_mfd_source.h,
+                    160.0f,
+                    120.0f,
+                    160.0f,
+                    120.0f,
+                    0.0f);
+        }
     }
 
+
+    if (pingpong_preuploaded &&
+        citadel_gpu_croppedtiled_enabled) {
+        if (citadel_gpu_pingpongtiled_draw_set == 1)
+            ++citadel_gpu_pingpongtiled_set1_draws;
+        else
+            ++citadel_gpu_pingpongtiled_set0_draws;
+    }
+
+    citadel_c3d_profile_current.draw_submit_ticks =
+        svcGetSystemTick() - profile_tick;
+
+    profile_tick = svcGetSystemTick();
     C3D_FrameEnd(0);
+    citadel_c3d_profile_current.frame_end_ticks =
+        svcGetSystemTick() - profile_tick;
+    citadel_c3d_profile_finish_frame(
+        citadel_gpu_right_frame_active);
     ++citadel_gpu_presented_frames;
     citadel_diag_note_frame();
 
@@ -3903,7 +6104,12 @@ void InitSDL() {
     Uint32 window_flags;
 
     remove("GPU_C2D_V16_1.log");
-    v5_log("PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s", __DATE__, __TIME__);
+    citadel_c3d_profile_write_startup_file();
+    v5_log("PROJECT CITADEL C3D R2C PINGPONGTILED1 ACTIVE | "
+           "build=%s %s profile_log=%s",
+           __DATE__,
+           __TIME__,
+           CITADEL_C3D_PROFILE_LOG_PATH);
 
     SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "software");

@@ -34,3 +34,9 @@ When reporting sluggish performance, attach:
 The current software-rendering pipeline remains in place in v1.0.1. A separate
 experimental Citro3D renderer branch is under development and is not part of
 this stable release.
+
+## Native Citro3D renderer status
+
+The stable release still uses System Shock's software world renderer. Citro3D
+handles the optimized final presentation path. A separate experimental native
+world-renderer branch is under development; it is not included in this release.
