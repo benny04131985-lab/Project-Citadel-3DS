@@ -31,7 +31,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <stdarg.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <SDL.h>
 
 #if defined(__3DS__) || defined(_3DS)
@@ -293,6 +295,500 @@ static bool v5_normal_announced = false;
 
 static void v5_log(const char *fmt, ...);
 static void v5_log_error(const char *stage);
+
+/* -------------------------------------------------------------------------
+ * PROJECT CITADEL V16.2: SILENT SUPPORT DIAGNOSTICS DIAG2 FPS SPLIT
+ *
+ * This logger has no interface and performs no filesystem writes while
+ * frames are being measured. It overwrites one log at startup, keeps all
+ * performance counters in RAM, and appends one summary at normal shutdown.
+ * ------------------------------------------------------------------------- */
+#if defined(__3DS__) || defined(_3DS)
+
+#define CITADEL_DIAG_PATH "sdmc:/3ds/SystemShock3D/citadel_diag.log"
+#define CITADEL_DIAG_VERSION "1.0.1-DIAG2-FPS-SPLIT"
+#define CITADEL_DIAG_HISTOGRAM_MAX_MS 250
+#define CITADEL_DIAG_LONG_GAP_MS 1000.0
+
+static FILE *citadel_diag_file = NULL;
+static bool citadel_diag_active = false;
+static bool citadel_diag_shutdown_complete = false;
+
+static Uint64 citadel_diag_frequency = 0;
+static Uint64 citadel_diag_session_started = 0;
+static Uint64 citadel_diag_previous_frame = 0;
+
+static unsigned long citadel_diag_frames = 0;
+static unsigned long citadel_diag_mono_frames = 0;
+static unsigned long citadel_diag_stereo_frames = 0;
+static float citadel_diag_last_slider = 0.0f;
+
+static double citadel_diag_total_frame_ms = 0.0;
+static double citadel_diag_best_frame_ms = 0.0;
+static double citadel_diag_worst_frame_ms = 0.0;
+
+static double citadel_diag_mono_total_frame_ms = 0.0;
+static double citadel_diag_mono_best_frame_ms = 0.0;
+static double citadel_diag_mono_worst_frame_ms = 0.0;
+
+static double citadel_diag_stereo_total_frame_ms = 0.0;
+static double citadel_diag_stereo_best_frame_ms = 0.0;
+static double citadel_diag_stereo_worst_frame_ms = 0.0;
+
+static unsigned long citadel_diag_over_16_67 = 0;
+static unsigned long citadel_diag_over_33_33 = 0;
+static unsigned long citadel_diag_over_50 = 0;
+static unsigned long citadel_diag_over_100 = 0;
+
+static unsigned long citadel_diag_current_over_33_streak = 0;
+static unsigned long citadel_diag_longest_over_33_streak = 0;
+
+static unsigned long citadel_diag_excluded_long_gaps = 0;
+static double citadel_diag_excluded_long_gap_ms = 0.0;
+static double citadel_diag_worst_excluded_gap_ms = 0.0;
+
+static unsigned long citadel_diag_histogram[
+    CITADEL_DIAG_HISTOGRAM_MAX_MS + 1
+];
+
+static unsigned long citadel_diag_initial_linear_free = 0;
+static unsigned long citadel_diag_lowest_linear_free = 0;
+
+static void citadel_diag_shutdown(void);
+
+static double citadel_diag_percentile(double percentile)
+{
+    unsigned long target;
+    unsigned long accumulated = 0;
+    int bucket;
+
+    if (citadel_diag_frames == 0)
+        return 0.0;
+
+    target = (unsigned long)(
+        ((double)citadel_diag_frames * percentile) + 0.999999
+    );
+
+    if (target < 1)
+        target = 1;
+
+    for (bucket = 0;
+         bucket <= CITADEL_DIAG_HISTOGRAM_MAX_MS;
+         ++bucket) {
+        accumulated += citadel_diag_histogram[bucket];
+
+        if (accumulated >= target)
+            return (double)bucket;
+    }
+
+    return (double)CITADEL_DIAG_HISTOGRAM_MAX_MS;
+}
+
+static void citadel_diag_init(void)
+{
+    time_t started_at;
+    float initial_slider;
+    bool is_new_3ds;
+
+    if (citadel_diag_active)
+        return;
+
+    /*
+     * Ask for the New 3DS clock/L2 speedup explicitly even though SDL may
+     * already request it. This confirms only that Citadel requested it;
+     * libctru does not provide a direct readback of Rosalina's chosen state.
+     */
+    osSetSpeedupEnable(true);
+
+    citadel_diag_file = fopen(CITADEL_DIAG_PATH, "w");
+    if (citadel_diag_file == NULL)
+        return;
+
+    memset(citadel_diag_histogram,
+           0,
+           sizeof(citadel_diag_histogram));
+
+    citadel_diag_frequency = SDL_GetPerformanceFrequency();
+    citadel_diag_session_started = SDL_GetPerformanceCounter();
+    citadel_diag_previous_frame = 0;
+
+    is_new_3ds = false;
+    APT_CheckNew3DS(&is_new_3ds);
+    initial_slider = osGet3DSliderState();
+    citadel_diag_last_slider = initial_slider;
+
+    citadel_diag_initial_linear_free =
+        (unsigned long)linearSpaceFree();
+    citadel_diag_lowest_linear_free =
+        citadel_diag_initial_linear_free;
+
+    started_at = time(NULL);
+
+    fprintf(citadel_diag_file,
+            "============================================================\n");
+    fprintf(citadel_diag_file,
+            "CITADEL 3DS SILENT DIAGNOSTIC LOG\n");
+    fprintf(citadel_diag_file,
+            "============================================================\n");
+    fprintf(citadel_diag_file,
+            "Version: %s\n",
+            CITADEL_DIAG_VERSION);
+    fprintf(citadel_diag_file,
+            "Build: %s %s\n",
+            __DATE__,
+            __TIME__);
+    fprintf(citadel_diag_file,
+            "Session start epoch: %lld\n",
+            (long long)started_at);
+    fprintf(citadel_diag_file,
+            "Hardware detected: %s\n",
+            is_new_3ds ? "New Nintendo 3DS" : "Old Nintendo 3DS");
+    fprintf(citadel_diag_file,
+            "New 3DS speedup requested: YES\n");
+    fprintf(citadel_diag_file,
+            "Speedup state independently verified: NO\n");
+    fprintf(citadel_diag_file,
+            "Initial 3D slider: %.3f\n",
+            (double)initial_slider);
+    fprintf(citadel_diag_file,
+            "Initial linear memory free: %lu bytes\n",
+            citadel_diag_initial_linear_free);
+    fprintf(citadel_diag_file,
+            "Timer frequency: %llu ticks/sec\n",
+            (unsigned long long)citadel_diag_frequency);
+    fprintf(citadel_diag_file,
+            "Frame timing source: completed Citro3D presentations\n");
+    fprintf(citadel_diag_file,
+            "Long gaps excluded from FPS average: > %.0f ms\n",
+            CITADEL_DIAG_LONG_GAP_MS);
+    fprintf(citadel_diag_file,
+            "Clean Shutdown: NO\n");
+    fprintf(citadel_diag_file,
+            "============================================================\n");
+
+    /*
+     * Flush only the startup fingerprint. No more filesystem writes occur
+     * until normal process shutdown.
+     */
+    fflush(citadel_diag_file);
+
+    citadel_diag_active = true;
+    atexit(citadel_diag_shutdown);
+}
+
+static void citadel_diag_note_frame(void)
+{
+    Uint64 now;
+    Uint64 delta;
+    double frame_ms;
+    int histogram_bucket;
+    float slider;
+
+    if (!citadel_diag_active ||
+        citadel_diag_frequency == 0)
+        return;
+
+    now = SDL_GetPerformanceCounter();
+
+    if (citadel_diag_previous_frame == 0) {
+        citadel_diag_previous_frame = now;
+        return;
+    }
+
+    delta = now - citadel_diag_previous_frame;
+    citadel_diag_previous_frame = now;
+
+    frame_ms =
+        ((double)delta * 1000.0) /
+        (double)citadel_diag_frequency;
+
+    /*
+     * HOME suspension, debugger stops, or very long loading pauses should
+     * remain visible in the log without destroying the actual frame average.
+     */
+    if (frame_ms > CITADEL_DIAG_LONG_GAP_MS) {
+        ++citadel_diag_excluded_long_gaps;
+        citadel_diag_excluded_long_gap_ms += frame_ms;
+
+        if (frame_ms > citadel_diag_worst_excluded_gap_ms)
+            citadel_diag_worst_excluded_gap_ms = frame_ms;
+
+        return;
+    }
+
+    ++citadel_diag_frames;
+    citadel_diag_total_frame_ms += frame_ms;
+
+    if (citadel_diag_best_frame_ms == 0.0 ||
+        frame_ms < citadel_diag_best_frame_ms)
+        citadel_diag_best_frame_ms = frame_ms;
+
+    if (frame_ms > citadel_diag_worst_frame_ms)
+        citadel_diag_worst_frame_ms = frame_ms;
+
+    slider = osGet3DSliderState();
+    citadel_diag_last_slider = slider;
+
+    if (slider > 0.01f) {
+        ++citadel_diag_stereo_frames;
+        citadel_diag_stereo_total_frame_ms += frame_ms;
+
+        if (citadel_diag_stereo_best_frame_ms == 0.0 ||
+            frame_ms < citadel_diag_stereo_best_frame_ms)
+            citadel_diag_stereo_best_frame_ms = frame_ms;
+
+        if (frame_ms > citadel_diag_stereo_worst_frame_ms)
+            citadel_diag_stereo_worst_frame_ms = frame_ms;
+    } else {
+        ++citadel_diag_mono_frames;
+        citadel_diag_mono_total_frame_ms += frame_ms;
+
+        if (citadel_diag_mono_best_frame_ms == 0.0 ||
+            frame_ms < citadel_diag_mono_best_frame_ms)
+            citadel_diag_mono_best_frame_ms = frame_ms;
+
+        if (frame_ms > citadel_diag_mono_worst_frame_ms)
+            citadel_diag_mono_worst_frame_ms = frame_ms;
+    }
+
+    if (frame_ms > 16.67)
+        ++citadel_diag_over_16_67;
+
+    if (frame_ms > 33.33) {
+        ++citadel_diag_over_33_33;
+        ++citadel_diag_current_over_33_streak;
+
+        if (citadel_diag_current_over_33_streak >
+            citadel_diag_longest_over_33_streak)
+            citadel_diag_longest_over_33_streak =
+                citadel_diag_current_over_33_streak;
+    } else {
+        citadel_diag_current_over_33_streak = 0;
+    }
+
+    if (frame_ms > 50.0)
+        ++citadel_diag_over_50;
+
+    if (frame_ms > 100.0)
+        ++citadel_diag_over_100;
+
+    histogram_bucket = (int)frame_ms;
+
+    if (histogram_bucket < 0)
+        histogram_bucket = 0;
+
+    if (histogram_bucket > CITADEL_DIAG_HISTOGRAM_MAX_MS)
+        histogram_bucket = CITADEL_DIAG_HISTOGRAM_MAX_MS;
+
+    ++citadel_diag_histogram[histogram_bucket];
+
+    /*
+     * Sample linear memory only once every 120 measured frames so memory
+     * tracking cannot become meaningful per-frame overhead.
+     */
+    if ((citadel_diag_frames % 120UL) == 0UL) {
+        unsigned long linear_free =
+            (unsigned long)linearSpaceFree();
+
+        if (linear_free < citadel_diag_lowest_linear_free)
+            citadel_diag_lowest_linear_free = linear_free;
+    }
+}
+
+static void citadel_diag_shutdown(void)
+{
+    Uint64 ended;
+    double session_seconds;
+    double average_frame_ms = 0.0;
+    double average_fps = 0.0;
+
+    double mono_average_frame_ms = 0.0;
+    double mono_average_fps = 0.0;
+    double stereo_average_frame_ms = 0.0;
+    double stereo_average_fps = 0.0;
+
+    double p50;
+    double p95;
+    double p99;
+    time_t ended_at;
+
+    if (!citadel_diag_active ||
+        citadel_diag_shutdown_complete)
+        return;
+
+    citadel_diag_shutdown_complete = true;
+
+    ended = SDL_GetPerformanceCounter();
+    ended_at = time(NULL);
+
+    session_seconds =
+        citadel_diag_frequency > 0
+            ? ((double)(ended - citadel_diag_session_started) /
+               (double)citadel_diag_frequency)
+            : 0.0;
+
+    if (citadel_diag_frames > 0) {
+        average_frame_ms =
+            citadel_diag_total_frame_ms /
+            (double)citadel_diag_frames;
+
+        if (average_frame_ms > 0.0)
+            average_fps = 1000.0 / average_frame_ms;
+    }
+
+    if (citadel_diag_mono_frames > 0) {
+        mono_average_frame_ms =
+            citadel_diag_mono_total_frame_ms /
+            (double)citadel_diag_mono_frames;
+
+        if (mono_average_frame_ms > 0.0)
+            mono_average_fps = 1000.0 / mono_average_frame_ms;
+    }
+
+    if (citadel_diag_stereo_frames > 0) {
+        stereo_average_frame_ms =
+            citadel_diag_stereo_total_frame_ms /
+            (double)citadel_diag_stereo_frames;
+
+        if (stereo_average_frame_ms > 0.0)
+            stereo_average_fps = 1000.0 / stereo_average_frame_ms;
+    }
+
+    p50 = citadel_diag_percentile(0.50);
+    p95 = citadel_diag_percentile(0.95);
+    p99 = citadel_diag_percentile(0.99);
+
+    fprintf(citadel_diag_file, "\n");
+    fprintf(citadel_diag_file,
+            "==================== SESSION SUMMARY =======================\n");
+    fprintf(citadel_diag_file,
+            "Session end epoch: %lld\n",
+            (long long)ended_at);
+    fprintf(citadel_diag_file,
+            "Session duration: %.3f seconds\n",
+            session_seconds);
+    fprintf(citadel_diag_file,
+            "Measured frames: %lu\n",
+            citadel_diag_frames);
+    fprintf(citadel_diag_file,
+            "Mono-slider frames: %lu\n",
+            citadel_diag_mono_frames);
+    fprintf(citadel_diag_file,
+            "Mono average FPS: %.3f\n",
+            mono_average_fps);
+    fprintf(citadel_diag_file,
+            "Mono average frame time: %.3f ms\n",
+            mono_average_frame_ms);
+    fprintf(citadel_diag_file,
+            "Mono best frame time: %.3f ms\n",
+            citadel_diag_mono_best_frame_ms);
+    fprintf(citadel_diag_file,
+            "Mono worst frame time: %.3f ms\n",
+            citadel_diag_mono_worst_frame_ms);
+
+    fprintf(citadel_diag_file,
+            "Stereo-slider frames: %lu\n",
+            citadel_diag_stereo_frames);
+    fprintf(citadel_diag_file,
+            "Stereo average FPS: %.3f\n",
+            stereo_average_fps);
+    fprintf(citadel_diag_file,
+            "Stereo average frame time: %.3f ms\n",
+            stereo_average_frame_ms);
+    fprintf(citadel_diag_file,
+            "Stereo best frame time: %.3f ms\n",
+            citadel_diag_stereo_best_frame_ms);
+    fprintf(citadel_diag_file,
+            "Stereo worst frame time: %.3f ms\n",
+            citadel_diag_stereo_worst_frame_ms);
+
+    fprintf(citadel_diag_file,
+            "Combined average FPS: %.3f\n",
+            average_fps);
+    fprintf(citadel_diag_file,
+            "Average frame time: %.3f ms\n",
+            average_frame_ms);
+    fprintf(citadel_diag_file,
+            "Best frame time: %.3f ms\n",
+            citadel_diag_best_frame_ms);
+    fprintf(citadel_diag_file,
+            "Median frame time (1 ms histogram): %.0f ms\n",
+            p50);
+    fprintf(citadel_diag_file,
+            "P95 frame time (1 ms histogram): %.0f ms\n",
+            p95);
+    fprintf(citadel_diag_file,
+            "P99 frame time (1 ms histogram): %.0f ms\n",
+            p99);
+    fprintf(citadel_diag_file,
+            "Worst measured frame: %.3f ms\n",
+            citadel_diag_worst_frame_ms);
+    fprintf(citadel_diag_file,
+            "Frames over 16.67 ms: %lu\n",
+            citadel_diag_over_16_67);
+    fprintf(citadel_diag_file,
+            "Frames over 33.33 ms: %lu\n",
+            citadel_diag_over_33_33);
+    fprintf(citadel_diag_file,
+            "Frames over 50 ms: %lu\n",
+            citadel_diag_over_50);
+    fprintf(citadel_diag_file,
+            "Frames over 100 ms: %lu\n",
+            citadel_diag_over_100);
+    fprintf(citadel_diag_file,
+            "Longest consecutive run over 33.33 ms: %lu frames\n",
+            citadel_diag_longest_over_33_streak);
+    fprintf(citadel_diag_file,
+            "Excluded gaps over %.0f ms: %lu\n",
+            CITADEL_DIAG_LONG_GAP_MS,
+            citadel_diag_excluded_long_gaps);
+    fprintf(citadel_diag_file,
+            "Excluded gap time: %.3f ms\n",
+            citadel_diag_excluded_long_gap_ms);
+    fprintf(citadel_diag_file,
+            "Worst excluded gap: %.3f ms\n",
+            citadel_diag_worst_excluded_gap_ms);
+    fprintf(citadel_diag_file,
+            "Initial linear memory free: %lu bytes\n",
+            citadel_diag_initial_linear_free);
+    fprintf(citadel_diag_file,
+            "Lowest sampled linear memory free: %lu bytes\n",
+            citadel_diag_lowest_linear_free);
+    fprintf(citadel_diag_file,
+            "Citro3D presented frames: %u\n",
+            citadel_gpu_presented_frames);
+    fprintf(citadel_diag_file,
+            "Citro3D upload failures: %u\n",
+            citadel_gpu_upload_failures);
+    fprintf(citadel_diag_file,
+            "Citro3D draw failures: %u\n",
+            citadel_gpu_draw_failures);
+    fprintf(citadel_diag_file,
+            "Last sampled 3D slider: %.3f\n",
+            (double)citadel_diag_last_slider);
+    fprintf(citadel_diag_file,
+            "Clean Shutdown: YES\n");
+    fprintf(citadel_diag_file,
+            "============================================================\n");
+
+    fflush(citadel_diag_file);
+    fclose(citadel_diag_file);
+
+    citadel_diag_file = NULL;
+    citadel_diag_active = false;
+}
+
+#else
+
+static void citadel_diag_init(void)
+{
+}
+
+static void citadel_diag_note_frame(void)
+{
+}
+
+#endif
 
 #if defined(__3DS__) || defined(_3DS)
 extern SDL_Color gamePalette[256];
@@ -2575,6 +3071,7 @@ static bool citadel_v16_present_splash(void)
 
     C3D_FrameEnd(0);
     ++citadel_gpu_presented_frames;
+    citadel_diag_note_frame();
     ++citadel_vx1_1_splash_frames;
 
     if (citadel_vx1_1_splash_frames == 1u) {
@@ -2701,6 +3198,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
                         C2D_Color32(24, 24, 24, 255));
         C3D_FrameEnd(0);
         ++citadel_gpu_presented_frames;
+        citadel_diag_note_frame();
         return true;
     }
 
@@ -2716,6 +3214,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
 
         C3D_FrameEnd(0);
         ++citadel_gpu_presented_frames;
+        citadel_diag_note_frame();
 
         return diagnostic_ok;
     }
@@ -2734,6 +3233,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
 
         C3D_FrameEnd(0);
         ++citadel_gpu_presented_frames;
+        citadel_diag_note_frame();
 
         return diagnostic_ok;
     }
@@ -2899,6 +3399,7 @@ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
 
     C3D_FrameEnd(0);
     ++citadel_gpu_presented_frames;
+    citadel_diag_note_frame();
 
     if (last_logged_layout != (split_layout ? 1 : 0)) {
         v5_log("GPU LAYOUT changed=%s top_src={%d,%d,%d,%d} "
@@ -3411,6 +3912,9 @@ void InitSDL() {
     result = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO);
     v5_log("SDL_Init result=%d", result);
     v5_log_error("After SDL_Init");
+
+    if (result == 0)
+        citadel_diag_init();
 
     if (result < 0) {
         DEBUG("%s: Init failed", __FUNCTION__);

@@ -15,7 +15,7 @@ Project Citadel 3D provides:
 
 ## Current release
 
-**v1.0.0 — S3 Ship**
+**v1.0.1 — Silent Diagnostics Hotfix**
 
 The middle portion of the physical 3D slider is the recommended comfort sweet
 spot. Maximum depth remains available, but comfort at the highest setting
@@ -53,3 +53,21 @@ included GPL-3.0 license terms. See [UPSTREAM_AND_LICENSE.md](UPSTREAM_AND_LICEN
 System Shock and related names and assets belong to their respective owners.
 Project Citadel 3D is an independent fan preservation/porting project and is
 not affiliated with or endorsed by the rights holders.
+
+## Support diagnostics
+
+Version 1.0.1 silently creates:
+
+`sdmc:/3ds/SystemShock3D/citadel_diag.log`
+
+The file is overwritten at each successful startup and receives a completed
+performance summary during normal shutdown. It records separate mono and stereo
+frame statistics, frame-pacing information, hardware detection, memory samples,
+Citro3D failure counters, and clean-shutdown status.
+
+When reporting a performance or stability problem, reproduce the issue, exit
+normally when possible, and attach the log or paste its contents into the
+report.
+
+The diagnostic system has no overlay or menu and performs no per-frame SD-card
+writes.

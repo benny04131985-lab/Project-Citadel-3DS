@@ -29,3 +29,13 @@ Launch `3D_Citadel_3DS.3dsx` from the Homebrew Launcher.
 Begin near the middle of the physical 3D slider and adjust gradually.
 Maximum depth is intentionally available, but prolonged comfort at the top
 setting varies by player.
+
+## Diagnostic log
+
+Project Citadel 3D v1.0.1 creates `citadel_diag.log` beside the executable at:
+
+`sdmc:/3ds/SystemShock3D/citadel_diag.log`
+
+The file is replaced at every successful startup. A full performance summary is
+added when the game exits normally. Users reporting performance or stability
+problems should attach this file or paste its contents into the report.

@@ -46,3 +46,13 @@ sdmc:/3ds/SystemShock3D/
 
 It must never be redirected to the mono-development folder
 `sdmc:/3ds/SystemShock/`.
+
+## Final v1.0.1 configuration additions
+
+The final v1.0.1 3DS configuration also disables optional example and debug-blit
+targets:
+
+```text
+-DENABLE_EXAMPLES=OFF
+-DENABLE_DEBUG_BLIT=OFF
+```
