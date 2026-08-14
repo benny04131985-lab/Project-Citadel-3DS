@@ -1,0 +1,45 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1A-BITMAP-CAPTURE-ACTIVATION1",
+  "created": "2026-08-05T14:33:30.063057-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "root_cause": "_g3d_enable_blend is a large-bitmap scale/filter hint, not a translucent material flag",
+  "capture_order": "BEFORE_LEGACY_SCALE_FILTER_EARLY_RETURN",
+  "material_policy": {
+    "legacy_blend_flag": "ACCEPT",
+    "BMT_TLUC8_or_BMF_TLUC8": "SOFTWARE_FALLBACK",
+    "BMF_TRANS_binary_alpha": "NATIVE_CANDIDATE"
+  },
+  "failure_policy": {
+    "alpha_mask_failure": "ROLL_BACK_NATIVE_TRIANGLES_AND_KEEP_SOFTWARE_DRAW"
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "f34c1b7e4e9f8f914e44d910139c0ea28fd401e59ea651414e9ebfefcffc5b9c",
+      "after_sha256": "7fc3fe27f2df78a1c5a08772f6da333aa21bef66347a9fa9ec3f2b4166345cf1"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "686ed09952bdfb563f4b0fc3d7aad20373e2a0e834b457d7c51096800df2c656",
+      "after_sha256": "01d0ddec43d3eac01a370323ab1906f133165e2418d3e4daeaf9ab3a3465e3b1"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "06cfc035b90d6fc68a9a20f407382c22ecd3cbd3b8042615f7d50a8d7ecdab3b",
+      "after_sha256": "1701702e4c27a88307bfb277b5e10c7a72b5d631adbd249b71d0cead89e7b9bf"
+    },
+    "src/Libraries/3D/Source/Bitmap.c": {
+      "before_sha256": "10e7656ab6261bff4cbbf345d842b8dcb9cc0c90113b1cb0aced3ff95af57d8e",
+      "after_sha256": "b26bb99af4f41c031543fa30a2458b77280c532c5a400291968f44f7f039943c"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected terrain",
+    "R3D5A3 native opaque and moving doors",
+    "stable Flat8 snapshots and content-hashed textures",
+    "alpha-shaped foreground erase",
+    "HUD, MFD, weapon and effect software paths",
+    "critter and model software paths",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

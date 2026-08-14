@@ -1,0 +1,40 @@
+{
+  "milestone": "CITADEL-C3D-R3D4D-PROJECTED-VERTEX-ALIGN1",
+  "created": "2026-08-04T23:16:36.348480-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "projection_policy": "SOFTWARE_PROJECTED_SX_SY_TO_DESTINATION",
+  "depth_policy": "EQUAL_DEPTH_GEQUAL_PAINTER_ORDER",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "1d6223df8af1cf346bb407101e0cb29f0dc57e15a464729bd4bf84e0d3ac3654",
+      "after_sha256": "4fe26b8ceb6d3c356e48614424e96a02dedc266714cdc84d6f4f732674d8a9d4"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "918226c866dd79490e5695bf42a4bb87afeeb18b8f62a86c1b0dcde5d2c69bc3",
+      "after_sha256": "1cba2e859a41900b2386cdcc03fa2145c1fe99e2af75578c3caee13d37cb78fe"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "8cdc4b4156844ea2bfae95801d4e9eb39fa0a6b1eef3d2361b60d5bfd435c863",
+      "after_sha256": "96f4a26a483811b74d34f0b1457cdce8b31fbf892347c3c274d80a4532b47e48"
+    },
+    "src/MacSrc/citadel_worldproof_vshader.v.pica": {
+      "before_sha256": "76410ec597bfabe9a4d307cee29a43d21c41bf81dd9a36880281072ebb33c683",
+      "after_sha256": "b7df12598762ea1605ec09ad9230da27af311f25c328372d41783380090f742a"
+    },
+    "src/MacSrc/citadel_worldtextured_vshader.v.pica": {
+      "before_sha256": "4ecc5c282ddfded2a09e80992245605fce786353adc7b3b4ef4f58b6aca81e1d",
+      "after_sha256": "4ea3978bd25e70ffaa73e4fc856d0682edd7cd8647f4013b8e78e55deb407b3b"
+    }
+  },
+  "preserved": [
+    "R3D4A fast terrain erase mask",
+    "R3D2B immutable bitmap descriptors",
+    "native RGB565 textures and cache",
+    "camera-Z perspective-correct texture W",
+    "software painter-order foreground visibility",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

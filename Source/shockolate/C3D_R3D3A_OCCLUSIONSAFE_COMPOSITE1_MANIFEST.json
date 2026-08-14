@@ -1,0 +1,41 @@
+{
+  "milestone": "CITADEL-C3D-R3D3A-OCCLUSIONSAFE-COMPOSITE1",
+  "created": "2026-08-04T14:34:24.724191-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "architecture": "complete software world versus mirrored terrain-only reference comparison",
+  "performance_note": "correctness proof retains and mirrors software terrain; performance may regress until ownership-mask optimization",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "2af1d0eb25303357fc63dbec6109eadcc687035ce8e54c179874c0d3fb76ddf4",
+      "after_sha256": "63fab7efcdbd75b77b0b016cf1392908300d6968703264913856b74f55240ab1"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "5cc90c802fdeafcff38c7897ed2c0efb0970a01e12b4eae85c1e27c45369f39b",
+      "after_sha256": "305501e0c6267b1a4773f9dc25defeec0c3e87aa001f90cbc6494fe70c5a2029"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "0d71a66e0e512257b4875d95379cf0580f4417f45f5b9661837509885c0e25b8",
+      "after_sha256": "8cdc4b4156844ea2bfae95801d4e9eb39fa0a6b1eef3d2361b60d5bfd435c863"
+    },
+    "src/GameSrc/frsetup.c": {
+      "before_sha256": "44dc7464dd5a0e7b3a2b8315e0860e775ecbdbf78fe0e36c6e3e9167704c8b82",
+      "after_sha256": "3ca82b9ee0063bddcdfaee7c3fe5f5ceb0a1c454927ef2e3e57cec6d393a98fb"
+    },
+    "src/GameSrc/render.c": {
+      "before_sha256": "f6b54f9c286c41761810922b12cf6826fb6c48132973f5b9e386ec4839b6f2d2",
+      "after_sha256": "c0276e8407eb18bc1521984924127437a29c4dcd3c57a4d937bbbc92acb86806"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "f90405d86b037d7817f766091cc3d4a169bff04f7bdefbce22df92d44eec64c7",
+      "after_sha256": "15cc6282adedefc6f83afa78c40106b1348ad97359a25c8a8ea10b9de04d39f0"
+    }
+  },
+  "preserved": [
+    "R3D2B immutable bitmap descriptor snapshots",
+    "R3D1 RGBA5551 foreground transport",
+    "native XYZ UV light texture cache and shaders",
+    "Legacy layout",
+    "Dual lower-screen layout",
+    "software-only stereo safety path"
+  ]
+}

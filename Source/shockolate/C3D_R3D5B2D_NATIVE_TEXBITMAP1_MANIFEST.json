@@ -1,0 +1,44 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B2D-NATIVE-TEXBITMAP1",
+  "created": "2026-08-07T13:07:18.297592-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "input": "R3D5B2C TEXBITMAP RESIDUAL AUDIT1",
+  "renderer_change": true,
+  "scope": [
+    "FAUBJ_TEXBITMAP CLASS_BIGSTUFF",
+    "FAUBJ_TEXBITMAP CLASS_SMALLSTUFF",
+    "FAUBJ_TEXBITMAP CLASS_FIXTURE"
+  ],
+  "native_rules": [
+    "Flat8/RSD8",
+    "POT 8..256",
+    "stable per-frame snapshot",
+    "RGBA5551 binary alpha when BMF_TRANS",
+    "original oriented four-corner geometry",
+    "original lighting and painter order",
+    "perspective alpha-shaped foreground erase",
+    "safe software fallback"
+  ],
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "722866141c25ee1e08c431bdb3b8b81c87324f9ac227c975e157b508a2798812",
+      "after_sha256": "b09fd33ffac864bb209773a73a7522af2fcdd04cdadf1a7a44a5494fece4d6d3"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "57b92b1ee60152134fd8303877c929b472304e6c0705e466ed576f04ae71905b",
+      "after_sha256": "c6a77e83f7c8c9478d6f4ee53412caf77f1970cc8ce3ebbaecb3b2146a7ed7c2"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "6bc51bf509f297faa3f61dc768c9af8d0ba4d14c7e8c692a6a7faf0ffa5b2f64",
+      "after_sha256": "abae30b1bd34f645ba696be5a491cd7a7a979d711ec1552aecbcf2e16084d9b1"
+    },
+    "src/GameSrc/gameobj.c": {
+      "before_sha256": "885346f962a5842887aa11ca45a566dd3648c3a4c9414043e55ef67041857db1",
+      "after_sha256": "440772d3512f825980c7c5f659cdbcff421f0d52bb0e44d705a0932cd41ce119"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "d11cf710598fe23a24acae99d551e58d47ec4a331847757e925f03b02ee2d9df",
+      "after_sha256": "25f6b0adafd8b0aa0b7406a8a806ae91193229763efd38f730a2adc22d5f53a1"
+    }
+  }
+}

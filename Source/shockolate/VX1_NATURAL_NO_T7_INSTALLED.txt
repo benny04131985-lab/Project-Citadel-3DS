@@ -1,0 +1,5 @@
+PROJECT CITADEL VX1-NATURAL NO-T7
+Installed: 2026-07-23T23:42:34
+Rollback: /c/Projects/Citadel-Baselines/VX1-NATURAL-IDLE-T7_ROLLBACK_20260723_234234
+Baseline: /c/Projects/Citadel-Baselines/VX1-NATURAL-NO-T7_BASELINE_20260723_234234
+Full four-path cold-boot matrix required.

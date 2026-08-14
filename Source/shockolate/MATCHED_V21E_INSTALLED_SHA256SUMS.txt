@@ -1,0 +1,5 @@
+05a84b8e8a9c1fc8e0105f1fe1f15324bf05a42f44a7e2e07cdfe76416b0a724  src/MacSrc/Shock.c
+236b2517ad37b87e88e4232bca712aaf8910f51205e130f13d0069cfe2f4ba82  src/GameSrc/setup.c
+ec06102cfb003e3ccd49f53012af199086bc865c39f47e69fbea69a4c556ff1f  src/GameSrc/mainloop.c
+d027061772d92a50c5d06bc890b9c56c07f93ccf80b3adfbbabd6bd801b8b9c2  src/GameSrc/wrapper.c
+c764f1a1f5c16bbafd44acbe06df88e2cbf2ddcf9c82945d5041509c9f0c9e30  src/GameSrc/gamewrap.c

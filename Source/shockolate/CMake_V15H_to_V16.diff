@@ -1,0 +1,52 @@
+--- CMakeLists_V15H.txt
++++ CMakeLists_V16.txt
+@@ -414,35 +414,35 @@
+ )
+ 
+ 
+-# PROJECT CITADEL V15H: generate an official tex3ds control texture.
++# PROJECT CITADEL V16: generate the Hack-i-Ben startup splash.
+ if(NINTENDO_3DS)
+     find_program(CITADEL_TEX3DS_EXECUTABLE NAMES tex3ds)
+ 
+     if(NOT CITADEL_TEX3DS_EXECUTABLE)
+         message(FATAL_ERROR
+-            "Project Citadel V15H requires tex3ds in PATH")
++            "Project Citadel V16 requires tex3ds in PATH")
+     endif()
+ 
+-    set(CITADEL_V15H_CONTROL_PNG
+-        "${CMAKE_SOURCE_DIR}/assets/v15h/V15H_CONTROL.png")
+-    set(CITADEL_V15H_CONTROL_T3X
+-        "${CMAKE_BINARY_DIR}/V15H_CONTROL.t3x")
++    set(CITADEL_V16_SPLASH_PNG
++        "${CMAKE_SOURCE_DIR}/assets/v16/Hack-i-Ben_Splash.png")
++    set(CITADEL_V16_SPLASH_T3X
++        "${CMAKE_BINARY_DIR}/Hack-i-Ben_Splash.t3x")
+ 
+     add_custom_command(
+-        OUTPUT "${CITADEL_V15H_CONTROL_T3X}"
++        OUTPUT "${CITADEL_V16_SPLASH_T3X}"
+         COMMAND "${CITADEL_TEX3DS_EXECUTABLE}"
+                 -f rgb565
+                 -z none
+-                -o "${CITADEL_V15H_CONTROL_T3X}"
+-                "${CITADEL_V15H_CONTROL_PNG}"
+-        DEPENDS "${CITADEL_V15H_CONTROL_PNG}"
+-        COMMENT "Project Citadel V15H: generating official tex3ds control"
++                -o "${CITADEL_V16_SPLASH_T3X}"
++                "${CITADEL_V16_SPLASH_PNG}"
++        DEPENDS "${CITADEL_V16_SPLASH_PNG}"
++        COMMENT "Project Citadel V16: generating Hack-i-Ben startup splash"
+         VERBATIM
+     )
+ 
+-    add_custom_target(citadel_v15h_control_asset ALL
+-        DEPENDS "${CITADEL_V15H_CONTROL_T3X}")
+-    add_dependencies(systemshock citadel_v15h_control_asset)
++    add_custom_target(citadel_v16_splash_asset ALL
++        DEPENDS "${CITADEL_V16_SPLASH_T3X}")
++    add_dependencies(systemshock citadel_v16_splash_asset)
+ endif()
+ 
+ add_library(GAME_LIB ${GAME_SRC})

@@ -1,0 +1,4 @@
+a7bfa101167707331bbe33bc0e5a366ef787cabebfb262d0c398fade5831aefd  src/GameSrc/render.c
+e0aeb587cd0c62f86328316ac5cd12ca0d36455d4460ebf92102fac7a188def5  src/GameSrc/frmain.c
+4481cc5731f8b39fe10c52c1dd540bbec8aee4d4694d22e906253b65990269cf  src/GameSrc/frsetup.c
+692c9c49e9d6d9963c452c66002cbd7bfce2bf17a067f687c301966579e95ed4  src/MacSrc/Shock.c

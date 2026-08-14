@@ -1,0 +1,38 @@
+{
+  "milestone": "CITADEL-C3D-R3D4B-VIEWPORT-PROJECTION-ALIGN1",
+  "created": "2026-08-04T21:48:52.690410-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "architecture": {
+    "hybrid_mode": "R3D4A_NATIVE_TERRAIN_PLUS_KEYED_FOREGROUND",
+    "terrain_projection": "DYNAMIC_VIEWPORT_ASPECT",
+    "terrain_occlusion": "FLAT_KEY_ZERO_POLYGON_ERASE",
+    "software_terrain_texture_mapping": "SUPPRESSED",
+    "per_pixel_reference_comparison": "DISABLED",
+    "foreground_format": "RGBA5551",
+    "foreground_key": 0
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "673cbe360a3cd7192ac6031cc22df54670a191fdb0a77475af0585fce2e23b9b",
+      "after_sha256": "297950faeff67ee18262ac6a10eae76ba633ecb847c23697df0db250dd547851"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "918226c866dd79490e5695bf42a4bb87afeeb18b8f62a86c1b0dcde5d2c69bc3",
+      "after_sha256": "1a81bc0f4c2278b621faf4d97a85266c3106cf96914b7e3477c5c9387180a6a6"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "8cdc4b4156844ea2bfae95801d4e9eb39fa0a6b1eef3d2361b60d5bfd435c863",
+      "after_sha256": "d465d7196e7bdcccf4a5aaa086eb40c554caced93c291c92c4d66c41948fb6d5"
+    }
+  },
+  "preserved": [
+    "R3D4A painter-order terrain erase foreground",
+    "native textured terrain cache and upload path",
+    "unsupported and transparent terrain software fallback",
+    "pause and wrapper complete-software fallback",
+    "stereo complete-software fallback",
+    "Legacy complete-software path",
+    "Dual-screen layout and lower-screen UI"
+  ],
+  "intent": "Fix remaining mono door-edge / space-stretch mismatch by matching native projection to the live viewport aspect."
+}

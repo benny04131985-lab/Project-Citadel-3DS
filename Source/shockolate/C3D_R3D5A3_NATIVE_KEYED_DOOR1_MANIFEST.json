@@ -1,0 +1,49 @@
+{
+  "milestone": "CITADEL-C3D-R3D5A3-NATIVE-KEYED-DOOR1",
+  "created": "2026-08-05T09:45:43.024721-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "native_category": "BINARY_ALPHA_MOVING_DOORS",
+  "texture_policy": {
+    "format": "RGBA5551",
+    "alpha_key": "PALETTE_INDEX_ZERO",
+    "filter": "NEAREST",
+    "resource_lifetime": "STABLE_FRAME_SNAPSHOT_BEFORE_UNLOCK",
+    "cache_identity": "CONTENT_HASHED"
+  },
+  "foreground_occlusion": {
+    "operation": "PERSPECTIVE_ALPHA_MASK_TO_KEY_ZERO",
+    "mask_source": "STABLE_DOOR_SNAPSHOT_NONZERO_TEXELS",
+    "failure_policy": "KEEP_COMPLETE_SOFTWARE_DOOR_DRAW"
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "dc67c3fe56c90369fa0ff2ddd0fec84b948188e5eabc7bc4fdb77fdb6393ed59",
+      "after_sha256": "2f457c0cef10f31af15b7d5360e632a08174d3cf569c1f4a1a2bc42e3c533ba3"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "be61a6d0d425d51cce962ac7180fc563152f9271354972638c6ec3f55aaacfa4",
+      "after_sha256": "aabc2833ddc3adb49e5b255d3eccb0fb52434acc4051c1e10225a91b14890bd4"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "2a7dbb0c97da1e471e7617e725b851a6d5bc341123977a21f2c7179deca92acf",
+      "after_sha256": "a1a530c8a1b02e971433665be415f9a83295347ceaa7b982b55a3c9421b203bd"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "7c3012e2733d49baacb6923b6bd40b573a82a7f5807e65cbccf5073f542d4994",
+      "after_sha256": "d11cf710598fe23a24acae99d551e58d47ec4a331847757e925f03b02ee2d9df"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected sx/sy",
+    "R3D5A2 native opaque doors",
+    "R3D4A terrain erase mask",
+    "camera-Z perspective-correct texture W",
+    "GEQUAL painter ordering",
+    "native RGB565 terrain/opaque-door cache",
+    "other software foreground categories",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

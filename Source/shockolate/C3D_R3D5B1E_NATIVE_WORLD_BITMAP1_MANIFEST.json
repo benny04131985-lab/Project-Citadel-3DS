@@ -1,0 +1,48 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1E-NATIVE-WORLD-BITMAP1",
+  "created": "2026-08-05T21:17:20.760229-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "hardware_trace": {
+    "visible_native_polygons": 7684,
+    "visible_native_triangles_captured": 15368,
+    "native_triangles_drawn": 30736,
+    "mask_pixels_erased": 8143301,
+    "fully_offscreen_quads": 2807,
+    "genuine_mask_failures": 0
+  },
+  "offscreen_policy": {
+    "native_triangles": "DISCARD_BEFORE_PRESENTATION",
+    "software_draw": "SUPPRESS_AS_NOOP",
+    "classification": "EXPECTED_VISIBILITY_EXCLUSION",
+    "fallback_counters": "DO_NOT_INCREMENT",
+    "failure_counters": "DO_NOT_INCREMENT"
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "9f69abd0bf1986233970b5cac54533a7538beb5af2533057a35ef257335b0884",
+      "after_sha256": "79943a233efe5ce214f8a54260d68d24ce8a7b2b709589b55fa5da842884af80"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "f49ed02d4914a717bd35c81adb783ae29a07a0702abd6ce4b6357c24ce73a4fc",
+      "after_sha256": "ad2e4ba20870b24d488385d7df345e0a3937a07b34ff295d9d1c29960d502226"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "ddc372f44c1016d95ae9b2b402dd52dce7c2243601078db9b1dd48f7201e1022",
+      "after_sha256": "9ae096362f12a57a6f1ebbbcfe7ebc373939b3b6bc9ae59a69ab12cf7e899b68"
+    }
+  },
+  "preserved": [
+    "R3D4D exact native terrain",
+    "R3D5A3 native opaque and keyed doors",
+    "R3D5B1C NPOT padded native world sprites",
+    "transparent power-of-two backing textures",
+    "cropped source UV maxima",
+    "exact projected object quads and camera Z",
+    "original painter ordering",
+    "alpha-shaped foreground erase",
+    "all genuine safe software fallbacks",
+    "HUD, MFD, weapon, effects and critters",
+    "pause, stereo and Legacy behavior",
+    "Dual-screen lower UI"
+  ]
+}

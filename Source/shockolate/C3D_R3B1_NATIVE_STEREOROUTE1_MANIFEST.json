@@ -1,0 +1,20 @@
+{
+  "milestone": "CITADEL-C3D-R3B1-NATIVE-STEREOROUTE1",
+  "created": "2026-08-03T23:46:06.192042-04:00",
+  "root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "base": "CITADEL-C3D-R3A2-WORLDSPACE-SOLIDROOM1",
+  "software_terrain_suppression": false,
+  "explicit_route": "render.c right/left/mono fr_rend boundaries",
+  "modified": {
+    "src/MacSrc/Shock.c": "317b3602dcc39a4db25e625689ef4f7ad71d35968e5f412f90ea67f942041f72",
+    "src/MacSrc/Citro3DNative.c": "f234416b0a1172b0677b2c3fe05fecdc77d9ceb76f2194ec656e6a8ea9115f66",
+    "src/MacSrc/Citro3DNative.h": "8de519508db3673084c04d2d0e998202310df0a05c1ea060292b19443666f159",
+    "src/GameSrc/render.c": "46bf3796f85f5742f6468800e42ce02806931d6523d69c544848a1d75eb5550b"
+  },
+  "backups": [
+    "src/MacSrc/Shock_C3D_R3B1_PRE_STEREOROUTE1.c",
+    "src/MacSrc/Citro3DNative_C3D_R3B1_PRE_STEREOROUTE1.c",
+    "src/MacSrc/Citro3DNative_C3D_R3B1_PRE_STEREOROUTE1.h",
+    "src/GameSrc/render_C3D_R3B1_PRE_STEREOROUTE1.c"
+  ]
+}

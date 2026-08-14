@@ -1,0 +1,20 @@
+{
+  "milestone": "CITADEL-C3D-R3D6A1-NATIVE-STEREO-TAKEOVER1",
+  "base_checkpoint": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3D5B2D2_HW_PASS_20260807_201400",
+  "base_archive": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3D5B2D2_HW_PASS_20260807_201400.tar.gz",
+  "base_archive_sha256": "e7b2967fb55d57c6af3d8dc6f7a19edb7235e667b1a3dd0da6ee13516c6c7098",
+  "changed_files": {
+    "src/MacSrc/Shock.c": "235e70269ca7318568fb1d00beb92c4a7a1788ff9db9c450b1d3ad5fae22b6e7",
+    "src/MacSrc/Citro3DNative.c": "43444641a52eedb2e439a345e11ca18113a9433996e9624b6792c2dfa3bb76f5"
+  },
+  "stereo_policy": {
+    "ordinary_split_gameplay": "native_dual_eye_takeover",
+    "right_camera": "existing_explicit_right_fr_rend_pass",
+    "left_camera": "existing_explicit_left_fr_rend_pass",
+    "left_foreground": "RGBA5551_key_zero",
+    "right_foreground": "dedicated_RGBA5551_key_zero",
+    "right_software_frame": "unsupported_objects_plus_shared_overlays_source",
+    "exceptional_modes": "software_fallback_unchanged",
+    "rgb565_transport": "retained_for_R3D6A1_correctness_proof"
+  }
+}

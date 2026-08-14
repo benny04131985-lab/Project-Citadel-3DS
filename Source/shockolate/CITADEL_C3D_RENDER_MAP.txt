@@ -1,0 +1,180 @@
+169:static C3D_Tex citadel_gpu_texture;
+170:static C3D_Tex citadel_gpu_right_texture;
+177:static unsigned int citadel_gpu_presented_frames = 0;
+203:static C2D_Image citadel_gpu_v15f_image;
+216:static C3D_Tex citadel_gpu_v15g_rgb565_texture;
+217:static C3D_Tex citadel_gpu_v15g_rgba8_texture;
+223:static C2D_Image citadel_gpu_v15g_rgb565_image;
+224:static C2D_Image citadel_gpu_v15g_rgba8_image;
+246:static C2D_SpriteSheet citadel_gpu_v15h_sheet = NULL;
+247:static C2D_Image citadel_gpu_v15h_official_image;
+248:static C3D_Tex citadel_gpu_v15h_manual_texture;
+252:static C2D_Image citadel_gpu_v15h_manual_image;
+261:static C2D_SpriteSheet citadel_v16_splash_sheet = NULL;
+262:static C2D_Image citadel_v16_splash_image;
+759:            citadel_gpu_presented_frames);
+814:static bool citadel_gpu_present(SDL_Surface *surface, bool magenta);
+1012:           citadel_gpu_presented_frames,
+1017:        C2D_SpriteSheetFree(citadel_v16_splash_sheet);
+1041:        C2D_SpriteSheetFree(citadel_gpu_v15h_sheet);
+1046:        C3D_TexDelete(&citadel_gpu_v15h_manual_texture);
+1056:        C3D_TexDelete(&citadel_gpu_v15g_rgb565_texture);
+1061:        C3D_TexDelete(&citadel_gpu_v15g_rgba8_texture);
+1071:        C3D_TexDelete(&citadel_gpu_right_texture);
+1076:        C3D_TexDelete(&citadel_gpu_texture);
+1086:        C2D_Fini();
+1107: * C2D_CreateScreenTarget() assumes the libctru default BGR8 framebuffer and
+1169:            C2D_SpriteSheetLoad(paths[i]);
+1177:        if (C2D_SpriteSheetCount(citadel_v16_splash_sheet) < 1) {
+1180:            C2D_SpriteSheetFree(citadel_v16_splash_sheet);
+1186:            C2D_SpriteSheetGetImage(
+1194:            C2D_SpriteSheetFree(citadel_v16_splash_sheet);
+1237:    if (!C2D_Init(C2D_DEFAULT_MAX_OBJECTS)) {
+1238:        v5_log("GPU INIT FAIL stage=C2D_Init");
+1244:    C2D_Prepare();
+1291:    if (!C3D_TexInit(&citadel_gpu_texture,
+1295:        v5_log("GPU INIT FAIL stage=C3D_TexInit size=%dx%d",
+1304:    C3D_TexSetFilter(&citadel_gpu_texture,
+1307:    C3D_TexSetWrap(&citadel_gpu_texture,
+1311:    if (!C3D_TexInit(&citadel_gpu_right_texture,
+1315:        v5_log("GPU 3D S2 INIT FAIL stage=right-C3D_TexInit size=%dx%d",
+1322:    C3D_TexSetFilter(&citadel_gpu_right_texture, GPU_NEAREST, GPU_NEAREST);
+1323:    C3D_TexSetWrap(&citadel_gpu_right_texture,
+1685:static uint32_t citadel_gpu_build_linear_frame(SDL_Surface *surface)
+1695:static void citadel_gpu_swizzle_staging_to_texture(C3D_Tex *texture)
+1842:                                         C3D_Tex *texture)
+1868:           (unsigned int)C3D_TexGetType(texture));
+1970:    C3D_TexLoadImage(&citadel_gpu_v15g_rgb565_texture,
+1974:    C3D_TexFlush(&citadel_gpu_v15g_rgb565_texture);
+1978:    C3D_TexLoadImage(&citadel_gpu_v15g_rgba8_texture,
+1982:    C3D_TexFlush(&citadel_gpu_v15g_rgba8_texture);
+2039:           "loader=C3D_TexLoadImage flush=C3D_TexFlush "
+2040:           "bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt "
+2050:    C3D_Tex *texture;
+2051:    C2D_Image image;
+2059:        bottom_color = C2D_Color32(0, 32, 96, 255);
+2064:        bottom_color = C2D_Color32(0, 96, 32, 255);
+2069:    C2D_TargetClear(citadel_gpu_top_target,
+2070:                    C2D_Color32(0, 0, 0, 255));
+2071:    C2D_TargetClear(citadel_gpu_bottom_target,
+2074:    C2D_SceneBegin(citadel_gpu_top_target);
+2081:    C3D_TexBind(0, texture);
+2084:        C2D_DrawImageAt(
+2099:    C2D_Flush();
+2271:                                          C3D_Tex *texture)
+2297:           (unsigned int)C3D_TexGetType(texture));
+2310:        citadel_gpu_v15h_sheet = C2D_SpriteSheetLoad(paths[i]);
+2315:                   (unsigned long)C2D_SpriteSheetCount(
+2348:    if (C2D_SpriteSheetCount(citadel_gpu_v15h_sheet) < 1) {
+2354:        C2D_SpriteSheetGetImage(citadel_gpu_v15h_sheet, 0);
+2386:    if (!C3D_TexInit(&citadel_gpu_v15h_manual_texture,
+2390:        v5_log("GPU V16.1 MANUAL INIT FAIL stage=C3D_TexInit");
+2395:    C3D_TexSetFilter(&citadel_gpu_v15h_manual_texture,
+2398:    C3D_TexSetWrap(&citadel_gpu_v15h_manual_texture,
+2447:    C3D_TexLoadImage(&citadel_gpu_v15h_manual_texture,
+2451:    C3D_TexFlush(&citadel_gpu_v15h_manual_texture);
+2466:           "official=C2D_SpriteSheetLoad runtime=C3D_TexLoadImage "
+2467:           "state_reset=C2D_Prepare");
+2473:    C2D_Image image;
+2485:        top_color = C2D_Color32(0, 32, 160, 255);
+2486:        bottom_color = C2D_Color32(0, 16, 96, 255);
+2490:        top_color = C2D_Color32(176, 24, 24, 255);
+2491:        bottom_color = C2D_Color32(96, 8, 8, 255);
+2501:     * No direct C3D_TexBind is used; C2D_DrawImageAt owns texture selection.
+2503:    C2D_Prepare();
+2505:    C2D_TargetClear(citadel_gpu_top_target, top_color);
+2506:    C2D_TargetClear(citadel_gpu_bottom_target, bottom_color);
+2513:    C2D_SceneBegin(citadel_gpu_top_target);
+2515:        C2D_DrawImageAt(image,
+2522:    C2D_Flush();
+2524:    C2D_SceneBegin(citadel_gpu_bottom_target);
+2525:    C2D_DrawRectSolid(0.0f,
+2531:    C2D_DrawRectSolid(16.0f,
+2536:                      C2D_Color32(255, 255, 255, 255));
+2537:    C2D_Flush();
+2586:               "marker=RED state_reset=C2D_Prepare "
+2587:               "bind_owner=C2D_DrawImageAt",
+2618:               "loader=C3D_TexLoadImage flush=C3D_TexFlush "
+2619:               "bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt "
+2642:        citadel_gpu_build_linear_frame(surface);
+2643:    citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_texture);
+2656:        citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_right_texture);
+2680:                   "marker=BLUE loader=C2D_SpriteSheetLoad "
+2681:                   "state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt",
+2711:static bool citadel_gpu_draw_region_from_texture(C3D_Tex *texture,
+2723:    C2D_Image image;
+2724:    C2D_DrawParams parameters;
+2829:    if (!C2D_DrawImage(image, &parameters, NULL)) {
+2837:static bool citadel_gpu_draw_region(int source_x, int source_y,
+2843:    return citadel_gpu_draw_region_from_texture(&citadel_gpu_texture,
+2893:    C3D_FrameSync();
+3020:    if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
+3025:    C2D_TargetClear(citadel_gpu_top_target,
+3026:                    C2D_Color32(0, 0, 0, 255));
+3027:    C2D_TargetClear(citadel_gpu_top_right_target,
+3028:                    C2D_Color32(0, 0, 0, 255));
+3029:    C2D_TargetClear(citadel_gpu_bottom_target,
+3030:                    C2D_Color32(0, 0, 0, 255));
+3032:    C2D_SceneBegin(citadel_gpu_top_target);
+3042:        C2D_DrawImageAt(citadel_v16_splash_image,
+3050:    C2D_SceneBegin(citadel_gpu_top_right_target);
+3052:        C2D_DrawImageAt(citadel_v16_splash_image,
+3064:    C2D_SceneBegin(citadel_gpu_bottom_target);
+3065:    C2D_DrawRectSolid(0.0f,
+3070:                      C2D_Color32(0, 0, 0, 255));
+3072:    C3D_FrameEnd(0);
+3073:    ++citadel_gpu_presented_frames;
+3098:        C3D_FrameSync();
+3122:static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
+3146:    if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
+3156:        C3D_FrameEnd(0);
+3172:     * C3D_TexBind when C2D_Image.tex is the same pointer as the preceding
+3176:     * C3D_TexBind marks texture unit 0 dirty every time it is called, even
+3183:        C3D_TexBind(0, &citadel_gpu_texture);
+3187:                   "C3D_TexBind(0, live_texture) after every live upload");
+3193:        C2D_TargetClear(citadel_gpu_top_target,
+3194:                        C2D_Color32(255, 0, 255, 255));
+3195:        C2D_TargetClear(citadel_gpu_top_right_target,
+3196:                        C2D_Color32(255, 0, 255, 255));
+3197:        C2D_TargetClear(citadel_gpu_bottom_target,
+3198:                        C2D_Color32(24, 24, 24, 255));
+3199:        C3D_FrameEnd(0);
+3200:        ++citadel_gpu_presented_frames;
+3208:     * blue = tex3ds-generated T3X through C2D_SpriteSheetLoad;
+3209:     * red  = runtime-generated bytes through a fresh C3D_Tex.
+3215:        C3D_FrameEnd(0);
+3216:        ++citadel_gpu_presented_frames;
+3226:     * first RGB565, then RGBA8. Both are loaded through C3D_TexLoadImage,
+3227:     * flushed through C3D_TexFlush, explicitly bound after SceneBegin, and
+3228:     * drawn with the simplest C2D_DrawImageAt path.
+3234:        C3D_FrameEnd(0);
+3235:        ++citadel_gpu_presented_frames;
+3243:    C2D_TargetClear(citadel_gpu_top_target,
+3244:                    C2D_Color32(0, 0, 0, 255));
+3245:    C2D_TargetClear(citadel_gpu_top_right_target,
+3246:                    C2D_Color32(0, 0, 0, 255));
+3247:    C2D_TargetClear(citadel_gpu_bottom_target,
+3248:                    C2D_Color32(0, 0, 0, 255));
+3250:    C2D_SceneBegin(citadel_gpu_top_target);
+3251:    C3D_TexBind(0, &citadel_gpu_texture);
+3261:        top_ok = citadel_gpu_draw_region(
+3279:        top_ok = citadel_gpu_draw_region(
+3292:    C2D_SceneBegin(citadel_gpu_top_right_target);
+3293:    C3D_TexBind(0, citadel_gpu_right_frame_active
+3297:        right_ok = citadel_gpu_draw_region_from_texture(
+3309:        right_ok = citadel_gpu_draw_region_from_texture(
+3347:        C2D_SceneBegin(citadel_gpu_bottom_target);
+3348:        C3D_TexBind(0, &citadel_gpu_texture);
+3351:            citadel_gpu_draw_region(
+3361:            citadel_gpu_draw_region(
+3371:            citadel_gpu_draw_region(
+3389:        C2D_SceneBegin(citadel_gpu_bottom_target);
+3391:            C2D_DrawRectSolid(
+3397:                C2D_Color32(0, 0, 0, 255));
+3400:    C3D_FrameEnd(0);
+3401:    ++citadel_gpu_presented_frames;
+3412:               citadel_gpu_presented_frames);
+3421:    if (citadel_gpu_presented_frames == 1) {
+3624:    FILE *file = fopen("GPU_C2D_V16_1.log", "a");
+3905:    remove("GPU_C2D_V16_1.log");
+4274:        if (!citadel_gpu_present(drawSurface, false)) {

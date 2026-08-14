@@ -1,0 +1,15 @@
+CMakeLists.txt
+src/GameSrc/Headers/mlimbs.h
+src/GameSrc/Headers/musicai.h
+src/GameSrc/audiolog.c
+src/GameSrc/mlimbs.c
+src/GameSrc/musicai.c
+src/GameSrc/setup.c
+src/MacSrc/MacTune.c
+src/MacSrc/MacTune.h
+src/MacSrc/SDLSound.c
+src/MacSrc/Shock.c
+src/MacSrc/Xmi.c
+src/MacSrc/Xmi.h
+src/MusicSrc/MusicDevice.c
+src/MusicSrc/MusicDevice.h

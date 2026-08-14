@@ -1,0 +1,125 @@
+PROJECT CITADEL VX0 / VX1 HARDWARE TEST MATRIX
+================================================
+
+Use a cold reboot before every lettered test.
+
+BUILD ID: ______________________
+3DSX SHA256: ___________________
+DATE/TIME: _____________________
+
+VX0 BASELINE
+------------
+
+A. Manual menu preparation -> New Game
+[ ] Cold reboot
+[ ] Reach main menu
+[ ] HOME from menu
+[ ] Resume
+[ ] Start New Game
+[ ] Let shipped/T7 sequence finish
+[ ] Reach Medical
+[ ] HOME
+[ ] Resume
+[ ] HOME again
+[ ] Resume again
+Notes:
+
+B. Continue
+[ ] Cold reboot
+[ ] Continue an existing save
+[ ] HOME
+[ ] Resume
+[ ] Repeat HOME/resume
+Notes:
+
+C. Explicit Load
+[ ] Cold reboot
+[ ] Load an existing save
+[ ] HOME
+[ ] Resume
+[ ] Repeat HOME/resume
+Notes:
+
+D. Unprepared New Game control
+[ ] Cold reboot
+[ ] Do NOT press HOME at menu
+[ ] Start New Game
+[ ] Reach earliest stable gameplay
+[ ] HOME
+Result:
+Notes:
+
+E. Layout regression
+[ ] Initial menus Legacy
+[ ] Gameplay Dual
+[ ] Pause preserves current layout
+[ ] Options preserves current layout
+[ ] Save preserves current layout
+[ ] Load preserves current layout
+[ ] SELECT alone toggles Legacy/Dual
+Notes:
+
+VX0 PASS GATE
+-------------
+A, B, C, and E must pass repeatedly on cold boots before VX1 is applied.
+D is the untreated control and may fail.
+
+VX1.0
+-----
+
+F. Deterministic primer
+[ ] Cold reboot
+[ ] Hack-i-Ben splash appears normally
+[ ] No manual HOME at menu
+[ ] Retrieve VX1_STARTUP_PRIMER.log
+[ ] All five GSP results are 0x00000000
+[ ] complete=1
+[ ] POST-PRIMER SPLASH FRAME COMPLETE exists
+
+G. New Game without manual preparation
+[ ] Cold reboot
+[ ] No HOME at menu
+[ ] Start New Game
+[ ] Reach Medical
+[ ] HOME
+[ ] Resume
+[ ] HOME again
+[ ] Resume again
+Notes:
+
+H. Main menu
+[ ] Cold reboot
+[ ] HOME at menu
+[ ] Resume
+[ ] Start New Game
+[ ] HOME in gameplay
+[ ] Resume
+Notes:
+
+I. Continue
+[ ] Cold reboot
+[ ] Continue
+[ ] HOME/resume twice
+Notes:
+
+J. Explicit Load
+[ ] Cold reboot
+[ ] Load
+[ ] HOME/resume twice
+Notes:
+
+K. Close Software
+[ ] HOME from menu -> Close Software
+[ ] Relaunch
+[ ] HOME from gameplay -> Close Software
+[ ] Relaunch
+Notes:
+
+VX1 PASS GATE
+-------------
+The primer log completes, unprepared New Game becomes HOME-safe, menu,
+Continue, and Load remain safe, repeat HOME/resume works, Close Software
+works, and layout behavior does not regress.
+
+Any failure means archive VX1.0 as failed, restore exact VX0, and make a new
+numbered iteration. Never alter a failed iteration in place.

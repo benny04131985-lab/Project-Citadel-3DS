@@ -1,0 +1,31 @@
+{
+  "milestone": "CITADEL-C3D-R3D3C-AUXVIEW-REFERENCE-LIFETIME1",
+  "created": "2026-08-04T16:18:30.997307-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "root_cause": "auxiliary post-main-view renders invalidated the completed terrain reference before SDL presentation",
+  "lifetime_policy": "MAIN_VIEW_TO_PRESENT_AUX_VIEWS_PRESERVE",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "7e4cd549eb681862c763726d55b9369dad5abdd6c3e826b0521bab1fce0be435",
+      "after_sha256": "45d78fe17440e64c0e864faa0bdad20d509a2b39ca68b5d348dbfcef3118ce8a"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "305501e0c6267b1a4773f9dc25defeec0c3e87aa001f90cbc6494fe70c5a2029",
+      "after_sha256": "9e47871fe44e1021d0e4471b788d726a39552f0da938188079f1afa59946cfa2"
+    },
+    "src/GameSrc/frsetup.c": {
+      "before_sha256": "3ca82b9ee0063bddcdfaee7c3fe5f5ceb0a1c454927ef2e3e57cec6d393a98fb",
+      "after_sha256": "9688c24125a2aa125e497c0d68ccf6556769effdadd8e86d9c51178d9696f345"
+    }
+  },
+  "preserved": [
+    "R3D3B source-rect-to-local-canvas remap",
+    "complete software world safety layer",
+    "software painter-order occlusion",
+    "pause/wrapper software fallback",
+    "software-only stereo fallback",
+    "R3D2B bitmap snapshots",
+    "native textures, UVs and shaders",
+    "Dual and Legacy layouts"
+  ]
+}

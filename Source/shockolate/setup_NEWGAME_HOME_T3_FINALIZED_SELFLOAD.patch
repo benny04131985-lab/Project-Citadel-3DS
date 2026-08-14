@@ -1,0 +1,112 @@
+--- src/GameSrc/setup.c
++++ src/GameSrc/setup.c
+@@
+-#include <string.h>
+-#include <SDL.h>
++#include <string.h>
++#include <stdio.h>
++#include <SDL.h>
+
+ #if defined(__3DS__) || defined(_3DS)
+ #include <3ds/applets/swkbd.h>
+ #warning "PROJECT CITADEL KEYBOARD V3: visible-top native keyboard is ACTIVE"
++#warning "PROJECT CITADEL NEW GAME FINALIZED SELF-LOAD TEST 3 IS ACTIVE"
+ #endif
+@@
+-    gr2ss_override = OVERRIDE_ALL; // CC: This fixed popups cursors drawing tiny
++    gr2ss_override = OVERRIDE_ALL; // CC: This fixed popups cursors drawing tiny
++
++#if defined(__3DS__) || defined(_3DS)
++    /*
++     * PROJECT CITADEL NEW GAME FINALIZED SELF-LOAD TEST 3
++     *
++     * Test 2 performed its temporary save/load inside
++     * create_initial_game_func(), before this function finalized the
++     * New Game quest variables.  A real Continue -> Load happens from
++     * setup.c after those values already exist.
++     *
++     * Save the now-complete New Game to a hidden temporary file, then
++     * reproduce the proven setup.c load preamble before GAME_LOOP begins.
++     * No visible save slot is consumed.
++     */
++    {
++        static const char *citadel_newgame_boot_file =
++            "NewGameBoot.dat";
++        FILE *citadel_newgame_log =
++            fopen("NEWGAME_HOME_T3.log", "wb");
++        errtype citadel_save_result;
++        errtype citadel_load_result = ERR_FOPEN;
++        int citadel_delete_result = -1;
++
++        if (citadel_newgame_log != NULL) {
++            fprintf(citadel_newgame_log,
++                    "PROJECT CITADEL NEW GAME HOME T3 START "
++                    "build=%s %s\n",
++                    __DATE__,
++                    __TIME__);
++            fprintf(citadel_newgame_log,
++                    "FINAL QVARS music=%ld sfx=%ld "
++                    "combat=%ld mission=%ld puzzle=%ld cyber=%ld\n",
++                    (long)QUESTVAR_GET(MUSIC_VOLUME_QVAR),
++                    (long)QUESTVAR_GET(SFX_VOLUME_QVAR),
++                    (long)QUESTVAR_GET(COMBAT_DIFF_QVAR),
++                    (long)QUESTVAR_GET(MISSION_DIFF_QVAR),
++                    (long)QUESTVAR_GET(PUZZLE_DIFF_QVAR),
++                    (long)QUESTVAR_GET(CYBER_DIFF_QVAR));
++            fflush(citadel_newgame_log);
++        }
++
++        citadel_save_result =
++            save_game((char *)citadel_newgame_boot_file,
++                      (char *)"Project Citadel New Game Boot");
++
++        if (citadel_newgame_log != NULL) {
++            fprintf(citadel_newgame_log,
++                    "FINAL TEMP SAVE result=%d file=%s\n",
++                    (int)citadel_save_result,
++                    citadel_newgame_boot_file);
++            fflush(citadel_newgame_log);
++        }
++
++        if (citadel_save_result == OK) {
++            /*
++             * Match load_that_thar_game() rather than calling load_game()
++             * from inside gamewrap.c.
++             */
++            clear_player_data = TRUE;
++            object_data_load();
++            player_create_initial();
++            player_struct.level = 0xFF;
++            change_mode_func(0, 0, GAME_LOOP);
++
++            citadel_load_result =
++                load_game((char *)citadel_newgame_boot_file);
++
++            if (citadel_load_result == OK)
++                gr2ss_override = OVERRIDE_ALL;
++        }
++
++        if (citadel_newgame_log != NULL) {
++            fprintf(citadel_newgame_log,
++                    "FINAL SETUP LOAD result=%d\n",
++                    (int)citadel_load_result);
++            fflush(citadel_newgame_log);
++        }
++
++        if (citadel_save_result == OK &&
++            citadel_load_result == OK) {
++            citadel_delete_result =
++                remove(citadel_newgame_boot_file);
++        }
++
++        if (citadel_newgame_log != NULL) {
++            fprintf(citadel_newgame_log,
++                    "TEMP DELETE result=%d\n",
++                    citadel_delete_result);
++            fprintf(citadel_newgame_log,
++                    "PROJECT CITADEL NEW GAME HOME T3 COMPLETE\n");
++            fclose(citadel_newgame_log);
++        }
++    }
++#endif
+ }

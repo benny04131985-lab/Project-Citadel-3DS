@@ -1,0 +1,6 @@
+PROJECT CITADEL VX1-NATURAL
+Only the active T7 arming call was removed from setup.c.
+New Game now follows the original path.
+Installed: 2026-07-23T20:11:26
+VX0 setup SHA256: 236b2517ad37b87e88e4232bca712aaf8910f51205e130f13d0069cfe2f4ba82
+VX1 setup SHA256: a694234dae19ee9c17635bd7add8537e66586ffd51146424be6756cccaccb435

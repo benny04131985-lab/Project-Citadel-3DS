@@ -1,0 +1,251 @@
+--- src/MacSrc/Shock.c.T7
++++ src/MacSrc/Shock.c.T7P
+@@ -80,6 +80,7 @@
+ 
+ #warning "PROJECT CITADEL V16.1: launch polish candidate is ACTIVE"
+ #warning "PROJECT CITADEL AUDIO SUSPEND HOTFIX V2: NDSP close/deferred reopen hook is ACTIVE"
++#warning "PROJECT CITADEL T7P: hidden normalizer mask + persistent gameplay layout are ACTIVE"
+ 
+ //--------------------
+ //  Globals
+@@ -117,6 +118,10 @@
+  * visibility flag is also part of layout selection.
+  */
+ extern uchar wrapper_panel_on;
++
++/* T7P presentation mask exported by wrapper.c. */
++extern bool citadel_3ds_newgame_home_t7_mask_active(void);
++extern unsigned int citadel_3ds_newgame_home_t7_mask_step(void);
+ 
+ /*
+  * False: use the automatic SS3DS layout (split during active gameplay,
+@@ -353,8 +358,18 @@
+ 
+ static bool citadel_3ds_use_split_layout(void)
+ {
++    /*
++     * T7P layout policy:
++     *   - SETUP_LOOP and other non-gameplay menus are always Legacy.
++     *   - Once GAME_LOOP begins, SELECT alone chooses Legacy or Dual.
++     *   - Pause/options/save/load wrappers preserve that choice instead of
++     *     forcing Legacy merely because wrapper_panel_on is true.
++     *
++     * Gameplay input is still separately disabled by
++     * citadel_3ds_gameplay_controls_active() while a wrapper is open.
++     */
+     return !citadel_legacy_view_override &&
+-           citadel_3ds_gameplay_controls_active();
++           _current_loop == GAME_LOOP;
+ }
+ 
+ bool citadel_3ds_split_layout_active(void)
+@@ -2311,6 +2326,102 @@
+     return draw_ok;
+ }
+ 
++static bool citadel_3ds_draw_t7_mask_in_active_frame(void)
++{
++    const Tex3DS_SubTexture *subtexture = NULL;
++    unsigned int step = citadel_3ds_newgame_home_t7_mask_step();
++    unsigned int index;
++    float scale_x = 1.0f;
++    float scale_y = 1.0f;
++    bool draw_ok = true;
++    const u32 background = C2D_Color32(0, 0, 0, 255);
++    const u32 inactive = C2D_Color32(42, 48, 48, 255);
++    const u32 complete = C2D_Color32(56, 190, 176, 255);
++    const u32 current =
++        ((citadel_gpu_presented_frames / 12U) & 1U)
++            ? C2D_Color32(238, 248, 246, 255)
++            : C2D_Color32(116, 224, 208, 255);
++
++    C2D_TargetClear(citadel_gpu_top_target, background);
++    C2D_TargetClear(citadel_gpu_bottom_target, background);
++
++    C2D_SceneBegin(citadel_gpu_top_target);
++
++    if (citadel_v16_splash_ready &&
++        citadel_v16_splash_image.subtex != NULL) {
++        subtexture = citadel_v16_splash_image.subtex;
++        scale_x =
++            (float)CITADEL_3DS_TOP_WIDTH /
++            (float)subtexture->width;
++        scale_y =
++            (float)CITADEL_3DS_TOP_HEIGHT /
++            (float)subtexture->height;
++
++        draw_ok = C2D_DrawImageAt(citadel_v16_splash_image,
++                                  0.0f,
++                                  0.0f,
++                                  0.0f,
++                                  NULL,
++                                  scale_x,
++                                  scale_y);
++    } else {
++        draw_ok = C2D_DrawRectSolid(0.0f,
++                                    0.0f,
++                                    0.0f,
++                                    (float)CITADEL_3DS_TOP_WIDTH,
++                                    (float)CITADEL_3DS_TOP_HEIGHT,
++                                    background);
++    }
++
++    /*
++     * Six compact segments represent the exact T7 lifecycle without exposing
++     * Shock's Save/Load UI: Save wrapper, Save callback, game frame, Load
++     * wrapper, Load callback, loaded frame. The active segment pulses so a
++     * longer SD-card operation never looks frozen.
++     */
++    for (index = 0; index < 6U; ++index) {
++        u32 color = inactive;
++
++        if (step > index + 1U)
++            color = complete;
++        else if (step == index + 1U)
++            color = current;
++
++        C2D_DrawRectSolid(57.0f + (float)index * 48.0f,
++                          224.0f,
++                          0.5f,
++                          38.0f,
++                          5.0f,
++                          color);
++    }
++
++    C2D_SceneBegin(citadel_gpu_bottom_target);
++    C2D_DrawRectSolid(0.0f,
++                      0.0f,
++                      0.0f,
++                      (float)CITADEL_3DS_BOTTOM_WIDTH,
++                      (float)CITADEL_3DS_BOTTOM_HEIGHT,
++                      background);
++
++    for (index = 0; index < 6U; ++index) {
++        u32 color = inactive;
++
++        if (step > index + 1U)
++            color = complete;
++        else if (step == index + 1U)
++            color = current;
++
++        C2D_DrawRectSolid(27.0f + (float)index * 46.0f,
++                          116.0f,
++                          0.5f,
++                          36.0f,
++                          8.0f,
++                          color);
++    }
++
++    return draw_ok;
++}
++
+ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
+ {
+     static int last_logged_layout = -1;
+@@ -2421,6 +2532,34 @@
+         ++citadel_gpu_presented_frames;
+ 
+         return diagnostic_ok;
++    }
++
++    {
++        static bool t7_mask_was_active = false;
++        const bool t7_mask_active =
++            citadel_3ds_newgame_home_t7_mask_active();
++
++        if (t7_mask_active) {
++            bool mask_ok;
++
++            if (!t7_mask_was_active)
++                v5_log("GPU T7P MASK begin: internal numbered Save/Load hidden");
++
++            t7_mask_was_active = true;
++            mask_ok = citadel_3ds_draw_t7_mask_in_active_frame();
++            C3D_FrameEnd(0);
++            ++citadel_gpu_presented_frames;
++
++            if (!mask_ok)
++                ++citadel_gpu_draw_failures;
++
++            return mask_ok;
++        }
++
++        if (t7_mask_was_active) {
++            v5_log("GPU T7P MASK complete: revealing normalized gameplay");
++            t7_mask_was_active = false;
++        }
+     }
+ 
+     split_layout = citadel_3ds_use_split_layout();
+@@ -2530,8 +2669,9 @@
+                 0.0f);
+     } else {
+         /*
+-         * Pause, options, save/load, menus, and SELECT legacy view must
+-         * actively submit a black bottom-screen scene. Clearing a target
++         * Initial menus and SELECT Legacy view must actively submit a
++         * black bottom-screen scene. Gameplay wrappers preserve the current
++         * user-selected layout. Clearing a target
+          * without beginning that scene leaves the preceding gameplay frame
+          * visible on the physical LCD.
+          */
+@@ -2669,7 +2809,8 @@
+ 
+     /*
+      * Never leave stale, disjointed interface fragments on the lower LCD
+-     * while menus or the SELECT legacy view are shown on top.
++     * while initial menus or the SELECT Legacy view are shown on top.
++     * Gameplay wrappers preserve the selected gameplay layout.
+      */
+     if (!citadel_3ds_use_split_layout()) {
+         citadel_clear_bottom_screen();
+--- src/GameSrc/wrapper.c.T7
++++ src/GameSrc/wrapper.c.T7P
+@@ -2286,7 +2286,7 @@
+ 
+ #if defined(__3DS__) || defined(_3DS)
+ 
+-#warning "PROJECT CITADEL NEW GAME HOME NORMALIZER T7 is ACTIVE"
++#warning "PROJECT CITADEL NEW GAME HOME NORMALIZER T7P is ACTIVE"
+ 
+ /*
+  * T7 reproduces the exact successful manual lifecycle demonstrated on hardware:
+@@ -2420,6 +2420,38 @@
+     citadel_3ds_t7_log_state(message);
+ }
+ 
++bool citadel_3ds_newgame_home_t7_mask_active(void)
++{
++    /*
++     * Do not mask the tutorial or the first usable gameplay frame. The mask
++     * begins only once T7 has actually opened its hidden Save wrapper, and it
++     * remains active through the loaded gameplay frame that proves the
++     * normalization completed.
++     */
++    return citadel_3ds_t7_stage >= CITADEL_T7_SAVE_WRAPPER_PRESENTING &&
++           citadel_3ds_t7_stage <= CITADEL_T7_LOAD_DONE_RENDER_GAME;
++}
++
++unsigned int citadel_3ds_newgame_home_t7_mask_step(void)
++{
++    switch (citadel_3ds_t7_stage) {
++    case CITADEL_T7_SAVE_WRAPPER_PRESENTING:
++        return 1U;
++    case CITADEL_T7_SAVE_CALLBACK_PENDING:
++        return 2U;
++    case CITADEL_T7_SAVE_DONE_RENDER_GAME:
++        return 3U;
++    case CITADEL_T7_LOAD_WRAPPER_PRESENTING:
++        return 4U;
++    case CITADEL_T7_LOAD_CALLBACK_PENDING:
++        return 5U;
++    case CITADEL_T7_LOAD_DONE_RENDER_GAME:
++        return 6U;
++    default:
++        return 0U;
++    }
++}
++
+ void citadel_3ds_arm_newgame_home_t7(void)
+ {
+     remove("NEWGAME_HOME_T7.log");

@@ -1,0 +1,662 @@
+--- Shock_V15J.c
++++ Shock_V16.c
+@@ -77,7 +77,7 @@
+ #include "status.h"
+ #include "version.h"
+ 
+-#warning "PROJECT CITADEL V15J: full 640x480 texture transport is ACTIVE"
++#warning "PROJECT CITADEL V16: release candidate is ACTIVE"
+ 
+ //--------------------
+ //  Globals
+@@ -221,6 +221,16 @@
+ static bool citadel_gpu_v15h_capture_done = false;
+ static Uint32 citadel_gpu_v15h_phase_until = 0;
+ static int citadel_gpu_v15h_phase = CITADEL_V15H_PHASE_LIVE;
++
++/* Project Citadel V16 branded startup splash. */
++#define CITADEL_V16_SPLASH_DURATION_MS 2200
++
++static C2D_SpriteSheet citadel_v16_splash_sheet = NULL;
++static C2D_Image citadel_v16_splash_image;
++static bool citadel_v16_splash_ready = false;
++static bool citadel_v16_splash_started = false;
++static bool citadel_v16_splash_finished_logged = false;
++static Uint32 citadel_v16_splash_until = 0;
+ 
+ #endif
+ 
+@@ -258,6 +268,8 @@
+ static bool citadel_gpu_v15h_initialize_control(void);
+ static bool citadel_gpu_v15h_phase_active(void);
+ static bool citadel_gpu_v15h_draw_phase(void);
++static bool citadel_v16_load_splash(void);
++static bool citadel_v16_present_splash(void);
+ #endif
+ 
+ #if defined(__3DS__) || defined(_3DS)
+@@ -362,6 +374,12 @@
+            citadel_gpu_presented_frames,
+            citadel_gpu_upload_failures,
+            citadel_gpu_draw_failures);
++
++    if (citadel_v16_splash_sheet != NULL) {
++        C2D_SpriteSheetFree(citadel_v16_splash_sheet);
++        citadel_v16_splash_sheet = NULL;
++        citadel_v16_splash_ready = false;
++    }
+ 
+     if (citadel_gpu_top_target != NULL) {
+         C3D_RenderTargetDelete(citadel_gpu_top_target);
+@@ -482,6 +500,68 @@
+     return target;
+ }
+ 
++static bool citadel_v16_load_splash(void)
++{
++    static const char *paths[] = {
++        "Hack-i-Ben_Splash.t3x",
++        "sdmc:/3ds/SystemShock/Hack-i-Ben_Splash.t3x",
++        "sdmc:/3ds/systemshock/Hack-i-Ben_Splash.t3x"
++    };
++    unsigned int i;
++
++    memset(&citadel_v16_splash_image,
++           0,
++           sizeof(citadel_v16_splash_image));
++
++    for (i = 0; i < sizeof(paths) / sizeof(paths[0]); ++i) {
++        citadel_v16_splash_sheet =
++            C2D_SpriteSheetLoad(paths[i]);
++
++        if (citadel_v16_splash_sheet == NULL) {
++            v5_log("GPU V16 SPLASH LOAD path=%s result=FAIL",
++                   paths[i]);
++            continue;
++        }
++
++        if (C2D_SpriteSheetCount(citadel_v16_splash_sheet) < 1) {
++            v5_log("GPU V16 SPLASH LOAD path=%s result=FAIL reason=no-images",
++                   paths[i]);
++            C2D_SpriteSheetFree(citadel_v16_splash_sheet);
++            citadel_v16_splash_sheet = NULL;
++            continue;
++        }
++
++        citadel_v16_splash_image =
++            C2D_SpriteSheetGetImage(
++                citadel_v16_splash_sheet,
++                0);
++
++        if (citadel_v16_splash_image.tex == NULL ||
++            citadel_v16_splash_image.subtex == NULL) {
++            v5_log("GPU V16 SPLASH LOAD path=%s result=FAIL reason=invalid-image",
++                   paths[i]);
++            C2D_SpriteSheetFree(citadel_v16_splash_sheet);
++            citadel_v16_splash_sheet = NULL;
++            continue;
++        }
++
++        citadel_v16_splash_ready = true;
++
++        v5_log("GPU V16 SPLASH LOAD path=%s result=SUCCESS "
++               "image=%ux%u texture=%ux%u",
++               paths[i],
++               (unsigned int)citadel_v16_splash_image.subtex->width,
++               (unsigned int)citadel_v16_splash_image.subtex->height,
++               (unsigned int)citadel_v16_splash_image.tex->width,
++               (unsigned int)citadel_v16_splash_image.tex->height);
++
++        return true;
++    }
++
++    v5_log("GPU V16 SPLASH unavailable; continuing directly to game");
++    return false;
++}
++
+ static bool citadel_gpu_initialize(void)
+ {
+     memset(&citadel_gpu_texture, 0, sizeof(citadel_gpu_texture));
+@@ -511,7 +591,7 @@
+     citadel_gpu_c2d_initialized = true;
+     C2D_Prepare();
+ 
+-    v5_log("GPU V15J SCREEN FORMAT before-targets "
++    v5_log("GPU V16 SCREEN FORMAT before-targets "
+            "top=%u bottom=%u expected_rgba8=%u",
+            (unsigned int)gfxGetScreenFormat(GFX_TOP),
+            (unsigned int)gfxGetScreenFormat(GFX_BOTTOM),
+@@ -526,7 +606,7 @@
+             GFX_BOTTOM,
+             GFX_LEFT);
+ 
+-    v5_log("GPU V15J TARGET OUTPUT transfer_in=RGBA8 "
++    v5_log("GPU V16 TARGET OUTPUT transfer_in=RGBA8 "
+            "transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8");
+ 
+     if (citadel_gpu_top_target == NULL ||
+@@ -574,58 +654,15 @@
+            0,
+            CITADEL_GPU_STAGING_BYTES);
+ 
+-    if (!C3D_TexInit(&citadel_gpu_v15g_rgb565_texture,
+-                     CITADEL_GPU_TEXTURE_WIDTH,
+-                     CITADEL_GPU_TEXTURE_HEIGHT,
+-                     GPU_RGB565)) {
+-        v5_log("GPU INIT FAIL stage=V15G-fresh-RGB565");
+-        citadel_gpu_shutdown();
+-        citadel_gpu_shutdown_complete = false;
+-        return false;
+-    }
+-    citadel_gpu_v15g_rgb565_initialized = true;
+-
+-    C3D_TexSetFilter(&citadel_gpu_v15g_rgb565_texture,
+-                     GPU_NEAREST,
+-                     GPU_NEAREST);
+-    C3D_TexSetWrap(&citadel_gpu_v15g_rgb565_texture,
+-                   GPU_CLAMP_TO_EDGE,
+-                   GPU_CLAMP_TO_EDGE);
+-
+-    if (!C3D_TexInit(&citadel_gpu_v15g_rgba8_texture,
+-                     CITADEL_GPU_TEXTURE_WIDTH,
+-                     CITADEL_GPU_TEXTURE_HEIGHT,
+-                     GPU_RGBA8)) {
+-        v5_log("GPU INIT FAIL stage=V15G-fresh-RGBA8");
+-        citadel_gpu_shutdown();
+-        citadel_gpu_shutdown_complete = false;
+-        return false;
+-    }
+-    citadel_gpu_v15g_rgba8_initialized = true;
+-
+-    C3D_TexSetFilter(&citadel_gpu_v15g_rgba8_texture,
+-                     GPU_NEAREST,
+-                     GPU_NEAREST);
+-    C3D_TexSetWrap(&citadel_gpu_v15g_rgba8_texture,
+-                   GPU_CLAMP_TO_EDGE,
+-                   GPU_CLAMP_TO_EDGE);
+-
+-    citadel_gpu_v15g_rgba8_staging =
+-        (u32 *)linearAlloc(CITADEL_GPU_RGBA8_BYTES);
+-
+-    if (citadel_gpu_v15g_rgba8_staging == NULL) {
+-        v5_log("GPU INIT FAIL stage=V15G-RGBA8-staging bytes=%u",
+-               (unsigned int)CITADEL_GPU_RGBA8_BYTES);
+-        citadel_gpu_shutdown();
+-        citadel_gpu_shutdown_complete = false;
+-        return false;
+-    }
+-
+-    memset(citadel_gpu_v15g_rgba8_staging,
+-           0,
+-           CITADEL_GPU_RGBA8_BYTES);
+-
+-    citadel_gpu_v15g_prepare_images();
++    /*
++     * V16 removes the V15G fresh-texture diagnostics from the live build.
++     * This avoids allocating the extra RGB565/RGBA8 textures and staging
++     * buffer now that the RGBA8 LCD transfer fix is proven.
++     */
++    citadel_gpu_v15g_rgb565_initialized = false;
++    citadel_gpu_v15g_rgba8_initialized = false;
++    citadel_gpu_v15g_rgba8_staging = NULL;
++
+ 
+     /* V15J is a production-quality transport pass. Disable all timed
+      * diagnostic phases and remove the external control-asset requirement.
+@@ -638,12 +675,13 @@
+     citadel_gpu_v15g_phase = CITADEL_V15G_PHASE_COMPLETE;
+ 
+     citadel_gpu_update_palette565();
++    citadel_v16_load_splash();
+ 
+     citadel_gpu_ready = true;
+     atexit(citadel_gpu_shutdown);
+ 
+-    v5_log("GPU V15J FULL-FRAME TRANSPORT ready texture=%dx%d content=%dx%d "
+-           "source-resample=none filter=NEAREST",
++    v5_log("GPU V16 RELEASE PIPELINE ready texture=%dx%d content=%dx%d "
++           "default-mode=640x400 source-resample=none filter=NEAREST",
+            CITADEL_GPU_TEXTURE_WIDTH,
+            CITADEL_GPU_TEXTURE_HEIGHT,
+            CITADEL_GPU_CONTENT_WIDTH,
+@@ -755,7 +793,7 @@
+ 
+     if (citadel_gpu_palette_refreshes == 1 ||
+         (mismatches > 0 && citadel_gpu_palette_change_logs < 16)) {
+-        v5_log("GPU V15J PALETTE SYNC refresh=%lu mismatches=%u "
++        v5_log("GPU V16 PALETTE SYNC refresh=%lu mismatches=%u "
+                "rgb565[0]=0x%04X rgb565[1]=0x%04X "
+                "rgb565[255]=0x%04X",
+                (unsigned long)citadel_gpu_palette_refreshes,
+@@ -919,8 +957,8 @@
+ }
+ 
+ /*
+- * Convert the current indexed Shock surface into an ordinary linear
+- * 512x384 RGB565 image inside citadel_gpu_staging.
++ * Convert the current indexed Shock surface into the full-resolution
++ * 640x480 RGB565 transport image inside citadel_gpu_staging.
+  */
+ static uint32_t citadel_gpu_build_linear_frame(SDL_Surface *surface)
+ {
+@@ -1145,12 +1183,12 @@
+         physical = osConvertVirtToPhys(texture->data);
+ 
+     if (texture == NULL) {
+-        v5_log("GPU V15J TEX %s NULL",
++        v5_log("GPU V16 TEX %s NULL",
+                label != NULL ? label : "(null)");
+         return;
+     }
+ 
+-    v5_log("GPU V15J TEX %s data=%p phys=0x%08lX "
++    v5_log("GPU V16 TEX %s data=%p phys=0x%08lX "
+            "width=%u height=%u fmt=%u size=%lu "
+            "dim=0x%08lX param=0x%08lX lod=0x%08lX type=%u",
+            label != NULL ? label : "(null)",
+@@ -1316,7 +1354,7 @@
+         "FRESH_RGBA8",
+         &citadel_gpu_v15g_rgba8_texture);
+ 
+-    v5_log("GPU V15J LOAD VERIFY rgb565_memcmp=%d "
++    v5_log("GPU V16 LOAD VERIFY rgb565_memcmp=%d "
+            "source_hash=0x%08lX fresh_hash=0x%08lX "
+            "rgba8_memcmp=%d source_hash=0x%08lX fresh_hash=0x%08lX "
+            "linear_hash=0x%08lX",
+@@ -1333,7 +1371,7 @@
+         CITADEL_V15G_PHASE_FRESH_RGB565;
+     citadel_gpu_v15g_phase_until = now + 6000;
+ 
+-    v5_log("GPU V15J PHASE begin=%s duration_ms=6000 "
++    v5_log("GPU V16 PHASE begin=%s duration_ms=6000 "
+            "loader=C3D_TexLoadImage flush=C3D_TexFlush "
+            "bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt "
+            "bottom_marker=BLUE",
+@@ -1574,12 +1612,12 @@
+         physical = osConvertVirtToPhys(texture->data);
+ 
+     if (texture == NULL) {
+-        v5_log("GPU V15J TEX %s NULL",
++        v5_log("GPU V16 TEX %s NULL",
+                label != NULL ? label : "(null)");
+         return;
+     }
+ 
+-    v5_log("GPU V15J TEX %s data=%p phys=0x%08lX "
++    v5_log("GPU V16 TEX %s data=%p phys=0x%08lX "
+            "width=%u height=%u fmt=%u size=%lu "
+            "dim=0x%08lX param=0x%08lX lod=0x%08lX type=%u",
+            label != NULL ? label : "(null)",
+@@ -1608,14 +1646,14 @@
+         citadel_gpu_v15h_sheet = C2D_SpriteSheetLoad(paths[i]);
+ 
+         if (citadel_gpu_v15h_sheet != NULL) {
+-            v5_log("GPU V15J TEX3DS LOAD path=%s result=SUCCESS count=%lu",
++            v5_log("GPU V16 TEX3DS LOAD path=%s result=SUCCESS count=%lu",
+                    paths[i],
+                    (unsigned long)C2D_SpriteSheetCount(
+                        citadel_gpu_v15h_sheet));
+             return true;
+         }
+ 
+-        v5_log("GPU V15J TEX3DS LOAD path=%s result=FAIL",
++        v5_log("GPU V16 TEX3DS LOAD path=%s result=FAIL",
+                paths[i]);
+     }
+ 
+@@ -1644,7 +1682,7 @@
+         return false;
+ 
+     if (C2D_SpriteSheetCount(citadel_gpu_v15h_sheet) < 1) {
+-        v5_log("GPU V15J TEX3DS LOAD FAIL reason=no-images");
++        v5_log("GPU V16 TEX3DS LOAD FAIL reason=no-images");
+         return false;
+     }
+ 
+@@ -1654,7 +1692,7 @@
+     if (citadel_gpu_v15h_official_image.tex == NULL ||
+         citadel_gpu_v15h_official_image.subtex == NULL ||
+         citadel_gpu_v15h_official_image.tex->data == NULL) {
+-        v5_log("GPU V15J TEX3DS LOAD FAIL reason=invalid-image");
++        v5_log("GPU V16 TEX3DS LOAD FAIL reason=invalid-image");
+         return false;
+     }
+ 
+@@ -1662,7 +1700,7 @@
+         "OFFICIAL_TEX3DS_RGB565",
+         citadel_gpu_v15h_official_image.tex);
+ 
+-    v5_log("GPU V15J SUBTEX official width=%u height=%u "
++    v5_log("GPU V16 SUBTEX official width=%u height=%u "
+            "left=%f right=%f top=%f bottom=%f",
+            (unsigned int)citadel_gpu_v15h_official_image.subtex->width,
+            (unsigned int)citadel_gpu_v15h_official_image.subtex->height,
+@@ -1676,7 +1714,7 @@
+         citadel_gpu_v15h_official_image.tex->height !=
+             CITADEL_V15H_CONTROL_SIZE ||
+         citadel_gpu_v15h_official_image.tex->fmt != GPU_RGB565) {
+-        v5_log("GPU V15J TEX3DS LOAD FAIL "
++        v5_log("GPU V16 TEX3DS LOAD FAIL "
+                "reason=unexpected-texture expected=256x256/RGB565");
+         return false;
+     }
+@@ -1685,7 +1723,7 @@
+                      CITADEL_V15H_CONTROL_SIZE,
+                      CITADEL_V15H_CONTROL_SIZE,
+                      GPU_RGB565)) {
+-        v5_log("GPU V15J MANUAL INIT FAIL stage=C3D_TexInit");
++        v5_log("GPU V16 MANUAL INIT FAIL stage=C3D_TexInit");
+         return false;
+     }
+     citadel_gpu_v15h_manual_initialized = true;
+@@ -1701,7 +1739,7 @@
+         (u16 *)linearAlloc(CITADEL_V15H_CONTROL_BYTES);
+ 
+     if (citadel_gpu_v15h_candidate == NULL) {
+-        v5_log("GPU V15J MANUAL INIT FAIL stage=linearAlloc bytes=%u",
++        v5_log("GPU V16 MANUAL INIT FAIL stage=linearAlloc bytes=%u",
+                (unsigned int)CITADEL_V15H_CONTROL_BYTES);
+         return false;
+     }
+@@ -1729,7 +1767,7 @@
+                 &first_manual,
+                 &first_official);
+ 
+-        v5_log("GPU V15J GOLDEN COMPARE variant=%d "
++        v5_log("GPU V16 GOLDEN COMPARE variant=%d "
+                "mismatches=%lu compared_bytes=%lu "
+                "first={offset=%lu manual=0x%02X official=0x%02X}",
+                variant,
+@@ -1760,7 +1798,7 @@
+         &citadel_gpu_v15h_manual_texture);
+ 
+     citadel_gpu_v15h_asset_ready = true;
+-    v5_log("GPU V15J CONTROL READY "
++    v5_log("GPU V16 CONTROL READY "
+            "official=C2D_SpriteSheetLoad runtime=C3D_TexLoadImage "
+            "state_reset=C2D_Prepare");
+     return true;
+@@ -1877,7 +1915,7 @@
+             CITADEL_V15H_PHASE_RUNTIME_CONTROL;
+         citadel_gpu_v15h_phase_until = now + 6000;
+ 
+-        v5_log("GPU V15J PHASE begin=%s duration_ms=6000 "
++        v5_log("GPU V16 PHASE begin=%s duration_ms=6000 "
+                "marker=RED state_reset=C2D_Prepare "
+                "bind_owner=C2D_DrawImageAt",
+                citadel_gpu_v15h_phase_name(
+@@ -1893,7 +1931,7 @@
+         citadel_gpu_v15h_phase =
+             CITADEL_V15H_PHASE_COMPLETE;
+ 
+-        v5_log("GPU V15J PHASE complete; "
++        v5_log("GPU V16 PHASE complete; "
+                "normal live presentation resumed");
+     }
+ 
+@@ -1909,7 +1947,7 @@
+             CITADEL_V15G_PHASE_FRESH_RGBA8;
+         citadel_gpu_v15g_phase_until = now + 6000;
+ 
+-        v5_log("GPU V15J PHASE begin=%s duration_ms=6000 "
++        v5_log("GPU V16 PHASE begin=%s duration_ms=6000 "
+                "loader=C3D_TexLoadImage flush=C3D_TexFlush "
+                "bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt "
+                "bottom_marker=GREEN",
+@@ -1926,7 +1964,7 @@
+         citadel_gpu_v15g_phase =
+             CITADEL_V15G_PHASE_COMPLETE;
+ 
+-        v5_log("GPU V15J PHASE complete; "
++        v5_log("GPU V16 PHASE complete; "
+                "normal live RGB565 presentation resumed");
+     }
+ 
+@@ -1948,7 +1986,7 @@
+                 CITADEL_V15H_PHASE_OFFICIAL_TEX3DS;
+             citadel_gpu_v15h_phase_until = now + 6000;
+ 
+-            v5_log("GPU V15J PHASE begin=%s duration_ms=6000 "
++            v5_log("GPU V16 PHASE begin=%s duration_ms=6000 "
+                    "marker=BLUE loader=C2D_SpriteSheetLoad "
+                    "state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt",
+                    citadel_gpu_v15h_phase_name(
+@@ -1956,12 +1994,12 @@
+         } else {
+             citadel_gpu_v15h_phase =
+                 CITADEL_V15H_PHASE_COMPLETE;
+-            v5_log("GPU V15J PHASE SKIPPED reason=asset-unavailable");
++            v5_log("GPU V16 PHASE SKIPPED reason=asset-unavailable");
+         }
+     }
+ 
+     if (!citadel_gpu_first_upload_logged) {
+-        v5_log("GPU V15J FIRST LIVE FEED src=%dx%d pitch=%d "
++        v5_log("GPU V16 FIRST LIVE FEED src=%dx%d pitch=%d "
+                "linear=%dx%d texture=%dx%d "
+                "palette=AUTHORITATIVE_EVERY_FRAME "
+                "initial_mismatches=%u hash=0x%08lX",
+@@ -2104,6 +2142,71 @@
+     return true;
+ }
+ 
++static bool citadel_v16_present_splash(void)
++{
++    const Tex3DS_SubTexture *subtexture;
++    float scale_x;
++    float scale_y;
++    bool draw_ok;
++
++    if (!citadel_gpu_ready ||
++        !citadel_v16_splash_ready ||
++        citadel_v16_splash_image.subtex == NULL ||
++        citadel_gpu_top_target == NULL ||
++        citadel_gpu_bottom_target == NULL)
++        return false;
++
++    subtexture = citadel_v16_splash_image.subtex;
++
++    if (!C3D_FrameBegin(C3D_FRAME_SYNCDRAW)) {
++        ++citadel_gpu_draw_failures;
++        return false;
++    }
++
++    C2D_TargetClear(citadel_gpu_top_target,
++                    C2D_Color32(0, 0, 0, 255));
++    C2D_TargetClear(citadel_gpu_bottom_target,
++                    C2D_Color32(0, 0, 0, 255));
++
++    C2D_SceneBegin(citadel_gpu_top_target);
++
++    scale_x =
++        (float)CITADEL_3DS_TOP_WIDTH /
++        (float)subtexture->width;
++    scale_y =
++        (float)CITADEL_3DS_TOP_HEIGHT /
++        (float)subtexture->height;
++
++    draw_ok =
++        C2D_DrawImageAt(citadel_v16_splash_image,
++                        0.0f,
++                        0.0f,
++                        0.0f,
++                        NULL,
++                        scale_x,
++                        scale_y);
++
++    /*
++     * Explicitly submit a black bottom-screen scene. A target clear alone
++     * does not replace the previously displayed lower framebuffer.
++     */
++    C2D_SceneBegin(citadel_gpu_bottom_target);
++    C2D_DrawRectSolid(0.0f,
++                      0.0f,
++                      0.0f,
++                      (float)CITADEL_3DS_BOTTOM_WIDTH,
++                      (float)CITADEL_3DS_BOTTOM_HEIGHT,
++                      C2D_Color32(0, 0, 0, 255));
++
++    C3D_FrameEnd(0);
++    ++citadel_gpu_presented_frames;
++
++    if (!draw_ok)
++        ++citadel_gpu_draw_failures;
++
++    return draw_ok;
++}
++
+ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta)
+ {
+     static int last_logged_layout = -1;
+@@ -2141,7 +2244,7 @@
+     }
+ 
+     if (!magenta && !citadel_gpu_sync_order_logged) {
+-        v5_log("GPU V15J SYNC ORDER confirmed: "
++        v5_log("GPU V16 SYNC ORDER confirmed: "
+                "FrameBegin(SYNCDRAW) -> direct texture write -> "
+                "forced texture rebind -> draw");
+         citadel_gpu_sync_order_logged = true;
+@@ -2166,7 +2269,7 @@
+         C3D_TexBind(0, &citadel_gpu_texture);
+ 
+         if (!citadel_gpu_cache_rebind_logged) {
+-            v5_log("GPU V15J CACHE REBIND active: "
++            v5_log("GPU V16 CACHE REBIND active: "
+                    "C3D_TexBind(0, live_texture) after every live upload");
+             citadel_gpu_cache_rebind_logged = true;
+         }
+@@ -2321,6 +2424,22 @@
+                 160.0f,
+                 120.0f,
+                 0.0f);
++    } else {
++        /*
++         * Pause, options, save/load, menus, and SELECT legacy view must
++         * actively submit a black bottom-screen scene. Clearing a target
++         * without beginning that scene leaves the preceding gameplay frame
++         * visible on the physical LCD.
++         */
++        C2D_SceneBegin(citadel_gpu_bottom_target);
++        bottom_ok =
++            C2D_DrawRectSolid(
++                0.0f,
++                0.0f,
++                0.0f,
++                (float)CITADEL_3DS_BOTTOM_WIDTH,
++                (float)CITADEL_3DS_BOTTOM_HEIGHT,
++                C2D_Color32(0, 0, 0, 255));
+     }
+ 
+     C3D_FrameEnd(0);
+@@ -2538,7 +2657,7 @@
+ 
+ static void v5_log(const char *fmt, ...)
+ {
+-    FILE *file = fopen("GPU_C2D_V15J.log", "a");
++    FILE *file = fopen("GPU_C2D_V16.log", "a");
+     va_list args;
+ 
+     if (file == NULL)
+@@ -2779,8 +2898,8 @@
+     int result;
+     Uint32 window_flags;
+ 
+-    remove("GPU_C2D_V15J.log");
+-    v5_log("PROJECT CITADEL V15J FULL 640x480 TEXTURE TRANSPORT START | build=%s %s", __DATE__, __TIME__);
++    remove("GPU_C2D_V16.log");
++    v5_log("PROJECT CITADEL V16 RELEASE CANDIDATE START | build=%s %s", __DATE__, __TIME__);
+ 
+     SDL_SetHint(SDL_HINT_NO_SIGNAL_HANDLERS, "1");
+     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "software");
+@@ -3107,67 +3226,31 @@
+     ++v5_sdl_draw_calls;
+     now = SDL_GetTicks();
+ 
+-    if (v5_magenta_until == 0) {
+-        v5_magenta_until = now + 500;
+-        v5_log("SDLDraw first call: renderer=%p window=%p drawSurface=%p magenta_until=%u",
+-               (void *)renderer,
+-               (void *)window,
+-               (void *)drawSurface,
+-               (unsigned int)v5_magenta_until);
+-    }
+-
+-    /*
+-     * Brief visual confirmation:
+-     * - Magenta visible: window/renderer presentation is functional.
+-     * - Still black: renderer presentation is broken; inspect V5 log/fallback.
+-     */
+-    if (!SDL_TICKS_PASSED(now, v5_magenta_until)) {
+-        if (!v5_magenta_announced) {
+-            v5_log("MAGENTA TEST ACTIVE for approximately half a second");
+-            v5_magenta_announced = true;
+-        }
+-
+ #if defined(__3DS__) || defined(_3DS)
+-        if (citadel_gpu_ready) {
+-            if (!citadel_gpu_present(NULL, true)) {
+-                v5_log("GPU MAGENTA presentation failed; disabling GPU primary path");
+-                citadel_gpu_ready = false;
+-            } else {
+-                return;
+-            }
+-        }
++    if (!citadel_v16_splash_started) {
++        citadel_v16_splash_started = true;
++        citadel_v16_splash_until =
++            now + CITADEL_V16_SPLASH_DURATION_MS;
++
++        v5_log("GPU V16 SPLASH begin duration_ms=%u ready=%d",
++               (unsigned int)CITADEL_V16_SPLASH_DURATION_MS,
++               citadel_v16_splash_ready ? 1 : 0);
++    }
++
++    if (citadel_v16_splash_ready &&
++        !SDL_TICKS_PASSED(now, citadel_v16_splash_until)) {
++        if (citadel_v16_present_splash())
++            return;
++
++        v5_log("GPU V16 SPLASH presentation failed; continuing to game");
++        citadel_v16_splash_ready = false;
++    }
++
++    if (!citadel_v16_splash_finished_logged) {
++        v5_log("GPU V16 SPLASH complete; beginning System Shock presentation");
++        citadel_v16_splash_finished_logged = true;
++    }
+ #endif
+-
+-        if (renderer != NULL) {
+-            SDL_ClearError();
+-            result = SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+-            v5_log("SDL_SetRenderDrawColor(magenta) result=%d", result);
+-
+-            SDL_ClearError();
+-            result = SDL_RenderClear(renderer);
+-            v5_log("SDL_RenderClear(magenta) result=%d", result);
+-            if (result < 0)
+-                v5_log_error("Magenta SDL_RenderClear failed");
+-
+-            SDL_RenderPresent(renderer);
+-        } else {
+-            v5_present_with_window_surface(NULL, true);
+-        }
+-
+-#if defined(__3DS__) || defined(_3DS)
+-        if (citadel_bottom_renderer != NULL) {
+-            SDL_SetRenderDrawColor(citadel_bottom_renderer, 24, 24, 24, 255);
+-            SDL_RenderClear(citadel_bottom_renderer);
+-            SDL_RenderPresent(citadel_bottom_renderer);
+-        }
+-#endif
+-        return;
+-    }
+-
+-    if (!v5_normal_announced) {
+-        v5_log("MAGENTA TEST COMPLETE; beginning real drawSurface presentation");
+-        v5_normal_announced = true;
+-    }
+ 
+ #if defined(__3DS__) || defined(_3DS)
+     if (citadel_gpu_ready) {

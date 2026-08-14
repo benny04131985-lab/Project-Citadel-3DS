@@ -1,0 +1,391 @@
+--- citadel_s2_src/src/MacSrc/Shock.c	2026-07-24 01:29:08.000000000 +0000
++++ citadel_s2_work/src/MacSrc/Shock.c	2026-07-24 05:52:49.640321734 +0000
+@@ -81,6 +81,7 @@
+ #warning "PROJECT CITADEL V16.1: launch polish candidate is ACTIVE"
+ #warning "PROJECT CITADEL AUDIO SUSPEND HOTFIX V2: NDSP close/deferred reopen hook is ACTIVE"
+ #warning "PROJECT CITADEL 3D S1: zero-parallax dual-eye transport is ACTIVE"
++#warning "PROJECT CITADEL 3D S2: true dual-camera world stereo is ACTIVE"
+ #warning "PROJECT CITADEL VX1.1-SPLASH-SYNTH-A: startup GPU ownership round trip is ACTIVE"
+ #warning "PROJECT CITADEL V17-SHIP: T7 HOME fix + persistent gameplay layout are ACTIVE"
+ 
+@@ -156,13 +157,18 @@
+ static bool citadel_gpu_c3d_initialized = false;
+ static bool citadel_gpu_c2d_initialized = false;
+ static bool citadel_gpu_texture_initialized = false;
++static bool citadel_gpu_right_texture_initialized = false;
+ static bool citadel_gpu_shutdown_complete = false;
+ 
+ static C3D_RenderTarget *citadel_gpu_top_target = NULL;
+ static C3D_RenderTarget *citadel_gpu_top_right_target = NULL;
+ static C3D_RenderTarget *citadel_gpu_bottom_target = NULL;
+ static C3D_Tex citadel_gpu_texture;
++static C3D_Tex citadel_gpu_right_texture;
+ static u16 *citadel_gpu_staging = NULL;
++static bool citadel_gpu_right_frame_active = false;
++static float citadel_gpu_right_frame_slider = 0.0f;
++static bool citadel_gpu_first_right_upload_logged = false;
+ static u16 citadel_gpu_palette565[256];
+ 
+ static unsigned int citadel_gpu_presented_frames = 0;
+@@ -289,6 +295,8 @@
+ 
+ #if defined(__3DS__) || defined(_3DS)
+ extern SDL_Color gamePalette[256];
++extern const unsigned char *citadel_3ds_stereo_get_right_frame(
++    int *width, int *height, int *pitch, float *slider);
+ 
+ static SDL_Rect citadel_scale_reference_rect(SDL_Surface *surface,
+                                               int x,
+@@ -562,6 +570,11 @@
+         citadel_gpu_v15g_rgba8_staging = NULL;
+     }
+ 
++    if (citadel_gpu_right_texture_initialized) {
++        C3D_TexDelete(&citadel_gpu_right_texture);
++        citadel_gpu_right_texture_initialized = false;
++    }
++
+     if (citadel_gpu_texture_initialized) {
+         C3D_TexDelete(&citadel_gpu_texture);
+         citadel_gpu_texture_initialized = false;
+@@ -706,6 +719,7 @@
+ static bool citadel_gpu_initialize(void)
+ {
+     memset(&citadel_gpu_texture, 0, sizeof(citadel_gpu_texture));
++    memset(&citadel_gpu_right_texture, 0, sizeof(citadel_gpu_right_texture));
+     memset(&citadel_gpu_v15g_rgb565_texture,
+            0,
+            sizeof(citadel_gpu_v15g_rgb565_texture));
+@@ -796,6 +810,21 @@
+                    GPU_CLAMP_TO_EDGE,
+                    GPU_CLAMP_TO_EDGE);
+ 
++    if (!C3D_TexInit(&citadel_gpu_right_texture,
++                     CITADEL_GPU_TEXTURE_WIDTH,
++                     CITADEL_GPU_TEXTURE_HEIGHT,
++                     GPU_RGB565)) {
++        v5_log("GPU 3D S2 INIT FAIL stage=right-C3D_TexInit size=%dx%d",
++               CITADEL_GPU_TEXTURE_WIDTH, CITADEL_GPU_TEXTURE_HEIGHT);
++        citadel_gpu_shutdown();
++        citadel_gpu_shutdown_complete = false;
++        return false;
++    }
++    citadel_gpu_right_texture_initialized = true;
++    C3D_TexSetFilter(&citadel_gpu_right_texture, GPU_NEAREST, GPU_NEAREST);
++    C3D_TexSetWrap(&citadel_gpu_right_texture,
++                   GPU_CLAMP_TO_EDGE, GPU_CLAMP_TO_EDGE);
++
+     citadel_gpu_staging =
+         (u16 *)linearAlloc(CITADEL_GPU_STAGING_BYTES);
+ 
+@@ -845,13 +874,14 @@
+            CITADEL_GPU_CONTENT_HEIGHT);
+ 
+     v5_log("GPU INIT SUCCESS backend=Citro2D texture=%dx%d format=RGB565 "
+-           "left=%p right=%p bottom=%p texture_data=%p staging=%p",
++           "left=%p right=%p bottom=%p left_tex=%p right_tex=%p staging=%p",
+            CITADEL_GPU_TEXTURE_WIDTH,
+            CITADEL_GPU_TEXTURE_HEIGHT,
+            (void *)citadel_gpu_top_target,
+            (void *)citadel_gpu_top_right_target,
+            (void *)citadel_gpu_bottom_target,
+            citadel_gpu_texture.data,
++           citadel_gpu_right_texture.data,
+            (void *)citadel_gpu_staging);
+ 
+     return true;
+@@ -1118,90 +1148,68 @@
+  * Convert the current indexed Shock surface into the full-resolution
+  * 640x480 RGB565 transport image inside citadel_gpu_staging.
+  */
+-static uint32_t citadel_gpu_build_linear_frame(SDL_Surface *surface)
++static uint32_t citadel_gpu_build_linear_indexed(const u8 *source_pixels,
++                                                   int source_width,
++                                                   int source_height,
++                                                   int source_pitch)
+ {
+-    const u8 *source_pixels =
+-        (const u8 *)surface->pixels;
+     uint32_t hash = 2166136261u;
+     int destination_y;
+-
+-    memset(citadel_gpu_staging,
+-           0,
+-           CITADEL_GPU_STAGING_BYTES);
+-
+-    for (destination_y = 0;
+-         destination_y < CITADEL_GPU_CONTENT_HEIGHT;
++    if (source_pixels == NULL || source_width <= 0 || source_height <= 0 ||
++        source_pitch < source_width) return 0;
++    memset(citadel_gpu_staging, 0, CITADEL_GPU_STAGING_BYTES);
++    for (destination_y = 0; destination_y < CITADEL_GPU_CONTENT_HEIGHT;
+          ++destination_y) {
+-        int source_y =
+-            (destination_y * surface->h) /
+-            CITADEL_GPU_CONTENT_HEIGHT;
++        int source_y = (destination_y * source_height) /
++                       CITADEL_GPU_CONTENT_HEIGHT;
+         const u8 *source_row;
+         u16 *destination_row;
+         int destination_x;
+-
+-        if (source_y >= surface->h)
+-            source_y = surface->h - 1;
+-
+-        source_row =
+-            source_pixels +
+-            ((size_t)source_y * (size_t)surface->pitch);
+-        destination_row =
+-            citadel_gpu_staging +
+-            ((size_t)destination_y *
+-             (size_t)CITADEL_GPU_TEXTURE_WIDTH);
+-
+-        for (destination_x = 0;
+-             destination_x < CITADEL_GPU_CONTENT_WIDTH;
++        if (source_y >= source_height) source_y = source_height - 1;
++        source_row = source_pixels + (size_t)source_y * source_pitch;
++        destination_row = citadel_gpu_staging +
++            (size_t)destination_y * CITADEL_GPU_TEXTURE_WIDTH;
++        for (destination_x = 0; destination_x < CITADEL_GPU_CONTENT_WIDTH;
+              ++destination_x) {
+-            int source_x =
+-                (destination_x * surface->w) /
+-                CITADEL_GPU_CONTENT_WIDTH;
++            int source_x = (destination_x * source_width) /
++                           CITADEL_GPU_CONTENT_WIDTH;
+             u16 converted;
+-
+-            if (source_x >= surface->w)
+-                source_x = surface->w - 1;
+-
+-            converted =
+-                citadel_gpu_palette565[source_row[source_x]];
++            if (source_x >= source_width) source_x = source_width - 1;
++            converted = citadel_gpu_palette565[source_row[source_x]];
+             destination_row[destination_x] = converted;
+-
+             hash ^= (uint32_t)converted;
+             hash *= 16777619u;
+         }
+     }
+-
+     return hash;
+ }
+ 
++static uint32_t citadel_gpu_build_linear_frame(SDL_Surface *surface)
++{
++    return citadel_gpu_build_linear_indexed((const u8 *)surface->pixels,
++        surface->w, surface->h, surface->pitch);
++}
++
++
+ /*
+  * Swizzle the complete linear staging image into the live C3D texture.
+  */
+-static void citadel_gpu_swizzle_staging_to_texture(void)
++static void citadel_gpu_swizzle_staging_to_texture(C3D_Tex *texture)
+ {
+-    u16 *texture_pixels =
+-        (u16 *)citadel_gpu_texture.data;
++    u16 *texture_pixels;
+     int y;
+-
++    if (texture == NULL || texture->data == NULL) return;
++    texture_pixels = (u16 *)texture->data;
+     memset(texture_pixels, 0, CITADEL_GPU_STAGING_BYTES);
+-
+     for (y = 0; y < CITADEL_GPU_CONTENT_HEIGHT; ++y) {
+-        const u16 *source_row =
+-            citadel_gpu_staging +
+-            ((size_t)y *
+-             (size_t)CITADEL_GPU_TEXTURE_WIDTH);
++        const u16 *source_row = citadel_gpu_staging +
++            (size_t)y * CITADEL_GPU_TEXTURE_WIDTH;
+         int x;
+-
+-        for (x = 0; x < CITADEL_GPU_CONTENT_WIDTH; ++x) {
+-            texture_pixels[
+-                citadel_gpu_tiled_offset(
+-                    (unsigned int)x,
+-                    (unsigned int)y)
+-            ] = source_row[x];
+-        }
++        for (x = 0; x < CITADEL_GPU_CONTENT_WIDTH; ++x)
++            texture_pixels[citadel_gpu_tiled_offset((unsigned int)x,
++                                                     (unsigned int)y)] = source_row[x];
+     }
+-
+-    GSPGPU_FlushDataCache(citadel_gpu_texture.data,
+-                          CITADEL_GPU_STAGING_BYTES);
++    GSPGPU_FlushDataCache(texture->data, CITADEL_GPU_STAGING_BYTES);
+ }
+ 
+ /*
+@@ -2042,6 +2050,9 @@
+     Uint32 elapsed;
+     uint32_t linear_hash;
+     unsigned int palette_mismatches;
++    const unsigned char *right_pixels = NULL;
++    int right_width = 0, right_height = 0, right_pitch = 0;
++    float right_slider = 0.0f;
+ 
+     if (surface == NULL ||
+         surface->pixels == NULL ||
+@@ -2131,7 +2142,30 @@
+ 
+     linear_hash =
+         citadel_gpu_build_linear_frame(surface);
+-    citadel_gpu_swizzle_staging_to_texture();
++    citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_texture);
++
++    citadel_gpu_right_frame_active = false;
++    citadel_gpu_right_frame_slider = 0.0f;
++    if (citadel_gpu_right_texture_initialized &&
++        citadel_3ds_gameplay_controls_active())
++        right_pixels = citadel_3ds_stereo_get_right_frame(
++            &right_width, &right_height, &right_pitch, &right_slider);
++
++    if (right_pixels != NULL && right_width == surface->w &&
++        right_height == surface->h && right_pitch >= right_width) {
++        (void)citadel_gpu_build_linear_indexed(right_pixels, right_width,
++                                               right_height, right_pitch);
++        citadel_gpu_swizzle_staging_to_texture(&citadel_gpu_right_texture);
++        citadel_gpu_right_frame_active = true;
++        citadel_gpu_right_frame_slider = right_slider;
++        if (!citadel_gpu_first_right_upload_logged) {
++            v5_log("GPU 3D S2 FIRST TRUE FRAME src=%dx%d pitch=%d "
++                   "slider=%0.3f method=DUAL_CAMERA_AUTO_OVERLAY_MASK",
++                   right_width, right_height, right_pitch,
++                   (double)right_slider);
++            citadel_gpu_first_right_upload_logged = true;
++        }
++    }
+ 
+     elapsed = now - citadel_gpu_v15g_started_at;
+ 
+@@ -2176,15 +2210,16 @@
+     return true;
+ }
+ 
+-static bool citadel_gpu_draw_region(int source_x,
+-                                    int source_y,
+-                                    int source_w,
+-                                    int source_h,
+-                                    float destination_x,
+-                                    float destination_y,
+-                                    float destination_w,
+-                                    float destination_h,
+-                                    float depth)
++static bool citadel_gpu_draw_region_from_texture(C3D_Tex *texture,
++                                                 int source_x,
++                                                 int source_y,
++                                                 int source_w,
++                                                 int source_h,
++                                                 float destination_x,
++                                                 float destination_y,
++                                                 float destination_w,
++                                                 float destination_h,
++                                                 float depth)
+ {
+     Tex3DS_SubTexture subtexture;
+     C2D_Image image;
+@@ -2196,7 +2231,8 @@
+     int texture_top;
+     int texture_bottom;
+ 
+-    if (source_w <= 0 ||
++    if (texture == NULL || texture->data == NULL ||
++        source_w <= 0 ||
+         source_h <= 0 ||
+         citadel_gpu_source_width <= 0 ||
+         citadel_gpu_source_height <= 0)
+@@ -2280,7 +2316,7 @@
+         ((float)texture_bottom /
+          (float)CITADEL_GPU_TEXTURE_HEIGHT);
+ 
+-    image.tex = &citadel_gpu_texture;
++    image.tex = texture;
+     image.subtex = &subtexture;
+ 
+     parameters.pos.x = destination_x;
+@@ -2300,6 +2336,17 @@
+     return true;
+ }
+ 
++static bool citadel_gpu_draw_region(int source_x, int source_y,
++                                    int source_w, int source_h,
++                                    float destination_x, float destination_y,
++                                    float destination_w, float destination_h,
++                                    float depth)
++{
++    return citadel_gpu_draw_region_from_texture(&citadel_gpu_texture,
++        source_x, source_y, source_w, source_h, destination_x, destination_y,
++        destination_w, destination_h, depth);
++}
++
+ static void citadel_vx1_1_log(const char *fmt, ...)
+ {
+     FILE *file;
+@@ -2699,6 +2746,7 @@
+                     C2D_Color32(0, 0, 0, 255));
+ 
+     C2D_SceneBegin(citadel_gpu_top_target);
++    C3D_TexBind(0, &citadel_gpu_texture);
+ 
+     if (split_layout) {
+         top_source = citadel_scale_reference_rect(
+@@ -2738,14 +2786,14 @@
+             0.0f);
+     }
+ 
+-    /*
+-     * S1 repeats the exact same source crop and destination geometry
+-     * for GFX_RIGHT. Both eyes therefore remain at zero parallax.
+-     */
++    /* S2: true right world when available; sealed S1 fallback otherwise. */
+     C2D_SceneBegin(citadel_gpu_top_right_target);
++    C3D_TexBind(0, citadel_gpu_right_frame_active
++        ? &citadel_gpu_right_texture : &citadel_gpu_texture);
+ 
+     if (split_layout) {
+-        right_ok = citadel_gpu_draw_region(
++        right_ok = citadel_gpu_draw_region_from_texture(
++            citadel_gpu_right_frame_active ? &citadel_gpu_right_texture : &citadel_gpu_texture,
+             top_source.x,
+             top_source.y,
+             top_source.w,
+@@ -2756,7 +2804,8 @@
+             (float)CITADEL_3DS_TOP_HEIGHT,
+             0.0f);
+     } else {
+-        right_ok = citadel_gpu_draw_region(
++        right_ok = citadel_gpu_draw_region_from_texture(
++            citadel_gpu_right_frame_active ? &citadel_gpu_right_texture : &citadel_gpu_texture,
+             top_source.x,
+             top_source.y,
+             top_source.w,
+@@ -2794,6 +2843,7 @@
+                 CITADEL_REF_MFD_H);
+ 
+         C2D_SceneBegin(citadel_gpu_bottom_target);
++        C3D_TexBind(0, &citadel_gpu_texture);
+ 
+         bottom_ok =
+             citadel_gpu_draw_region(
+@@ -2862,11 +2912,13 @@
+ 
+     if (citadel_gpu_presented_frames == 1 ||
+         (citadel_gpu_presented_frames % 600) == 0) {
+-        v5_log("GPU 3D S1 FRAME frame=%u slider=%0.3f split=%d "
+-               "left_ok=%d right_ok=%d bottom_ok=%d surface=%dx%d",
++        v5_log("GPU 3D S2 FRAME frame=%u slider=%0.3f split=%d "
++               "true_world=%d left_ok=%d right_ok=%d bottom_ok=%d surface=%dx%d",
+                citadel_gpu_presented_frames,
+-               (double)osGet3DSliderState(),
++               (double)(citadel_gpu_right_frame_active
++                   ? citadel_gpu_right_frame_slider : osGet3DSliderState()),
+                split_layout ? 1 : 0,
++               citadel_gpu_right_frame_active ? 1 : 0,
+                top_ok ? 1 : 0,
+                right_ok ? 1 : 0,
+                bottom_ok ? 1 : 0,

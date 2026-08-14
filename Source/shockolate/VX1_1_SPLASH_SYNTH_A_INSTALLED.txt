@@ -1,0 +1,8 @@
+PROJECT CITADEL VX1.1-SPLASH-SYNTH-A
+Installed: 2026-07-24T00:09:49
+Input baseline: /c/Projects/Citadel-Baselines/VX1-NATURAL-NO-T7_BASELINE_20260723_234234
+Rollback folder: /c/Projects/Citadel-Baselines/VX1-NATURAL-NO-T7_PRE-SPLASH_ROLLBACK_20260724_000949
+Candidate folder: /c/Projects/Citadel-Baselines/VX1_1_SPLASH_SYNTH_A_CANDIDATE_20260724_000949
+Baseline Shock SHA256: 05a84b8e8a9c1fc8e0105f1fe1f15324bf05a42f44a7e2e07cdfe76416b0a724
+Candidate Shock SHA256: b7518c27f2842720f37744acabf1461f1c870e3712552ba7681d4b021fbeb37d
+Only Shock.c was modified.

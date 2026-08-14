@@ -1,0 +1,6 @@
+b76c3c1d27ea2b70e81fac100fd70297d13947a0fed64290985aa8d0a7527d80  src/GameSrc/render.c
+b2900ea73c6ee360763fcdbd87da98a244d7d360c199bd61e95c6980882bc470  src/GameSrc/frmain.c
+39bd7b76cb0a80785271fcbba3aefec7fbdc9fecaba45dfae13d9ca7adc01edd  src/GameSrc/frsetup.c
+9bac2edb2b9471a1e9b5f27186bc0d5247f23221da43e6031ab200be7d4500bc  src/MacSrc/Shock.c
+bb688fe9c7041fb86e9f23d8fcd04979816267a73c1d7414199edabc4b62cec3  CMakeLists.txt (guard)
+a7f04a76b0948b6774c81b4dcd384e2b24832578df1fb988def8f65d5edf4115  src/GameSrc/setup.c (guard)

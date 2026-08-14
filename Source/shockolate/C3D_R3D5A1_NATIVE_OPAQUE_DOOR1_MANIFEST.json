@@ -1,0 +1,46 @@
+{
+  "milestone": "CITADEL-C3D-R3D5A1-NATIVE-OPAQUE-DOOR1",
+  "created": "2026-08-05T08:29:00.184850-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "native_category": "OPAQUE_CLOSED_DOORS",
+  "capture_order": "ORIGINAL_TMAP_PAINTER_STREAM",
+  "software_policy": {
+    "opaque_closed_doors": "SUPPRESSED_AFTER_CAPTURE",
+    "transparent_moving_doors": "PRESERVED",
+    "other_objects_effects_hud": "PRESERVED"
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "4fe26b8ceb6d3c356e48614424e96a02dedc266714cdc84d6f4f732674d8a9d4",
+      "after_sha256": "a3d5a3a0e3424027574ea824636d4042d594f293bc9668f2d6ebbab1677d1d4d"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "1cba2e859a41900b2386cdcc03fa2145c1fe99e2af75578c3caee13d37cb78fe",
+      "after_sha256": "ed62b1df3585af963ac3b9f0cdda74b5786f36b08309c256f4de99de8c5137cb"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "96f4a26a483811b74d34f0b1457cdce8b31fbf892347c3c274d80a4532b47e48",
+      "after_sha256": "6ce31efffb1b3a57f4499832efcac48dcaa0e99a419f458a84f6c800617f9520"
+    },
+    "src/GameSrc/gameobj.c": {
+      "before_sha256": "9d4d953d3b1759a1208d46c56f8e6ed6ef15e6153fdbc5c4ce2db03791f9a8f0",
+      "after_sha256": "efd30bb00f68e45e93dc4194624be5b144f48e74d5ae2907935fade8ec71d730"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "9234623895b099955d302dc5c60c75409135f8ee1bfd7ce2e004fc837851d9be",
+      "after_sha256": "c27da647d144eef447f3eaf795e4eeef1940d4160b3b3af9befb8155c9dc4610"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected sx/sy",
+    "camera-Z perspective-correct texture W",
+    "R3D4A terrain erase mask",
+    "R3D2B immutable bitmap snapshots",
+    "native RGB565 texture cache",
+    "GEQUAL painter ordering",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

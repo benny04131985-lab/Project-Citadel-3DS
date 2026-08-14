@@ -1,0 +1,163 @@
+--- CMakeLists_V16.txt
++++ CMakeLists_V16_1.txt
+@@ -414,7 +414,7 @@
+ )
+ 
+ 
+-# PROJECT CITADEL V16: generate the Hack-i-Ben startup splash.
++# PROJECT CITADEL V16.1: generate splash and launch packaging.
+ if(NINTENDO_3DS)
+     find_program(CITADEL_TEX3DS_EXECUTABLE NAMES tex3ds)
+ 
+@@ -423,26 +423,26 @@
+             "Project Citadel V16 requires tex3ds in PATH")
+     endif()
+ 
+-    set(CITADEL_V16_SPLASH_PNG
+-        "${CMAKE_SOURCE_DIR}/assets/v16/Hack-i-Ben_Splash.png")
+-    set(CITADEL_V16_SPLASH_T3X
++    set(CITADEL_V16_1_SPLASH_PNG
++        "${CMAKE_SOURCE_DIR}/assets/v16_1/Hack-i-Ben_Splash.png")
++    set(CITADEL_V16_1_SPLASH_T3X
+         "${CMAKE_BINARY_DIR}/Hack-i-Ben_Splash.t3x")
+ 
+     add_custom_command(
+-        OUTPUT "${CITADEL_V16_SPLASH_T3X}"
++        OUTPUT "${CITADEL_V16_1_SPLASH_T3X}"
+         COMMAND "${CITADEL_TEX3DS_EXECUTABLE}"
+                 -f rgb565
+                 -z none
+-                -o "${CITADEL_V16_SPLASH_T3X}"
+-                "${CITADEL_V16_SPLASH_PNG}"
+-        DEPENDS "${CITADEL_V16_SPLASH_PNG}"
+-        COMMENT "Project Citadel V16: generating Hack-i-Ben startup splash"
++                -o "${CITADEL_V16_1_SPLASH_T3X}"
++                "${CITADEL_V16_1_SPLASH_PNG}"
++        DEPENDS "${CITADEL_V16_1_SPLASH_PNG}"
++        COMMENT "Project Citadel V16.1: generating Hack-i-Ben startup splash"
+         VERBATIM
+     )
+ 
+-    add_custom_target(citadel_v16_splash_asset ALL
+-        DEPENDS "${CITADEL_V16_SPLASH_T3X}")
+-    add_dependencies(systemshock citadel_v16_splash_asset)
++    add_custom_target(citadel_v16_1_splash_asset ALL
++        DEPENDS "${CITADEL_V16_1_SPLASH_T3X}")
++    add_dependencies(systemshock citadel_v16_1_splash_asset)
+ endif()
+ 
+ add_library(GAME_LIB ${GAME_SRC})
+@@ -493,3 +493,113 @@
+ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/externals/sanitizers/cmake" ${CMAKE_MODULE_PATH})
+ find_package(Sanitizers)
+ add_sanitizers(systemshock)
++
++# PROJECT CITADEL V16.1: Homebrew Menu metadata and optional CIA target.
++#
++# The CIA intentionally contains only executable metadata/code. Original
++# System Shock data, music, saves, preferences, and Hack-i-Ben_Splash.t3x
++# remain external in sdmc:/3ds/SystemShock/.
++if(NINTENDO_3DS)
++    find_program(CITADEL_BANNERTOOL_EXECUTABLE NAMES bannertool)
++    find_program(CITADEL_3DSXTOOL_EXECUTABLE NAMES 3dsxtool)
++    find_program(CITADEL_MAKEROM_EXECUTABLE NAMES makerom)
++
++    set(CITADEL_V16_1_ICON_PNG
++        "${CMAKE_SOURCE_DIR}/assets/v16_1/Project_Citadel_Icon.png")
++    set(CITADEL_V16_1_BANNER_PNG
++        "${CMAKE_SOURCE_DIR}/assets/v16_1/Project_Citadel_Banner.png")
++    set(CITADEL_V16_1_BANNER_WAV
++        "${CMAKE_SOURCE_DIR}/assets/v16_1/Project_Citadel_Banner.wav")
++    set(CITADEL_V16_1_RSF
++        "${CMAKE_SOURCE_DIR}/assets/v16_1/Project_Citadel_3DS.rsf")
++
++    set(CITADEL_V16_1_SMDH
++        "${CMAKE_BINARY_DIR}/Project_Citadel_3DS.smdh")
++    set(CITADEL_V16_1_BANNER_BNR
++        "${CMAKE_BINARY_DIR}/Project_Citadel_3DS.bnr")
++    set(CITADEL_V16_1_3DSX
++        "${CMAKE_BINARY_DIR}/Project_Citadel_3DS.3dsx")
++    set(CITADEL_V16_1_CIA
++        "${CMAKE_BINARY_DIR}/Project_Citadel_3DS.cia")
++
++    if(CITADEL_BANNERTOOL_EXECUTABLE)
++        add_custom_command(
++            OUTPUT "${CITADEL_V16_1_SMDH}"
++            COMMAND "${CITADEL_BANNERTOOL_EXECUTABLE}" makesmdh
++                    -s "Project Citadel 3DS"
++                    -l "System Shock for Nintendo 3DS"
++                    -p "Hack-i-Ben"
++                    -i "${CITADEL_V16_1_ICON_PNG}"
++                    -o "${CITADEL_V16_1_SMDH}"
++            DEPENDS "${CITADEL_V16_1_ICON_PNG}"
++            COMMENT "Project Citadel V16.1: generating SMDH/icon"
++            VERBATIM
++        )
++
++        add_custom_command(
++            OUTPUT "${CITADEL_V16_1_BANNER_BNR}"
++            COMMAND "${CITADEL_BANNERTOOL_EXECUTABLE}" makebanner
++                    -i "${CITADEL_V16_1_BANNER_PNG}"
++                    -a "${CITADEL_V16_1_BANNER_WAV}"
++                    -o "${CITADEL_V16_1_BANNER_BNR}"
++            DEPENDS
++                "${CITADEL_V16_1_BANNER_PNG}"
++                "${CITADEL_V16_1_BANNER_WAV}"
++            COMMENT "Project Citadel V16.1: generating HOME Menu banner"
++            VERBATIM
++        )
++    else()
++        message(WARNING
++            "bannertool not found: branded 3DSX/CIA targets are disabled")
++    endif()
++
++    if(CITADEL_BANNERTOOL_EXECUTABLE AND
++       CITADEL_3DSXTOOL_EXECUTABLE)
++        add_custom_command(
++            OUTPUT "${CITADEL_V16_1_3DSX}"
++            COMMAND "${CITADEL_3DSXTOOL_EXECUTABLE}"
++                    "$<TARGET_FILE:systemshock>"
++                    "${CITADEL_V16_1_3DSX}"
++                    "--smdh=${CITADEL_V16_1_SMDH}"
++            DEPENDS systemshock "${CITADEL_V16_1_SMDH}"
++            COMMENT "Project Citadel V16.1: generating branded 3DSX"
++            VERBATIM
++        )
++
++        add_custom_target(project_citadel_3dsx ALL
++            DEPENDS "${CITADEL_V16_1_3DSX}")
++    endif()
++
++    if(CITADEL_BANNERTOOL_EXECUTABLE AND
++       CITADEL_MAKEROM_EXECUTABLE)
++        add_custom_command(
++            OUTPUT "${CITADEL_V16_1_CIA}"
++            COMMAND "${CITADEL_MAKEROM_EXECUTABLE}"
++                    -f cia
++                    -o "${CITADEL_V16_1_CIA}"
++                    -target t
++                    -major 16
++                    -minor 1
++                    -micro 0
++                    -exefslogo
++                    -rsf "${CITADEL_V16_1_RSF}"
++                    -elf "$<TARGET_FILE:systemshock>"
++                    -icon "${CITADEL_V16_1_SMDH}"
++                    -banner "${CITADEL_V16_1_BANNER_BNR}"
++            DEPENDS
++                systemshock
++                "${CITADEL_V16_1_SMDH}"
++                "${CITADEL_V16_1_BANNER_BNR}"
++                "${CITADEL_V16_1_RSF}"
++            COMMENT "Project Citadel V16.1: generating CIA without game data"
++            VERBATIM
++        )
++
++        add_custom_target(project_citadel_cia
++            DEPENDS "${CITADEL_V16_1_CIA}")
++    else()
++        message(STATUS
++            "makerom/bannertool not found: use the normal 3DSX build or install the optional CIA tools")
++    endif()
++endif()
++

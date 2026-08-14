@@ -1,0 +1,81 @@
+{
+  "base_milestone": "CITADEL-C3D-R3D5B2A-NATIVE-CRITTER-SPRITE1",
+  "next_milestone": "CITADEL-C3D-R3D5B2B-NATIVE-MULTIVIEW-SPRITE1",
+  "created": "2026-08-06T08:57:28.842158-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "binary": "/c/Projects/CITADEL_C3D_R3D5B2A_NATIVE_CRITTER_SPRITE1.3dsx",
+  "binary_sha256": "32e860ac8e01064142e4a690cf1927a535139302ccd0531094a2a1e1410ba104",
+  "proof_log": "/c/Users/benny/Downloads/C3D_R3D5B2A_NATIVE_CRITTER_SPRITE.log",
+  "proof_log_sha256": "92c93afa3e06d7e28452681ccb4e49fb37fc329ee4c1621e4e6e39064f58de19",
+  "diag_log": null,
+  "diag_log_sha256": null,
+  "proof_counters": {
+    "Takeover-active frames": 1940,
+    "Standard bitmap polygons captured": 6497,
+    "Standard bitmap software calls suppressed": 7018,
+    "Critter bitmap calls observed": 835,
+    "Critter bitmap polygons captured": 814,
+    "Critter bitmap triangles captured": 1628,
+    "Critter software calls suppressed": 835,
+    "Critter alpha-mask erases": 814,
+    "Native critter textured triangles drawn": 3256,
+    "Door texture snapshot failures": 0,
+    "Transparent/moving door mask failures": 0,
+    "Foreground build failures": 0,
+    "Foreground draw failures": 0,
+    "Texture upload failures": 0,
+    "Capture overflows": 0,
+    "Draw-budget drops": 0,
+    "GPU upload failures": 0,
+    "GPU draw failures": 0,
+    "Standard bitmap software fallbacks": 0,
+    "Standard bitmap capture fallbacks": 0,
+    "Standard bitmap snapshot failures": 0,
+    "Standard bitmap alpha-mask failures": 0,
+    "Mask initial-state failures": 0,
+    "Mask-canvas allocation failures": 0,
+    "Mask source-descriptor failures": 0,
+    "Mask fully-offscreen fallbacks": 0,
+    "Eligibility null-vertices rejects": 0,
+    "Eligibility null-bitmap rejects": 0,
+    "Eligibility null-bits rejects": 0,
+    "Eligibility unsupported-type rejects": 0,
+    "Eligibility dimension-range rejects": 0,
+    "Eligibility NPOT-width rejects": 0,
+    "Eligibility NPOT-height rejects": 0,
+    "Eligibility row-pitch rejects": 0,
+    "Eligibility camera-Z rejects": 0,
+    "Eligibility triangle-append failures": 0,
+    "Critter capture failures": 0
+  },
+  "source_before_hashes": {
+    "src/MacSrc/Shock.c": "1150d3bcd37d7cd889b420f0626f4d473674533e6f5b65d163da03aa682417c4",
+    "src/MacSrc/Citro3DNative.c": "4094614334e471f646c4c20582d1f9f6ea397cd921c3df87fd152cb1e2f021b7",
+    "src/MacSrc/Citro3DNative.h": "7d9802f1df614ddc81348ae7dce6340b6607994d4edaf4cc0c562aff850d8fd9",
+    "src/GameSrc/gameobj.c": "2a319fa774cf18f976982f053c6f14f47d821117de28a38995c5048e8bad1f4c"
+  },
+  "source_after_hashes": {
+    "src/MacSrc/Shock.c": "9739ce118fa498a13d0261bfa347284a61a905718257e5d18b44efe8fde28290",
+    "src/MacSrc/Citro3DNative.c": "57b92b1ee60152134fd8303877c929b472304e6c0705e466ed576f04ae71905b",
+    "src/MacSrc/Citro3DNative.h": "10ad6aad2f392973decd402b2a27e9c9026a0949fdae98891f7578e001924300",
+    "src/GameSrc/gameobj.c": "3b9c8c53787cb435a45ac4030960596c2cbd9a8c4b61431c5e74818815e0cb57"
+  },
+  "b2b_scope": {
+    "native": [
+      "FAUBJ_MULTIVIEW directional binary-alpha sprites"
+    ],
+    "software_fallback": [
+      "true TLUC8 multiview resources",
+      "non-alpha multiview resources",
+      "failed snapshot/capture/mask cases",
+      "pick mode, hack-camera, HUD, pause, stereo and Legacy"
+    ],
+    "unchanged_software_categories": [
+      "models and security-camera models",
+      "voxels",
+      "effects and projectiles",
+      "HUD, MFD and weapon art",
+      "special Diego and true-TLUC8 critter effects"
+    ]
+  }
+}

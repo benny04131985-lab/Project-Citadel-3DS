@@ -1,0 +1,88 @@
+--- sdl_events_INPUT_V9.c
++++ sdl_events_INPUT_V16.c
+@@ -36,7 +36,7 @@
+ #include <3ds.h>
+ #endif
+ 
+-#warning "PROJECT CITADEL INPUT V9: polished movement and C-stick speed are ACTIVE"
++#warning "PROJECT CITADEL INPUT V16: A/R swap is ACTIVE"
+ 
+ extern SDL_Window *window;
+ extern SDL_Renderer *renderer;
+@@ -593,7 +593,7 @@
+ #define CITADEL_CSTICK_SPEED_DENOMINATOR    5
+ 
+ static bool citadel_input_log_initialized = false;
+-static bool citadel_a_left_down = false;
++static bool citadel_r_left_down = false;
+ static bool citadel_touch_left_down = false;
+ static bool citadel_b_right_down = false;
+ static unsigned int citadel_mouse_buttons = 0;
+@@ -632,11 +632,11 @@
+     va_list args;
+ 
+     if (!citadel_input_log_initialized) {
+-        remove("INPUT_3DS_V9.log");
++        remove("INPUT_3DS_V16.log");
+         citadel_input_log_initialized = true;
+     }
+ 
+-    file = fopen("INPUT_3DS_V9.log", "a");
++    file = fopen("INPUT_3DS_V16.log", "a");
+     if (file == NULL)
+         return;
+ 
+@@ -719,7 +719,7 @@
+ static void citadel_update_left_button(void)
+ {
+     static bool emitted_down = false;
+-    bool should_be_down = citadel_a_left_down || citadel_touch_left_down;
++    bool should_be_down = citadel_r_left_down || citadel_touch_left_down;
+ 
+     if (should_be_down != emitted_down) {
+         emitted_down = should_be_down;
+@@ -1044,15 +1044,15 @@
+     citadel_cpad_raw_x=circle.dx; citadel_cpad_raw_y=circle.dy; citadel_analog_gameplay_active=gameplay_active;
+     if (split_layout && !citadel_last_split_layout) citadel_sync_panel_from_logical();
+     citadel_last_split_layout=split_layout;
+-    if ((keys_down&KEY_R) && gameplay_active) { citadel_freelook_desired=!citadel_freelook_desired; citadel_input_log("FREELOOK desired=%d panel=%d local=%d,%d logical=%d,%d",citadel_freelook_desired,citadel_cursor_panel,citadel_cursor_local_x,citadel_cursor_local_y,MouseX,MouseY); }
++    if ((keys_down&KEY_A) && gameplay_active) { citadel_freelook_desired=!citadel_freelook_desired; citadel_input_log("FREELOOK desired=%d trigger=A panel=%d local=%d,%d logical=%d,%d",citadel_freelook_desired,citadel_cursor_panel,citadel_cursor_local_x,citadel_cursor_local_y,MouseX,MouseY); }
+     if (keys_down&KEY_START) { citadel_freelook_desired=false; citadel_emit_key(SDLK_ESCAPE,true); }
+     if (keys_up&KEY_START) citadel_emit_key(SDLK_ESCAPE,false);
+     if (keys_down&KEY_SELECT) { citadel_freelook_desired=false; citadel_3ds_toggle_legacy_view(); }
+     if (!gameplay_active) citadel_freelook_desired=false;
+     citadel_update_menu_dpad(keys_held,gameplay_active);
+     citadel_update_cstick(&cstick,gameplay_active,split_layout,touch_held);
+-    if (keys_down&KEY_A) { citadel_a_left_down=true; citadel_update_left_button(); }
+-    if (keys_up&KEY_A) { citadel_a_left_down=false; citadel_update_left_button(); }
++    if (keys_down&KEY_R) { citadel_r_left_down=true; citadel_update_left_button(); }
++    if (keys_up&KEY_R) { citadel_r_left_down=false; citadel_update_left_button(); }
+     if (keys_down&KEY_TOUCH) {
+         hidTouchRead(&touch); citadel_freelook_desired=false;
+         if (split_layout) { citadel_touch_panel=citadel_touch_panel_at(&touch); citadel_set_panel_from_touch(&touch,citadel_touch_panel); citadel_input_log("TOUCH START panel=%d screen=%u,%u local=%d,%d logical=%d,%d",citadel_touch_panel,touch.px,touch.py,citadel_cursor_local_x,citadel_cursor_local_y,MouseX,MouseY); }
+@@ -1093,13 +1093,13 @@
+         citadel_set_mouse_position(citadel_current_mouse_width() / 2,
+                                    citadel_current_mouse_height() / 2,
+                                    false);
+-        citadel_input_log("PROJECT CITADEL INPUT V9 START build=%s %s mouse=%d,%d",
++        citadel_input_log("PROJECT CITADEL INPUT V16 START build=%s %s mouse=%d,%d",
+                           __DATE__,
+                           __TIME__,
+                           MouseX,
+                           MouseY);
+-        citadel_input_log("CONTROLS circle=direct-analog cstick=panel-cursor R=native-freelook "
+-                          "touch=direct-lower A=left B=right X=space Y=enter "
++        citadel_input_log("CONTROLS circle=direct-analog cstick=panel-cursor A=native-freelook "
++                          "touch=direct-lower R=left B=right X=space Y=enter "
+                           "START=escape SELECT=legacy");
+     }
+ #endif
+@@ -1598,7 +1598,7 @@
+ void get_mouselook_vel(int *vx, int *vy) {
+ #if defined(__3DS__) || defined(_3DS)
+     /*
+-     * The 3DS has no desktop relative-mouse stream. While R-toggle freelook
++     * The 3DS has no desktop relative-mouse stream. While A-toggle freelook
+      * is active, feed Shockolate the C-stick deltas sampled in pump_events().
+      */
+     if (citadel_freelook_desired &&

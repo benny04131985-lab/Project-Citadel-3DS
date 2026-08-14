@@ -1,0 +1,37 @@
+{
+  "milestone": "CITADEL-C3D-R3D1-KEYED-FOREGROUND-COMPOSITE1",
+  "base": "CITADEL-C3D-R3C-TEXTURED-TERRAIN1",
+  "installed": "2026-08-04T09:15:22.192208-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "prepatch_checkpoint": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3D1_PREPATCH_FILES_20260804_091521",
+  "modified_files": {
+    "src/MacSrc/Shock.c": {
+      "prepatch_sha256": "67bb76f4fcc0468dc0f39f49d214ffd0e27b8ae1e01a7c9d1041170f88944a92",
+      "installed_sha256": "fdf8b57f0f0cc3948b6e4f730260e44e592410970ea30a646350efa82cee8331"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "prepatch_sha256": "61719356abd832da362c611bff02caf07846770457e6aad9ad3ddc7ac0baa9ff",
+      "installed_sha256": "2e1c8462d5241fee82298b59e6504b7df378ede894137d47f6c7c2503f5cc02f"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "prepatch_sha256": "85649813965246fd2a3b4281913a074986ebf03e7387a724e2183defe29c0925",
+      "installed_sha256": "11d8316843632bfd5f9413cf7d7f36f736369b8032a7d7c1af71944f810ecc33"
+    },
+    "src/GameSrc/frsetup.c": {
+      "prepatch_sha256": "a718010841a1eb09570b8c11077f056fee2fb02fee486d09ab582282af661465",
+      "installed_sha256": "44dc7464dd5a0e7b3a2b8315e0860e775ecbdbf78fe0e36c6e3e9167704c8b82"
+    }
+  },
+  "behavior": {
+    "native_textured_terrain": "preserved",
+    "mono_split_software_clear_index": 0,
+    "foreground_texture_format": "GPU_RGBA5551",
+    "foreground_key_policy": "index0_alpha0_nonzero_alpha1",
+    "foreground_order": "after_native_terrain",
+    "stereo_composite": false,
+    "legacy_composite": false,
+    "allocation_failure": "R3C_path_preserved"
+  },
+  "cmake_modified": false,
+  "shader_modified": false
+}

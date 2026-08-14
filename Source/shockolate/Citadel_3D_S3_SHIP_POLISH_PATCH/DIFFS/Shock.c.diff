@@ -1,0 +1,50 @@
+--- src/MacSrc/Shock.c (S2.1)
++++ src/MacSrc/Shock.c (S3)
+@@ -82,6 +82,7 @@
+ #warning "PROJECT CITADEL AUDIO SUSPEND HOTFIX V2: NDSP close/deferred reopen hook is ACTIVE"
+ #warning "PROJECT CITADEL 3D S1: zero-parallax dual-eye transport is ACTIVE"
+ #warning "PROJECT CITADEL 3D S2: true dual-camera world stereo is ACTIVE"
++#warning "PROJECT CITADEL 3D S3: ship polish and quiet diagnostics are ACTIVE"
+ #warning "PROJECT CITADEL VX1.1-SPLASH-SYNTH-A: startup GPU ownership round trip is ACTIVE"
+ #warning "PROJECT CITADEL V17-SHIP: T7 HOME fix + persistent gameplay layout are ACTIVE"
+ 
+@@ -770,8 +771,9 @@
+ 
+     v5_log("GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 "
+            "transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8");
+-    v5_log("GPU 3D S1 mode=IDENTICAL_EYES slider=%0.3f "
+-           "left=%p right=%p bottom=%p",
++    v5_log("GPU 3D S3 mode=TRUE_WORLD_AUTO_FLAT_UI "
++           "fallback=IDENTICAL_EYES max_convergence_px=5 "
++           "curve=CENTERED slider=%0.3f left=%p right=%p bottom=%p",
+            (double)osGet3DSliderState(),
+            (void *)citadel_gpu_top_target,
+            (void *)citadel_gpu_top_right_target,
+@@ -2159,7 +2161,7 @@
+         citadel_gpu_right_frame_active = true;
+         citadel_gpu_right_frame_slider = right_slider;
+         if (!citadel_gpu_first_right_upload_logged) {
+-            v5_log("GPU 3D S2 FIRST TRUE FRAME src=%dx%d pitch=%d "
++            v5_log("GPU 3D S3 FIRST TRUE FRAME src=%dx%d pitch=%d "
+                    "slider=%0.3f method=DUAL_CAMERA_AUTO_OVERLAY_MASK",
+                    right_width, right_height, right_pitch,
+                    (double)right_slider);
+@@ -2910,11 +2912,14 @@
+         last_logged_layout = split_layout ? 1 : 0;
+     }
+ 
+-    if (citadel_gpu_presented_frames == 1 ||
+-        (citadel_gpu_presented_frames % 600) == 0) {
+-        v5_log("GPU 3D S2 FRAME frame=%u slider=%0.3f split=%d "
++    /*
++     * S3 retains one presentation sanity record and the separate one-time
++     * FIRST TRUE FRAME record. The former 600-frame recurring diagnostic is
++     * intentionally removed from the ship path.
++     */
++    if (citadel_gpu_presented_frames == 1) {
++        v5_log("GPU 3D S3 FIRST PRESENT slider=%0.3f split=%d "
+                "true_world=%d left_ok=%d right_ok=%d bottom_ok=%d surface=%dx%d",
+-               citadel_gpu_presented_frames,
+                (double)(citadel_gpu_right_frame_active
+                    ? citadel_gpu_right_frame_slider : osGet3DSliderState()),
+                split_layout ? 1 : 0,

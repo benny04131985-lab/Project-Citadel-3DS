@@ -1,3 +1,0 @@
-LOCAL DRAFT ONLY
-Created to preserve the R2B hardware-pass update while further Citro3D work continues.
-Do not commit, push, tag, or publish this entry yet.

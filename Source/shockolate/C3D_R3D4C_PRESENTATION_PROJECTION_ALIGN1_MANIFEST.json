@@ -1,0 +1,31 @@
+{
+  "milestone": "CITADEL-C3D-R3D4C-PRESENTATION-PROJECTION-ALIGN1",
+  "created": "2026-08-04T22:35:34.622433-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "rejected_policy": "RAW_ENGINE_VIEWPORT_ASPECT",
+  "new_policy": "SOURCE_CROP_TO_DESTINATION_ASPECT",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "297950faeff67ee18262ac6a10eae76ba633ecb847c23697df0db250dd547851",
+      "after_sha256": "1d6223df8af1cf346bb407101e0cb29f0dc57e15a464729bd4bf84e0d3ac3654"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "1a81bc0f4c2278b621faf4d97a85266c3106cf96914b7e3477c5c9387180a6a6",
+      "after_sha256": "918226c866dd79490e5695bf42a4bb87afeeb18b8f62a86c1b0dcde5d2c69bc3"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "d465d7196e7bdcccf4a5aaa086eb40c554caced93c291c92c4d66c41948fb6d5",
+      "after_sha256": "8cdc4b4156844ea2bfae95801d4e9eb39fa0a6b1eef3d2361b60d5bfd435c863"
+    }
+  },
+  "preserved": [
+    "R3D4A fast terrain erase-mask architecture",
+    "R3D2B immutable bitmap descriptors",
+    "native RGB565 textures and cache",
+    "software painter-order foreground visibility",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

@@ -1,0 +1,15 @@
+MAINLOOP V16.1 PATCH
+
+The installer inserts this immediately after the first pump_events(); call:
+
+#if defined(__3DS__) || defined(_3DS)
+        /*
+         * PROJECT CITADEL V16.1: stop immediately after SDL system-close
+         * request.
+         */
+        if (!gPlayingGame)
+            break;
+#endif
+
+This prevents the current gameplay/menu loop and another GPU presentation
+from running after SDL's 3DS backend reports aptMainLoop() == false.

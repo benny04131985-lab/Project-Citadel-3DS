@@ -1,0 +1,247 @@
+--- src/MacSrc/Shock.c (no-T7 baseline)
++++ src/MacSrc/Shock.c (VX1.1 splash synth A)
+@@ -80,6 +80,7 @@
+ 
+ #warning "PROJECT CITADEL V16.1: launch polish candidate is ACTIVE"
+ #warning "PROJECT CITADEL AUDIO SUSPEND HOTFIX V2: NDSP close/deferred reopen hook is ACTIVE"
++#warning "PROJECT CITADEL VX1.1-SPLASH-SYNTH-A: startup GPU ownership round trip is ACTIVE"
+ #warning "PROJECT CITADEL V17-SHIP: T7 HOME fix + persistent gameplay layout are ACTIVE"
+ 
+ //--------------------
+@@ -252,6 +253,19 @@
+ static bool citadel_v16_splash_started = false;
+ static bool citadel_v16_splash_finished_logged = false;
+ static Uint32 citadel_v16_splash_until = 0;
++
++/*
++ * VX1.1-SPLASH-SYNTH-A:
++ * the existing Hack-i-Ben image already fills a real 400x240 Citro2D
++ * textured rectangle. After eight completed splash frames, perform one
++ * controlled GPU ownership and VRAM save/restore round trip.
++ */
++#define CITADEL_VX1_1_SYNTH_FRAME 8u
++
++static unsigned int citadel_vx1_1_splash_frames = 0;
++static bool citadel_vx1_1_synth_attempted = false;
++static bool citadel_vx1_1_synth_complete = false;
++static bool citadel_vx1_1_post_frame_complete = false;
+ 
+ #endif
+ 
+@@ -300,6 +314,8 @@
+ static bool citadel_gpu_v15h_draw_phase(void);
+ static bool citadel_v16_load_splash(void);
+ static bool citadel_v16_present_splash(void);
++static void citadel_vx1_1_log(const char *fmt, ...);
++static bool citadel_vx1_1_run_splash_synth(void);
+ #endif
+ 
+ #if defined(__3DS__) || defined(_3DS)
+@@ -2257,6 +2273,160 @@
+     return true;
+ }
+ 
++static void citadel_vx1_1_log(const char *fmt, ...)
++{
++    FILE *file;
++    va_list args;
++
++    file = fopen("VX1_1_SPLASH_SYNTH_A.log", "a");
++    if (file == NULL)
++        return;
++
++    va_start(args, fmt);
++    vfprintf(file, fmt, args);
++    va_end(args);
++
++    fputc('\n', file);
++    fflush(file);
++    fclose(file);
++}
++
++static bool citadel_vx1_1_run_splash_synth(void)
++{
++    GSPGPU_CaptureInfo capture_info;
++    Result save_result = (Result)-1;
++    Result capture_result = (Result)-1;
++    Result release_result = (Result)-1;
++    Result acquire_result = (Result)-1;
++    Result restore_result = (Result)-1;
++    bool owned_before;
++    bool owned_after;
++    u16 top_width = 0;
++    u16 top_height = 0;
++    u16 bottom_width = 0;
++    u16 bottom_height = 0;
++    u8 *top_left;
++    u8 *top_right;
++    u8 *bottom;
++
++    if (citadel_vx1_1_synth_attempted)
++        return citadel_vx1_1_synth_complete;
++
++    citadel_vx1_1_synth_attempted = true;
++
++    /*
++     * The calling splash frame has already ended. Fully drain it and cross
++     * one VBlank before touching GPU ownership.
++     */
++    C3D_FrameSync();
++    gspWaitForVBlank();
++
++    owned_before = gspHasGpuRight();
++
++    top_left =
++        gfxGetFramebuffer(
++            GFX_TOP,
++            GFX_LEFT,
++            &top_width,
++            &top_height);
++    top_right =
++        gfxGetFramebuffer(
++            GFX_TOP,
++            GFX_RIGHT,
++            NULL,
++            NULL);
++    bottom =
++        gfxGetFramebuffer(
++            GFX_BOTTOM,
++            GFX_LEFT,
++            &bottom_width,
++            &bottom_height);
++
++    citadel_vx1_1_log(
++        "VX1.1 SYNTH BEGIN build=%s %s splash_frames=%u "
++        "gpu_right_before=%d top=%ux%u bottom=%ux%u "
++        "topL=%p topR=%p bottom=%p",
++        __DATE__,
++        __TIME__,
++        citadel_vx1_1_splash_frames,
++        owned_before ? 1 : 0,
++        (unsigned int)top_width,
++        (unsigned int)top_height,
++        (unsigned int)bottom_width,
++        (unsigned int)bottom_height,
++        (void *)top_left,
++        (void *)top_right,
++        (void *)bottom);
++
++    v5_log(
++        "VX1.1 SYNTH BEGIN splash_frames=%u gpu_right_before=%d",
++        citadel_vx1_1_splash_frames,
++        owned_before ? 1 : 0);
++
++    if (!owned_before) {
++        citadel_vx1_1_log(
++            "VX1.1 SYNTH ABORT reason=no-GPU-right");
++        v5_log(
++            "VX1.1 SYNTH ABORT reason=no-GPU-right");
++        return false;
++    }
++
++    memset(&capture_info, 0, sizeof(capture_info));
++
++    save_result = GSPGPU_SaveVramSysArea();
++    capture_result =
++        GSPGPU_ImportDisplayCaptureInfo(&capture_info);
++
++    if (R_SUCCEEDED(save_result) &&
++        R_SUCCEEDED(capture_result)) {
++        release_result = GSPGPU_ReleaseRight();
++
++        if (R_SUCCEEDED(release_result)) {
++            acquire_result = GSPGPU_AcquireRight(0);
++
++            if (R_SUCCEEDED(acquire_result))
++                restore_result = GSPGPU_RestoreVramSysArea();
++        }
++    }
++
++    gspWaitForVBlank();
++    owned_after = gspHasGpuRight();
++
++    citadel_vx1_1_synth_complete =
++        R_SUCCEEDED(save_result) &&
++        R_SUCCEEDED(capture_result) &&
++        R_SUCCEEDED(release_result) &&
++        R_SUCCEEDED(acquire_result) &&
++        R_SUCCEEDED(restore_result) &&
++        owned_after;
++
++    citadel_vx1_1_log(
++        "VX1.1 SYNTH RESULTS save=0x%08lX capture=0x%08lX "
++        "release=0x%08lX acquire=0x%08lX restore=0x%08lX "
++        "gpu_right_after=%d complete=%d",
++        (unsigned long)save_result,
++        (unsigned long)capture_result,
++        (unsigned long)release_result,
++        (unsigned long)acquire_result,
++        (unsigned long)restore_result,
++        owned_after ? 1 : 0,
++        citadel_vx1_1_synth_complete ? 1 : 0);
++
++    v5_log(
++        "VX1.1 SYNTH RESULTS save=0x%08lX capture=0x%08lX "
++        "release=0x%08lX acquire=0x%08lX restore=0x%08lX "
++        "gpu_right_after=%d complete=%d",
++        (unsigned long)save_result,
++        (unsigned long)capture_result,
++        (unsigned long)release_result,
++        (unsigned long)acquire_result,
++        (unsigned long)restore_result,
++        owned_after ? 1 : 0,
++        citadel_vx1_1_synth_complete ? 1 : 0);
++
++    return citadel_vx1_1_synth_complete;
++}
++
+ static bool citadel_v16_present_splash(void)
+ {
+     const Tex3DS_SubTexture *subtexture;
+@@ -2315,6 +2485,46 @@
+ 
+     C3D_FrameEnd(0);
+     ++citadel_gpu_presented_frames;
++    ++citadel_vx1_1_splash_frames;
++
++    if (citadel_vx1_1_splash_frames == 1u) {
++        remove("VX1_1_SPLASH_SYNTH_A.log");
++        citadel_vx1_1_log(
++            "PROJECT CITADEL VX1.1-SPLASH-SYNTH-A START "
++            "build=%s %s",
++            __DATE__,
++            __TIME__);
++    }
++
++    if (!citadel_vx1_1_synth_attempted &&
++        citadel_vx1_1_splash_frames >=
++            CITADEL_VX1_1_SYNTH_FRAME) {
++        (void)citadel_vx1_1_run_splash_synth();
++    } else if (citadel_vx1_1_synth_complete &&
++               !citadel_vx1_1_post_frame_complete &&
++               citadel_vx1_1_splash_frames >
++                   CITADEL_VX1_1_SYNTH_FRAME) {
++        /*
++         * This is a later ordinary SYNCDRAW splash frame submitted after
++         * GPU reacquisition. Fully synchronize it before declaring success.
++         */
++        C3D_FrameSync();
++        gspWaitForVBlank();
++
++        citadel_vx1_1_post_frame_complete = true;
++
++        citadel_vx1_1_log(
++            "VX1.1 POST-SYNTH SPLASH FRAME COMPLETE "
++            "frame=%u gpu_right=%d",
++            citadel_vx1_1_splash_frames,
++            gspHasGpuRight() ? 1 : 0);
++
++        v5_log(
++            "VX1.1 POST-SYNTH SPLASH FRAME COMPLETE "
++            "frame=%u gpu_right=%d",
++            citadel_vx1_1_splash_frames,
++            gspHasGpuRight() ? 1 : 0);
++    }
+ 
+     if (!draw_ok)
+         ++citadel_gpu_draw_failures;

@@ -1,0 +1,62 @@
+--- citadel_s2_src/src/GameSrc/render.c	2026-07-24 01:29:08.000000000 +0000
++++ citadel_s2_work/src/GameSrc/render.c	2026-07-24 05:52:49.636321734 +0000
+@@ -25,6 +25,10 @@
+ 
+ #include <string.h>
+ 
++#if defined(__3DS__) || defined(_3DS)
++#include <3ds.h>
++#endif
++
+ #include "gamerend.h"
+ #include "render.h"
+ #include "frprotox.h"
+@@ -103,6 +107,15 @@
+ int hack_camera_draw_callback(grs_canvas *cvs, grs_bitmap *bm, int u1, int u2, int u3);
+ void update_cspace_tiles(void);
+ 
++#if defined(__3DS__) || defined(_3DS)
++/* Project Citadel 3D S2 renderer bridge, implemented in frsetup.c. */
++extern void citadel_3ds_stereo_begin_frame(float slider);
++extern int citadel_3ds_stereo_frame_enabled(void);
++extern void citadel_3ds_stereo_begin_right_pass(void);
++extern void citadel_3ds_stereo_begin_left_pass(void);
++extern void citadel_3ds_stereo_end_frame(void);
++#endif
++
+ int hack_camera_draw_callback(grs_canvas *cvs, grs_bitmap *bm, int u1, int u2, int u3) {
+     //   gr_push_canvas(&hack_cam_canvases[curr_hack_cam]);
+     //   gr_bitmap(bm,0,0);
+@@ -338,7 +351,32 @@
+         rendrect = mainview_region->r;
+ 
+         // printf("fr_rend\n");
++#if defined(__3DS__) || defined(_3DS)
++        /*
++         * S2 performs a second geometry pass only while the physical slider
++         * is raised and the player is in the ordinary station world.
++         * Cyberspace remains on S1 identical-eye transport for this stage.
++         */
++        citadel_3ds_stereo_begin_frame(
++            global_fullmap->cyber ? 0.0f : osGet3DSliderState());
++
++        if (citadel_3ds_stereo_frame_enabled()) {
++            citadel_3ds_stereo_begin_right_pass();
++            fr_rend(NULL);
++
++            /* The capture pass may enqueue world-space HUD objects. */
++            current_num_hudobjs = 0;
++
++            citadel_3ds_stereo_begin_left_pass();
++            fr_rend(NULL);
++        } else {
++            fr_rend(NULL);
++        }
++
++        citadel_3ds_stereo_end_frame();
++#else
+         fr_rend(NULL);
++#endif
+ 
+         if (view360_render_on)
+             view360_render();

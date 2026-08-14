@@ -1,0 +1,134 @@
+--- sdl_events_V16.c
++++ sdl_events_V16_1.c
+@@ -36,7 +36,7 @@
+ #include <3ds.h>
+ #endif
+ 
+-#warning "PROJECT CITADEL INPUT V16: A/R swap is ACTIVE"
++#warning "PROJECT CITADEL INPUT V16.1: launch controls are ACTIVE"
+ 
+ extern SDL_Window *window;
+ extern SDL_Renderer *renderer;
+@@ -47,6 +47,7 @@
+ 
+ #if defined(__3DS__) || defined(_3DS)
+ extern bool gPlayingGame;
++extern bool citadel_3ds_system_close_requested;
+ extern void citadel_3ds_toggle_legacy_view(void);
+ extern bool citadel_3ds_split_layout_active(void);
+ extern bool citadel_3ds_gameplay_controls_active(void);
+@@ -570,8 +571,8 @@
+ #define CITADEL_REF_LEFT_MFD_W           160
+ #define CITADEL_REF_RIGHT_MFD_X          472
+ #define CITADEL_REF_RIGHT_MFD_W          168
+-#define CITADEL_REF_MFD_Y                312
+-#define CITADEL_REF_MFD_H                156
++#define CITADEL_REF_MFD_Y                320
++#define CITADEL_REF_MFD_H                160
+ 
+ #define CITADEL_BOTTOM_INVENTORY_W       320
+ #define CITADEL_BOTTOM_INVENTORY_H       120
+@@ -595,7 +596,7 @@
+ static bool citadel_input_log_initialized = false;
+ static bool citadel_r_left_down = false;
+ static bool citadel_touch_left_down = false;
+-static bool citadel_b_right_down = false;
++static bool citadel_l_right_down = false;
+ static unsigned int citadel_mouse_buttons = 0;
+ 
+ enum {
+@@ -632,11 +633,11 @@
+     va_list args;
+ 
+     if (!citadel_input_log_initialized) {
+-        remove("INPUT_3DS_V16.log");
++        remove("INPUT_3DS_V16_1.log");
+         citadel_input_log_initialized = true;
+     }
+ 
+-    file = fopen("INPUT_3DS_V16.log", "a");
++    file = fopen("INPUT_3DS_V16_1.log", "a");
+     if (file == NULL)
+         return;
+ 
+@@ -730,7 +731,7 @@
+ static void citadel_update_right_button(void)
+ {
+     static bool emitted_down = false;
+-    bool should_be_down = citadel_b_right_down;
++    bool should_be_down = citadel_l_right_down;
+ 
+     if (should_be_down != emitted_down) {
+         emitted_down = should_be_down;
+@@ -852,6 +853,23 @@
+         citadel_scale_ref_x(rx+(citadel_cursor_local_x*rw)/dw),
+         citadel_scale_ref_y(ry+(citadel_cursor_local_y*rh)/dh),
+         queue_motion);
++}
++
++static void citadel_center_cursor_on_top(void)
++{
++    const int old_panel = citadel_cursor_panel;
++
++    citadel_cursor_panel = CITADEL_CURSOR_PANEL_TOP;
++    citadel_cursor_local_x = CITADEL_TOP_WIDTH / 2;
++    citadel_cursor_local_y = CITADEL_TOP_HEIGHT / 2;
++    citadel_apply_panel_cursor(true);
++
++    citadel_input_log("CENTER TOP old_panel=%d local=%d,%d logical=%d,%d",
++                      old_panel,
++                      citadel_cursor_local_x,
++                      citadel_cursor_local_y,
++                      MouseX,
++                      MouseY);
+ }
+ 
+ static void citadel_sync_panel_from_logical(void)
+@@ -1061,8 +1079,17 @@
+     }
+     if (keys_held&KEY_TOUCH) { hidTouchRead(&touch); if (split_layout) citadel_set_panel_from_touch(&touch,citadel_touch_panel); else citadel_set_mouse_position(((int)touch.px*mouse_width)/CITADEL_TOUCH_WIDTH,((int)touch.py*mouse_height)/CITADEL_TOUCH_HEIGHT,true); }
+     if (keys_up&KEY_TOUCH) { citadel_touch_left_down=false; citadel_update_left_button(); citadel_input_log("TOUCH END panel=%d local=%d,%d logical=%d,%d",citadel_cursor_panel,citadel_cursor_local_x,citadel_cursor_local_y,MouseX,MouseY); }
+-    if (keys_down&KEY_B) { citadel_b_right_down=true; citadel_update_right_button(); }
+-    if (keys_up&KEY_B) { citadel_b_right_down=false; citadel_update_right_button(); }
++    if (keys_down&KEY_L) { citadel_l_right_down=true; citadel_update_right_button(); }
++    if (keys_up&KEY_L) { citadel_l_right_down=false; citadel_update_right_button(); }
++    if (keys_down&KEY_B) {
++        /*
++         * B is the fast recovery button: leave freelook/camera mode and put
++         * the logical cursor back in the center of the upper world view.
++         * A can then immediately re-enter freelook for combat.
++         */
++        citadel_freelook_desired=false;
++        citadel_center_cursor_on_top();
++    }
+     if (keys_down&KEY_X) citadel_emit_key(SDLK_SPACE,true); if (keys_up&KEY_X) citadel_emit_key(SDLK_SPACE,false);
+     if (keys_down&KEY_Y) citadel_emit_key(SDLK_RETURN,true); if (keys_up&KEY_Y) citadel_emit_key(SDLK_RETURN,false);
+ }
+@@ -1093,13 +1120,14 @@
+         citadel_set_mouse_position(citadel_current_mouse_width() / 2,
+                                    citadel_current_mouse_height() / 2,
+                                    false);
+-        citadel_input_log("PROJECT CITADEL INPUT V16 START build=%s %s mouse=%d,%d",
++        citadel_input_log("PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d",
+                           __DATE__,
+                           __TIME__,
+                           MouseX,
+                           MouseY);
+-        citadel_input_log("CONTROLS circle=direct-analog cstick=panel-cursor A=native-freelook "
+-                          "touch=direct-lower R=left B=right X=space Y=enter "
++        citadel_input_log("CONTROLS circle=direct-analog cstick=panel-cursor "
++                          "A=native-freelook R=activate-left L=fire-right "
++                          "B=center-top touch=direct-lower X=space Y=enter "
+                           "START=escape SELECT=legacy");
+     }
+ #endif
+@@ -1112,7 +1140,8 @@
+              * Do not call exit(0) from inside SDL's applet event handling.
+              * Let Shock's main loop unwind and run its normal shutdown path.
+              */
+-            citadel_input_log("SDL_QUIT received; requesting clean main-loop exit");
++            citadel_input_log("SDL_QUIT received; requesting V16.1 HOME cleanup");
++            citadel_3ds_system_close_requested = true;
+             gPlayingGame = false;
+             return;
+ #else

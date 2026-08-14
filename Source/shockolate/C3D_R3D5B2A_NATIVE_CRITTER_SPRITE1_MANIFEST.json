@@ -1,0 +1,81 @@
+{
+  "base_milestone": "CITADEL-C3D-R3D5B1E-NATIVE-WORLD-BITMAP1",
+  "next_milestone": "CITADEL-C3D-R3D5B2A-NATIVE-CRITTER-SPRITE1",
+  "created": "2026-08-05T21:55:27.707538-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "binary": "/c/Projects/CITADEL_C3D_R3D5B1E_NATIVE_WORLD_BITMAP1.3dsx",
+  "binary_sha256": "2089ea1e3cacf118edfa63382de5a72e035c2a2012911a615131a76233d8a284",
+  "proof_log": "/c/Users/benny/Downloads/C3D_R3D5B1E_NATIVE_WORLD_BITMAP.log",
+  "proof_log_sha256": "ec153ae94067c0c5129b5b1b4f060c367349442fff9aee3b4c20548acbbc63e8",
+  "proof_counters": {
+    "Takeover-active frames": 2387,
+    "Opaque door polygons captured": 4352,
+    "Transparent/moving door polygons captured": 1152,
+    "Standard bitmap polygons captured": 5696,
+    "Standard bitmap triangles captured": 11392,
+    "Standard bitmap software calls suppressed": 6957,
+    "Standard bitmap texture snapshots": 6520,
+    "Standard bitmap alpha-mask erases": 5696,
+    "Fully-offscreen bitmap exclusions": 1261,
+    "Native standard bitmap textured triangles drawn": 22784,
+    "Standard bitmap software fallbacks": 0,
+    "Standard bitmap capture fallbacks": 0,
+    "Standard bitmap snapshot failures": 0,
+    "Standard bitmap alpha-mask failures": 0,
+    "Mask initial-state failures": 0,
+    "Mask-canvas allocation failures": 0,
+    "Mask source-descriptor failures": 0,
+    "Mask fully-offscreen fallbacks": 0,
+    "Eligibility null-vertices rejects": 0,
+    "Eligibility null-bitmap rejects": 0,
+    "Eligibility null-bits rejects": 0,
+    "Eligibility unsupported-type rejects": 0,
+    "Eligibility dimension-range rejects": 0,
+    "Eligibility NPOT-width rejects": 0,
+    "Eligibility NPOT-height rejects": 0,
+    "Eligibility row-pitch rejects": 0,
+    "Eligibility camera-Z rejects": 0,
+    "Eligibility triangle-append failures": 0,
+    "Foreground build failures": 0,
+    "Foreground draw failures": 0,
+    "Texture upload failures": 0,
+    "Capture overflows": 0,
+    "Draw-budget drops": 0,
+    "GPU upload failures": 0,
+    "GPU draw failures": 0
+  },
+  "source_before_hashes": {
+    "src/MacSrc/Shock.c": "79943a233efe5ce214f8a54260d68d24ce8a7b2b709589b55fa5da842884af80",
+    "src/MacSrc/Citro3DNative.c": "ad2e4ba20870b24d488385d7df345e0a3937a07b34ff295d9d1c29960d502226",
+    "src/MacSrc/Citro3DNative.h": "9ae096362f12a57a6f1ebbbcfe7ebc373939b3b6bc9ae59a69ab12cf7e899b68",
+    "src/GameSrc/gameobj.c": "0d1971b4100baf2f87b7bb3bf98249eee497b54a539f7a4a453b707935e2430c"
+  },
+  "source_after_hashes": {
+    "src/MacSrc/Shock.c": "da3909885cc1b19505c1ad353c7ca4c0b1fd7d43fc7306d78db2ba981c2e5136",
+    "src/MacSrc/Citro3DNative.c": "7e9d5afcc3cd96bf8425b9eb167efa8a96e778abad0b2c45838a5832bf62d670",
+    "src/MacSrc/Citro3DNative.h": "7d9802f1df614ddc81348ae7dce6340b6607994d4edaf4cc0c562aff850d8fd9",
+    "src/GameSrc/gameobj.c": "2a319fa774cf18f976982f053c6f14f47d821117de28a38995c5048e8bad1f4c"
+  },
+  "b2a_scope": {
+    "native": [
+      "normal FAUBJ_CRIT animated binary-alpha sprites"
+    ],
+    "software_exclusions": [
+      "special Diego death/teleport bitmap",
+      "true TLUC8 invisible critters",
+      "FAUBJ_MULTIVIEW",
+      "models and security-camera models",
+      "voxels",
+      "effects and projectiles",
+      "HUD, MFD and weapon art",
+      "stereo, Legacy, pause and wrappers"
+    ]
+  },
+  "diag3": {
+    "canonical": "sdmc:/3ds/SystemShock3D/citadel_diag.log",
+    "fallback": "sdmc:/3ds/SystemShock3D/citadel_diag_current.log",
+    "self_remove": true,
+    "binary_overwrite": true,
+    "gpu_open_probe": true
+  }
+}

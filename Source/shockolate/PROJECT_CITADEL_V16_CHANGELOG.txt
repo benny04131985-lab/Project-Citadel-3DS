@@ -1,0 +1,37 @@
+PROJECT CITADEL V16 — CHANGELOG
+
+Rendering
+---------
+- Preserves V15I's RGBA8 -> RGBA8 LCD target transfer.
+- Preserves V15J's 1024x512 texture and full-resolution source transport.
+- Actively submits a black lower-screen scene whenever split gameplay layout
+  is inactive.
+- Removes V15G's unused diagnostic RGB565/RGBA8 textures and staging buffer.
+
+Defaults
+--------
+- Nintendo 3DS defaults to video-mode index 2: 640x400.
+- Existing prefs.txt values remain authoritative.
+
+Input
+-----
+- Physical R now performs left mouse click / activation.
+- Physical A now toggles native C-stick freelook.
+- Touch remains left-click capable.
+- B remains right-click.
+- X remains Space.
+- Y remains Enter.
+- START remains Escape.
+- SELECT remains legacy-view toggle.
+
+Branding
+--------
+- Adds the Hack-i-Ben / Project Citadel 3DS startup splash.
+- CMake generates Hack-i-Ben_Splash.t3x using tex3ds.
+- Startup continues safely when the external splash asset is absent.
+
+Diagnostics
+-----------
+- Runtime graphics log renamed to GPU_C2D_V16.log.
+- Input log renamed to INPUT_3DS_V16.log.
+- Compiler markers updated to V16.

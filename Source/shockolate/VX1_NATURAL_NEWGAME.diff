@@ -1,0 +1,11 @@
+--- src/GameSrc/setup.c (VX0)
++++ src/GameSrc/setup.c (VX1-NATURAL)
+@@ -1059,7 +1059,7 @@
+      * quest-variable, version, HUD, and setup-state assignment. Continue and
+      * every user-selected Load path remain completely untouched.
+      */
+-    citadel_3ds_arm_newgame_home_t7();
++    /* PROJECT CITADEL VX1-NATURAL: use the original New Game path. */
+ #endif
+ }
+ 

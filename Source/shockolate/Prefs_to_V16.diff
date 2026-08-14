@@ -1,0 +1,22 @@
+--- Prefs.c
++++ Prefs_V16.c
+@@ -115,7 +115,19 @@
+     gShockPrefs.soMusicVolume = 75;
+     gShockPrefs.soSfxVolume = 100;
+     gShockPrefs.soAudioLogVolume = 100;
++#if defined(__3DS__) || defined(_3DS)
++    /*
++     * Registered SVGA mode order:
++     *   0=320x400, 1=640x400? (base mode is registered separately),
++     *   active menu index 2 resolves to the proven 640x400 option.
++     *
++     * On 3DS, 640x400 preserves the cleanest small-font structure before
++     * the final 320x240 LCD presentation.
++     */
++    gShockPrefs.doVideoMode = 2;
++#else
+     gShockPrefs.doVideoMode = 3;
++#endif
+     gShockPrefs.doResolution = 0; // High-res.
+     gShockPrefs.doDetail = 3;     // Max detail.
+     gShockPrefs.doUseOpenGL = false;

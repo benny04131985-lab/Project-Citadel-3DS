@@ -1,0 +1,28 @@
+PROJECT CITADEL 3DS V16.1 — CHANGELOG
+
+Stability
+- Stops the engine loop immediately after the 3DS app lifecycle emits
+  SDL_QUIT.
+- Adds explicit ordered shutdown for music, Citro2D/Citro3D, and SDL.
+- Forces process completion only after cleanup on HOME Menu close.
+- Uses sdmc:/3ds/SystemShock as the stable working directory for 3DSX/CIA.
+
+Presentation
+- Corrects both lower MFD crops from Y=312/H=156 to Y=320/H=160.
+- Keeps the V16 640x400 default, full-resolution transport, RGBA8 output fix,
+  branded splash, split layout, and black paused/menu lower screen.
+
+Controls
+- A: freelook toggle.
+- R: activate / left mouse.
+- L: fire / right mouse.
+- B: exit freelook and center the cursor on the top world view.
+- X/Y, START, SELECT, Circle Pad, C-Stick, and touch behavior otherwise remain
+  as validated in V16.
+
+Packaging
+- Adds Homebrew Menu icon assets.
+- Adds a HOME Menu banner asset.
+- Adds a branded Project_Citadel_3DS.3dsx output.
+- Adds an optional code-only Project_Citadel_3DS.cia target.
+- No original game data or res folder is bundled.

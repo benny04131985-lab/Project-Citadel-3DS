@@ -1,0 +1,21 @@
+PROJECT CITADEL VX0 BASELINE PROVENANCE
+
+src/MacSrc/Shock.c
+  SHA256: 05a84b8e8a9c1fc8e0105f1fe1f15324bf05a42f44a7e2e07cdfe76416b0a724
+  FROM: /c/Users/benny/Downloads/PROJECT_CITADEL_V17_SHIP.zip::Shock_V17_SHIP.c
+
+src/GameSrc/setup.c
+  SHA256: 236b2517ad37b87e88e4232bca712aaf8910f51205e130f13d0069cfe2f4ba82
+  FROM: /c/Users/benny/Downloads/PROJECT_CITADEL_V17_SHIP.zip::setup_V17_SHIP.c
+
+src/GameSrc/mainloop.c
+  SHA256: 8fb3331b9e3e0fe1532417237d5adb8a8820508dc5f7e4f9d389870d31e9a369
+  FROM: /c/Users/benny/Downloads/PROJECT_CITADEL_V17_SHIP.zip::mainloop_V17_SHIP.c
+
+src/GameSrc/wrapper.c
+  SHA256: d027061772d92a50c5d06bc890b9c56c07f93ccf80b3adfbbabd6bd801b8b9c2
+  FROM: /c/Users/benny/Downloads/PROJECT_CITADEL_V17_SHIP.zip::wrapper_V17_SHIP.c
+
+src/GameSrc/gamewrap.c
+  SHA256: c764f1a1f5c16bbafd44acbe06df88e2cbf2ddcf9c82945d5041509c9f0c9e30
+  FROM: /c/Projects/Citadel-Recovery-PROBFUCKED/FROM_ZIP_ARCHIVES/c/Projects/Citadel-Ship-16-1.zip/Citadel - Copy/systemshock/src/GameSrc/gamewrap.c

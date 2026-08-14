@@ -1,0 +1,67 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1C-NPOT-PADDED-BITMAP1",
+  "created": "2026-08-05T15:14:23.963380-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "hardware_trace": {
+    "first_candidate": {
+      "type": "BMT_FLAT8",
+      "flags": "BMF_TRANS",
+      "width": 10,
+      "height": 6,
+      "row": 10,
+      "camera_z": 0.783218
+    },
+    "width_range": "3..87",
+    "height_range": "3..54",
+    "npot_width_rejects": 6773,
+    "npot_height_rejects": 6821,
+    "former_minimum_dimension_rejects": 3409,
+    "all_other_eligibility_failures": 0
+  },
+  "source_policy": {
+    "types": [
+      "BMT_FLAT8",
+      "BMT_RSD8"
+    ],
+    "dimensions": "1..256 independently",
+    "binary_alpha": "BMF_TRANS palette index zero"
+  },
+  "gpu_backing_policy": {
+    "minimum_dimension": 8,
+    "rounding": "NEXT_POWER_OF_TWO_PER_AXIS",
+    "maximum_dimension": 256,
+    "padding": "TRANSPARENT_INDEX_ZERO",
+    "u_max": "SOURCE_WIDTH / TEXTURE_WIDTH",
+    "v_max": "SOURCE_HEIGHT / TEXTURE_HEIGHT"
+  },
+  "mask_policy": "ORIGINAL_SOURCE_DIMENSIONS_WITH_PADDED_ROW_PITCH",
+  "failure_policy": "ROLL_BACK_NATIVE_CAPTURE_AND_KEEP_COMPLETE_SOFTWARE_DRAW",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "c11d4a7bba532a25c4d7830a2f227c522a23a201e3ecd86fcfea2bc3b7423da5",
+      "after_sha256": "41c58411429df3c550621bd2aaa750825795c25169036c54dbd0b949a238dc82"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "6e6386860d4ce48114f82e193bd620724a03d399f5504aa757ea5a0fc8d6014e",
+      "after_sha256": "d3c2155a359b12fb812d4811e07ca20eca1bf35c8b0ed2145f68ed576ffd3959"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "ccd40b7a59a785b1f63f57c523265745e1079e69607f8715c39c107c16c00a20",
+      "after_sha256": "911124211ccd47ca4dcbbb12ceaae1a82b6df3fae799e0ee7c545ba5fc554d90"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected terrain",
+    "R3D5A3 native opaque and moving doors",
+    "R3D5B1 exact projected world-bitmap quad",
+    "camera-Z homogeneous W",
+    "original painter stream",
+    "stable content-hashed texture snapshots",
+    "alpha-shaped foreground erase",
+    "HUD, MFD, weapon, effects and critters",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

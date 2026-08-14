@@ -1,0 +1,13 @@
+{
+  "milestone": "CITADEL-C3D-R3D2A-COPLANAR-LAYERORDER1",
+  "created": "2026-08-04T13:13:55.162412-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "file": "src/MacSrc/Shock.c",
+  "before_sha256": "fdf8b57f0f0cc3948b6e4f730260e44e592410970ea30a646350efa82cee8331",
+  "after_sha256": "f9c04746967cbec92c46f715761f3b9fc4eac025e3ed99058d1549703994f877",
+  "changes": [
+    "native terrain depth GPU_GREATER -> GPU_GEQUAL",
+    "skip native terrain overlay during true stereo",
+    "unique C3D_R3D2A_LAYERORDER.log"
+  ]
+}

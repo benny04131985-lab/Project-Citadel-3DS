@@ -1,0 +1,45 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1B-BITMAP-ELIGIBILITY-TRACE1",
+  "created": "2026-08-05T14:55:25.690117-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "behavioral_change": false,
+  "eligibility_policy": "UNCHANGED_FROM_R3D5B1A",
+  "diagnostic_counters": [
+    "null vertices",
+    "null bitmap",
+    "null bitmap bits",
+    "unsupported type",
+    "dimension range",
+    "NPOT width",
+    "NPOT height",
+    "row pitch",
+    "camera Z",
+    "triangle append failure",
+    "first descriptor sample",
+    "observed size range"
+  ],
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "7fc3fe27f2df78a1c5a08772f6da333aa21bef66347a9fa9ec3f2b4166345cf1",
+      "after_sha256": "c11d4a7bba532a25c4d7830a2f227c522a23a201e3ecd86fcfea2bc3b7423da5"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "01d0ddec43d3eac01a370323ab1906f133165e2418d3e4daeaf9ab3a3465e3b1",
+      "after_sha256": "6e6386860d4ce48114f82e193bd620724a03d399f5504aa757ea5a0fc8d6014e"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "1701702e4c27a88307bfb277b5e10c7a72b5d631adbd249b71d0cead89e7b9bf",
+      "after_sha256": "ccd40b7a59a785b1f63f57c523265745e1079e69607f8715c39c107c16c00a20"
+    }
+  },
+  "preserved": [
+    "R3D4D native terrain",
+    "R3D5A3 native opaque and moving doors",
+    "R3D5B1A software object fallback",
+    "HUD, MFD, weapon, effects, and critters",
+    "pause and wrapper fallback",
+    "stereo fallback",
+    "Legacy path",
+    "Dual-screen lower UI"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "milestone": "CITADEL-C3D-R3C-TEXTURED-TERRAIN1",
+  "created": "2026-08-04T01:10:16.853074-04:00",
+  "root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "checkpoint": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3B2_PRE_R3C_TEXTURED_TERRAIN1_20260804_010941",
+  "checkpoint_archive": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3B2_PRE_R3C_TEXTURED_TERRAIN1_20260804_010941.tar.gz",
+  "shader_validation": {
+    "picasso": "/opt/devkitpro/tools/bin/picasso",
+    "size": 308,
+    "sha256": "94c2826e5b66a74929f7212dd1c11cc63e45d3ac5cb3357c5731b050401c4858"
+  },
+  "policy": {
+    "mono_split_suppression": "capture-success only",
+    "stereo_suppression": false,
+    "legacy_suppression": false,
+    "transparent_terrain": "software fallback",
+    "texture_upload_failure": "flat native fallback",
+    "texture_format": "GPU_RGB565",
+    "texture_wrap": "GPU_REPEAT",
+    "texture_cache_capacity": 128
+  },
+  "modified_hashes": {
+    "CMakeLists.txt": "ed6b956c500a699f678d4bfa6584b35453dc881327a666564f2b2e8525dd8455",
+    "src/MacSrc/Shock.c": "67bb76f4fcc0468dc0f39f49d214ffd0e27b8ae1e01a7c9d1041170f88944a92",
+    "src/MacSrc/Citro3DNative.c": "61719356abd832da362c611bff02caf07846770457e6aad9ad3ddc7ac0baa9ff",
+    "src/MacSrc/Citro3DNative.h": "85649813965246fd2a3b4281913a074986ebf03e7387a724e2183defe29c0925",
+    "src/MacSrc/citadel_worldtextured_vshader.v.pica": "4ecc5c282ddfded2a09e80992245605fce786353adc7b3b4ef4f58b6aca81e1d"
+  }
+}

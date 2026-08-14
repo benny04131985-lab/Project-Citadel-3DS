@@ -1,0 +1,29 @@
+{
+  "milestone": "CITADEL-C3D-R3D2B-BITMAP-SNAPSHOT1",
+  "created": "2026-08-04T13:50:02.572872-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "root_cause": "get_texture_map reuses four mutable grs_bitmap descriptors; native capture retained descriptor pointers instead of values",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "f9c04746967cbec92c46f715761f3b9fc4eac025e3ed99058d1549703994f877",
+      "after_sha256": "2af1d0eb25303357fc63dbec6109eadcc687035ce8e54c179874c0d3fb76ddf4"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "2e1c8462d5241fee82298b59e6504b7df378ede894137d47f6c7c2503f5cc02f",
+      "after_sha256": "5cc90c802fdeafcff38c7897ed2c0efb0970a01e12b4eae85c1e27c45369f39b"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "11d8316843632bfd5f9413cf7d7f36f736369b8032a7d7c1af71944f810ecc33",
+      "after_sha256": "0d71a66e0e512257b4875d95379cf0580f4417f45f5b9661837509885c0e25b8"
+    }
+  },
+  "preserved": [
+    "R3D1 keyed foreground composite",
+    "R3D2A safe software-only stereo guard",
+    "R3C UV/light/RGB565 texture transport",
+    "Dual-screen layout and Legacy fallback"
+  ],
+  "restored": [
+    "GPU_GREATER strict depth policy from R3D1"
+  ]
+}

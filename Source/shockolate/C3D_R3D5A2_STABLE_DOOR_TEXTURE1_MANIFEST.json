@@ -1,0 +1,48 @@
+{
+  "milestone": "CITADEL-C3D-R3D5A2-STABLE-DOOR-TEXTURE1",
+  "created": "2026-08-05T08:58:56.641637-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "root_causes": [
+    "door resource bitmap bits pointer was retained after RefUnlock",
+    "native door suppression omitted painter-order key-zero occlusion erase"
+  ],
+  "door_texture_policy": {
+    "capture": "DECODE_AND_COPY_BEFORE_RESOURCE_UNLOCK",
+    "snapshot_format": "FLAT8",
+    "maximum_unique_snapshots_per_frame": 16,
+    "maximum_dimensions": "256x256",
+    "cache_content_identity": "FNV1A64_PIXEL_HASH"
+  },
+  "door_occlusion_policy": "FLAT_KEY_ZERO_POLYGON_ERASE_IN_ORIGINAL_PAINTER_ORDER",
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "a3d5a3a0e3424027574ea824636d4042d594f293bc9668f2d6ebbab1677d1d4d",
+      "after_sha256": "dc67c3fe56c90369fa0ff2ddd0fec84b948188e5eabc7bc4fdb77fdb6393ed59"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "ed62b1df3585af963ac3b9f0cdda74b5786f36b08309c256f4de99de8c5137cb",
+      "after_sha256": "be61a6d0d425d51cce962ac7180fc563152f9271354972638c6ec3f55aaacfa4"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "6ce31efffb1b3a57f4499832efcac48dcaa0e99a419f458a84f6c800617f9520",
+      "after_sha256": "2a7dbb0c97da1e471e7617e725b851a6d5bc341123977a21f2c7179deca92acf"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "c27da647d144eef447f3eaf795e4eeef1940d4160b3b3af9befb8155c9dc4610",
+      "after_sha256": "7c3012e2733d49baacb6923b6bd40b573a82a7f5807e65cbccf5073f542d4994"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected sx/sy",
+    "camera-Z perspective-correct texture W",
+    "R3D4A terrain erase mask",
+    "native RGB565 texture cache",
+    "GEQUAL painter ordering",
+    "transparent door software fallback",
+    "all other software foreground categories",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

@@ -1,41 +1,19 @@
-# Installing Project Citadel 3D
+# Installing v2.0.0
 
-## Release files
-
-Copy the release executable and Citadel runtime presentation assets to:
-
-```text
-sdmc:/3ds/SystemShock3D/
-```
-
-Expected layout:
+Copy the release executable and included Project Citadel presentation assets to:
 
 ```text
 sdmc:/3ds/SystemShock3D/
 ├── 3D_Citadel_3DS.3dsx
 ├── Hack-i-Ben_Splash.t3x
+├── V15H_CONTROL.t3x
 ├── DATA/
 ├── RES/
 └── SOUND/
 ```
 
-`DATA`, `RES`, and `SOUND` must come from a legally obtained copy of the
-original game. They are not provided by this project.
-
+`DATA`, `RES`, and `SOUND` must come from a legally obtained original game copy.
 Launch `3D_Citadel_3DS.3dsx` from the Homebrew Launcher.
 
-## Stereo comfort
-
-Begin near the middle of the physical 3D slider and adjust gradually.
-Maximum depth is intentionally available, but prolonged comfort at the top
-setting varies by player.
-
-## Diagnostic log
-
-Project Citadel 3D v1.0.1 creates `citadel_diag.log` beside the executable at:
-
-`sdmc:/3ds/SystemShock3D/citadel_diag.log`
-
-The file is replaced at every successful startup. A full performance summary is
-added when the game exits normally. Users reporting performance or stability
-problems should attach this file or paste its contents into the report.
+Slider down is mono; raising the slider progressively adds station-world depth.
+The HUD/interface stays flat for readability.

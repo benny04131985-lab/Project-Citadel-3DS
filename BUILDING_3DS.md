@@ -1,58 +1,16 @@
-# Building Project Citadel 3D
+# Building v2.0.0
 
-## Requirements
+Requirements: devkitPro/devkitARM with 3DS libraries, CMake, and an MSYS2/devkitPro or compatible shell.
 
-- devkitPro with devkitARM and the Nintendo 3DS libraries.
-- CMake.
-- An MSYS2/devkitPro shell on Windows, or a compatible Unix-like shell.
-
-## Configure
-
-Always begin from an empty `build/` directory. Incremental CMake dependency
-files proved unreliable in the Windows/MSYS development environment.
+The exact qualified SDL2 headers/static libraries are included in `Libraries/SDL2`.
 
 ```bash
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=/opt/devkitpro/devkitARM
+cd Source/shockolate
 rm -rf build
-
-cmake -S . -B build \
-  -DCMAKE_TOOLCHAIN_FILE="$DEVKITPRO/cmake/3DS.cmake" \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-  -DENABLE_OPENGL=OFF \
-  -DENABLE_SOUND=OFF \
-  -DENABLE_FLUIDSYNTH=OFF \
-  -DENABLE_SDL2=ON
+cmake -S . -B build   -DCMAKE_TOOLCHAIN_FILE="$DEVKITPRO/cmake/3DS.cmake"   -DCMAKE_BUILD_TYPE=Release   -DCMAKE_POLICY_VERSION_MINIMUM=3.5   -DENABLE_OPENGL=OFF   -DENABLE_SOUND=OFF   -DENABLE_FLUIDSYNTH=OFF   -DENABLE_SDL2=ON
+cmake --build build --target project_citadel_3dsx -j"$(nproc)"
 ```
 
-## Build
-
-```bash
-cmake --build build \
-  --target project_citadel_3dsx \
-  -j"$(nproc)"
-```
-
-Expected output:
-
-```text
-build/3D_Citadel_3DS.3dsx
-```
-
-The build must retain the runtime wall:
-
-```text
-sdmc:/3ds/SystemShock3D/
-```
-
-It must never be redirected to the mono-development folder
-`sdmc:/3ds/SystemShock/`.
-
-## Final v1.0.1 configuration additions
-
-The final v1.0.1 3DS configuration also disables optional example and debug-blit
-targets:
-
-```text
--DENABLE_EXAMPLES=OFF
--DENABLE_DEBUG_BLIT=OFF
-```
+Qualified release executable: `Release/3D_Citadel_3DS.3dsx`.

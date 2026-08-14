@@ -1,0 +1,26 @@
+--- citadel_s2_src/src/GameSrc/frmain.c	2026-07-24 01:29:08.000000000 +0000
++++ citadel_s2_work/src/GameSrc/frmain.c	2026-07-24 05:52:49.636321734 +0000
+@@ -58,6 +58,10 @@
+ #include "frflags.h"
+ #include "gr2ss.h"
+ 
++#if defined(__3DS__) || defined(_3DS)
++extern int citadel_3ds_stereo_right_pass_active(void);
++#endif
++
+ int fr_pipe_go_2(void);
+ int fr_pipe_go_3(void);
+ 
+@@ -124,7 +128,11 @@
+ 
+     // printf(" fr_pipe_end\n");
+     fr_send_view(); /* send it, whether it came from 3d or special */
+-    if ((_fr->flags & FR_CURVIEW_MASK) == FR_CURVIEW_STRT)
++    if ((_fr->flags & FR_CURVIEW_MASK) == FR_CURVIEW_STRT
++#if defined(__3DS__) || defined(_3DS)
++        && !citadel_3ds_stereo_right_pass_active()
++#endif
++    )
+         _frp.time.last_frame_cnt++;
+     return 1;
+ }

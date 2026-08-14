@@ -1,0 +1,26 @@
+{
+  "milestone": "CITADEL-C3D-R3B2-MONO-TERRAIN-TAKEOVER1",
+  "created": "2026-08-04T00:16:25.419601-04:00",
+  "root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "rollback_checkpoint": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3B1_NATIVE_STEREOROUTE1_HW_PASS_20260804_001548",
+  "policy": {
+    "split_mono": "capture-success terrain suppression enabled",
+    "stereo": "full software terrain preserved",
+    "legacy": "full software terrain preserved",
+    "generic_objects_hud": "full R2C preserved"
+  },
+  "modified": {
+    "src/MacSrc/Shock.c": "a8cba5abbe18108a3825017648151efcbe1c3b22182763ea33c7ba884e6986ed",
+    "src/MacSrc/Citro3DNative.c": "e85777942f5c7b4df3f63cc993e0987c89fd761322e3d22854b76352343258ee",
+    "src/MacSrc/Citro3DNative.h": "7960abed41262a80d3e3aba7ff5dea3611eeda642ec0944c504bc626047c8d16",
+    "src/GameSrc/render.c": "f6b54f9c286c41761810922b12cf6826fb6c48132973f5b9e386ec4839b6f2d2",
+    "src/Libraries/3D/Source/tmap.c": "f90405d86b037d7817f766091cc3d4a169bff04f7bdefbce22df92d44eec64c7"
+  },
+  "backups": [
+    "src/MacSrc/Shock_C3D_R3B2_PRE_TAKEOVER1.c",
+    "src/MacSrc/Citro3DNative_C3D_R3B2_PRE_TAKEOVER1.c",
+    "src/MacSrc/Citro3DNative_C3D_R3B2_PRE_TAKEOVER1.h",
+    "src/GameSrc/render_C3D_R3B2_PRE_TAKEOVER1.c",
+    "src/Libraries/3D/Source/tmap_C3D_R3B2_PRE_TAKEOVER1.c"
+  ]
+}

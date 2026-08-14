@@ -1,0 +1,29 @@
+{
+  "milestone": "CITADEL-C3D-R3A2-WORLDSPACE-SOLIDROOM1",
+  "created": "2026-08-03T20:50:33.368808-04:00",
+  "root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "rollback_checkpoint": "/c/Projects/Citadel_C3D_CHECKPOINTS/CITADEL_C3D_R3A_SCREENSPACE_OVERLAY_PROBE_20260803_205028",
+  "shader_validation": {
+    "picasso": "/opt/devkitpro/tools/bin/picasso",
+    "size": 296,
+    "sha256": "7f0486ec6540710a233f27b62d41402196b3ff537baad01c3d50e5f5d95d104e"
+  },
+  "architecture": {
+    "geometry_source": "frterr producer-classified terrain",
+    "coordinates": "clipped g3s_point camera-space gX/gY/gZ",
+    "surfaces": "walls, floors, ceilings",
+    "excluded": "generic tmap, bitmap/HUD, objects, solids/fog",
+    "projection": "dedicated PICA perspective shader",
+    "depth": "GPU_GREATER with depth writes",
+    "software_suppression": false,
+    "R2C_fallback": "fully preserved"
+  },
+  "modified_hashes": {
+    "CMakeLists.txt": "4f96401bfe994108df0c1935b9f13cad8152945795e62f0db58b90dfb6ba81fe",
+    "src/MacSrc/Shock.c": "77e9334ba4678dc49d47356b683968f9d8b0b1b647f28dcc55955e2008fc160f",
+    "src/MacSrc/Citro3DNative.c": "8f084dbced9d4106b84dd98ca13a53218c37ee7c996fa8adfd28794e43f1e635",
+    "src/MacSrc/Citro3DNative.h": "235e1c317f9018843bbe46514ee1dd78dd66e00cf942e68b82636a6c18d40935",
+    "src/GameSrc/frterr.c": "f256fba4ea510e2671b3945a3ffef4ec81bf6a2f249dceea80a3d9111016ac2d",
+    "src/MacSrc/citadel_worldproof_vshader.v.pica": "76410ec597bfabe9a4d307cee29a43d21c41bf81dd9a36880281072ebb33c683"
+  }
+}

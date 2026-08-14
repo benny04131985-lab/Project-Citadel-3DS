@@ -1,0 +1,37 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1D-BITMAP-MASK-FALLBACK-TRACE1",
+  "created": "2026-08-05T15:39:28.054574-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "behavioral_change": false,
+  "object_capture_policy": "UNCHANGED_FROM_R3D5B1C",
+  "mask_failure_counters": [
+    "initial state",
+    "mask canvas allocation",
+    "snapshot source descriptor",
+    "fully offscreen projected quad"
+  ],
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "41c58411429df3c550621bd2aaa750825795c25169036c54dbd0b949a238dc82",
+      "after_sha256": "9f69abd0bf1986233970b5cac54533a7538beb5af2533057a35ef257335b0884"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "d3c2155a359b12fb812d4811e07ca20eca1bf35c8b0ed2145f68ed576ffd3959",
+      "after_sha256": "f49ed02d4914a717bd35c81adb783ae29a07a0702abd6ce4b6357c24ce73a4fc"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "911124211ccd47ca4dcbbb12ceaae1a82b6df3fae799e0ee7c545ba5fc554d90",
+      "after_sha256": "ddc372f44c1016d95ae9b2b402dd52dce7c2243601078db9b1dd48f7201e1022"
+    }
+  },
+  "preserved": [
+    "R3D4D exact native terrain",
+    "R3D5A3 native opaque and keyed doors",
+    "R3D5B1C NPOT padded native world bitmaps",
+    "transparent backing and cropped UV range",
+    "alpha-shaped foreground erase",
+    "all safe software fallbacks",
+    "HUD, weapon, MFD, effects and critters",
+    "pause, stereo and Legacy behavior"
+  ]
+}

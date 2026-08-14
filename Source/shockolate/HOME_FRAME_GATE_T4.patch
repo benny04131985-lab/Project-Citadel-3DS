@@ -1,0 +1,178 @@
+--- src/MacSrc/Shock.c
++++ src/MacSrc/Shock.c
+@@
+ static aptHookCookie citadel_3ds_audio_apt_cookie;
+ static bool citadel_3ds_audio_apt_hook_registered = false;
++
++/*
++ * PROJECT CITADEL HOME FRAME-GATE TEST 4
++ *
++ * These flags let the outer Shock frame loop know that APT entered a
++ * suspend transition. They are deliberately independent of audio state.
++ */
++volatile bool citadel_3ds_suspend_active = false;
++volatile bool citadel_3ds_suspend_seen = false;
++volatile bool citadel_3ds_restore_seen = false;
+@@
+ static void citadel_3ds_audio_unregister_apt_hook(void);
++void citadel_3ds_prepare_gpu_for_apt(void);
+ static bool citadel_gpu_present(SDL_Surface *surface, bool magenta);
+@@
+ static void citadel_3ds_audio_apt_hook(
+     APT_HookType hook,
+     void *parameter)
+ {
+@@
+     switch (hook) {
+         case APTHOOK_ONSUSPEND:
++            citadel_3ds_suspend_active = true;
++            citadel_3ds_suspend_seen = true;
+             v5_log("APT AUDIO HOOK event=ONSUSPEND begin");
+             citadel_3ds_audio_suspend();
+             v5_log("APT AUDIO HOOK event=ONSUSPEND complete");
+             break;
+
+         case APTHOOK_ONSLEEP:
++            citadel_3ds_suspend_active = true;
++            citadel_3ds_suspend_seen = true;
+             v5_log("APT AUDIO HOOK event=ONSLEEP begin");
+             citadel_3ds_audio_suspend();
+             v5_log("APT AUDIO HOOK event=ONSLEEP complete");
+             break;
+
+         case APTHOOK_ONRESTORE:
++            citadel_3ds_restore_seen = true;
++            citadel_3ds_suspend_active = false;
+             v5_log("APT AUDIO HOOK event=ONRESTORE should_close=%d",
+                    aptShouldClose() ? 1 : 0);
+             if (!aptShouldClose())
+                 citadel_3ds_audio_resume();
+             break;
+
+         case APTHOOK_ONWAKEUP:
++            citadel_3ds_restore_seen = true;
++            citadel_3ds_suspend_active = false;
+             v5_log("APT AUDIO HOOK event=ONWAKEUP should_close=%d",
+                    aptShouldClose() ? 1 : 0);
+             if (!aptShouldClose())
+                 citadel_3ds_audio_resume();
+             break;
+
+         case APTHOOK_ONEXIT:
++            citadel_3ds_suspend_active = true;
++            citadel_3ds_suspend_seen = true;
+             v5_log("APT AUDIO HOOK event=ONEXIT");
+             citadel_3ds_audio_suspend();
+             break;
+@@
+ }
+
++/*
++ * Drain the previously submitted Citro3D frame before SDL's event backend
++ * services APT/HOME. This ensures HOME never attempts to capture the LCDs
++ * while Project Citadel still has outstanding PICA200 work.
++ */
++void citadel_3ds_prepare_gpu_for_apt(void)
++{
++    if (citadel_gpu_c3d_initialized)
++        C3D_FrameSync();
++}
++
+ static void citadel_3ds_audio_register_apt_hook(void)
+ {
+--- src/GameSrc/mainloop.c
++++ src/GameSrc/mainloop.c
+@@
+ #include <stdio.h>
+
++#if defined(__3DS__) || defined(_3DS)
++#include <3ds.h>
++#warning "PROJECT CITADEL HOME FRAME-GATE TEST 4 IS ACTIVE"
++#endif
++
+ #include "InitMac.h"
+@@
+ extern void MousePollProc(void);
+ void mainloop(int argc, char *argv[]) {
++#if defined(__3DS__) || defined(_3DS)
++    extern bool citadel_3ds_system_close_requested;
++    extern volatile bool citadel_3ds_suspend_active;
++    extern volatile bool citadel_3ds_suspend_seen;
++    extern volatile bool citadel_3ds_restore_seen;
++    extern void citadel_3ds_prepare_gpu_for_apt(void);
++#endif
++
+     int log_this_frame;
+@@
+     while (_current_loop >= 0 && gPlayingGame) {
+         loop_log_frame++;
+         log_this_frame = (loop_log_frame <= LOOP_LOG_FRAME_LIMIT);
+
+         if (log_this_frame)
+             loopmark("FRAME START");
+
++#if defined(__3DS__) || defined(_3DS)
++        /*
++         * HOME FRAME-GATE TEST 4
++         *
++         * SDL's N3DS video/event backend already services aptMainLoop()
++         * from SDL_PollEvent() inside pump_events(). Do not call
++         * aptMainLoop() a second time.
++         *
++         * Instead:
++         *   1. finish all previous GPU work;
++         *   2. make pump_events/APT the first operation of the frame;
++         *   3. run no timers, input, simulation, or rendering until it
++         *      returns from any HOME/sleep transition.
++         */
++        if (log_this_frame)
++            loopmark("Before GPU sync for APT-first frame gate");
++        citadel_3ds_prepare_gpu_for_apt();
++        if (log_this_frame)
++            loopmark("After GPU sync for APT-first frame gate");
++#endif
++
++        if (log_this_frame)
++            loopmark("Before APT-FIRST pump_events");
++        pump_events();
++        if (log_this_frame)
++            loopmark("After APT-FIRST pump_events");
++
++#if defined(__3DS__) || defined(_3DS)
++        if (aptShouldClose()) {
++            loopmark("APT-FIRST gate: close requested");
++            citadel_3ds_system_close_requested = true;
++            gPlayingGame = false;
++            break;
++        }
++
++        /*
++         * aptMainLoop normally blocks until restore. If an SDL/libctru
++         * combination returns while suspension is still active, freeze the
++         * complete game frame and poll again without touching game/GPU state.
++         */
++        if (citadel_3ds_suspend_active) {
++            loopmark("APT-FIRST gate: suspend still active; frame frozen");
++            svcSleepThread(1000000LL);
++            continue;
++        }
++
++        if (citadel_3ds_suspend_seen || citadel_3ds_restore_seen) {
++            loopmark("APT-FIRST gate: suspend/restore completed cleanly");
++            citadel_3ds_suspend_seen = false;
++            citadel_3ds_restore_seen = false;
++        }
++#endif
++
+         if (log_this_frame)
+             loopmark("Before TickCount");
+         gShockTicks = TickCount();
+@@
+-        // DG: at the beginning of each frame, get all the events from SDL
+-        if (log_this_frame)
+-            loopmark("Before pump_events");
+-        pump_events();
+-        if (log_this_frame)
+-            loopmark("After pump_events");
+-
+         // Run the loop

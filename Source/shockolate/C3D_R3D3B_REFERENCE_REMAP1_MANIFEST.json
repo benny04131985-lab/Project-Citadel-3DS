@@ -1,0 +1,19 @@
+{
+  "milestone": "CITADEL-C3D-R3D3B-REFERENCE-REMAP1",
+  "created": "2026-08-04T15:50:42.644800-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "file": "src/MacSrc/Shock.c",
+  "before_sha256": "63fab7efcdbd75b77b0b016cf1392908300d6968703264913856b74f55240ab1",
+  "after_sha256": "7e4cd549eb681862c763726d55b9369dad5abdd6c3e826b0521bab1fce0be435",
+  "root_cause": "full-resolution SDL coordinates were compared directly against a lower-resolution local terrain reference canvas",
+  "coordinate_policy": "SOURCE_RECT_TO_LOCAL_CANVAS_SCALE",
+  "preserved": [
+    "complete software world safety layer",
+    "software painter-order occlusion",
+    "pause/wrapper software fallback",
+    "software-only stereo fallback",
+    "R3D2B bitmap snapshots",
+    "native terrain textures and shaders",
+    "Dual and Legacy layouts"
+  ]
+}

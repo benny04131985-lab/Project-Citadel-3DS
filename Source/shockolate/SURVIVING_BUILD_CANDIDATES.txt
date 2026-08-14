@@ -1,0 +1,2535 @@
+============================================================
+FILE: /c/Projects/3ds-stereo-control/graphics/gpu/lenny/lenny.3dsx
+TIME: 2026-07-22 15:29:45.068253700 -0400  SIZE: 191508
+f5d51cbb4b201071b2781907eed31e9c07b36b59239d284476e78147e8eae445 */c/Projects/3ds-stereo-control/graphics/gpu/lenny/lenny.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/3ds-stereo-control/graphics/gpu/lenny/lenny.elf
+TIME: 2026-07-22 15:29:43.828205900 -0400  SIZE: 1258200
+3c0932460122d62b9bcfef8fac5b9e8c415f0212956218b7e27ee68e2bb3d2a4 */c/Projects/3ds-stereo-control/graphics/gpu/lenny/lenny.elf
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-bootstrap-sdl-link-working.elf
+TIME: 2026-07-23 09:41:51.871246600 -0400  SIZE: 6425784
+9f84d4d29d92dd30942cf5a4bb68da21cd284b87e0a97a0a7d7aa6393cdfa9d7 */c/Projects/AvP3DS/Source/AvP_Gold-bootstrap-sdl-link-working.elf
+MARKERS:
+_ZTV21AVP_Power_Cable_Chunk
+_ZTV21Environment_TLT_Chunk
+_ZTV21AI_Module_Slave_Chunk
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-bootstrap.3dsx
+TIME: 2026-07-23 01:26:36.031037000 -0400  SIZE: 426784
+859e828e0cec48d2c1cd30e5d1215501796126d5d6aefe98dc874515b3f7d926 */c/Projects/AvP3DS/Source/AvP_Gold-bootstrap.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-bootstrap.elf
+TIME: 2026-07-23 01:26:35.988025700 -0400  SIZE: 6425784
+9f84d4d29d92dd30942cf5a4bb68da21cd284b87e0a97a0a7d7aa6393cdfa9d7 */c/Projects/AvP3DS/Source/AvP_Gold-bootstrap.elf
+MARKERS:
+_ZTV21AVP_Power_Cable_Chunk
+_ZTV21Environment_TLT_Chunk
+_ZTV21AI_Module_Slave_Chunk
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-engine-link-clean.3dsx
+TIME: 2026-07-23 09:32:13.498383800 -0400  SIZE: 418516
+15a711cb72e3cd23e0c487245cb381d6a980a4ca4079aaa8643fea9dcb58663c */c/Projects/AvP3DS/Source/AvP_Gold-engine-link-clean.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-engine-link-clean.elf
+TIME: 2026-07-23 09:32:13.178089100 -0400  SIZE: 6425784
+9f84d4d29d92dd30942cf5a4bb68da21cd284b87e0a97a0a7d7aa6393cdfa9d7 */c/Projects/AvP3DS/Source/AvP_Gold-engine-link-clean.elf
+MARKERS:
+_ZTV21AVP_Power_Cable_Chunk
+_ZTV21Environment_TLT_Chunk
+_ZTV21AI_Module_Slave_Chunk
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-engine-probe1.3dsx
+TIME: 2026-07-23 10:05:14.808240100 -0400  SIZE: 895784
+91bbaac46f039374fdef60450165a5eaf4b78e85d7dbff320fe88b0e3e0ad6f5 */c/Projects/AvP3DS/Source/AvP_Gold-engine-probe1.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-renderer-probe-success.elf
+TIME: 2026-07-23 11:42:36.278268500 -0400  SIZE: 10859944
+b7aabe2d927516587a1cca17034ec4d372892503afc39db4410ed28d43d46f34 */c/Projects/AvP3DS/Source/AvP_Gold-renderer-probe-success.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-renderer-probe1.3dsx
+TIME: 2026-07-23 11:36:01.931513300 -0400  SIZE: 879920
+6a498dc1d938f3f2b10650a49abe60a12abf37837cdbd62e70642c9cbee8aabc */c/Projects/AvP3DS/Source/AvP_Gold-renderer-probe1.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-surface-probe-success.elf
+TIME: 2026-07-23 11:35:00.119219900 -0400  SIZE: 10368328
+8ed3c2a79436a6842a3b65174cd4c037af6221c0d86238daefd0fc8eb581c32c */c/Projects/AvP3DS/Source/AvP_Gold-surface-probe-success.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-surface-probe1.3dsx
+TIME: 2026-07-23 11:32:25.640722800 -0400  SIZE: 878800
+23f6faae2666f4391f32fe96fe526bb5c39bd985fcde8b0336ede97062dd1c31 */c/Projects/AvP3DS/Source/AvP_Gold-surface-probe1.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET1.3dsx
+TIME: 2026-07-23 13:24:55.838595300 -0400  SIZE: 2336648
+d3e760245770e2c5af3594ad9391e80bc6f0fe2bf881df4368ec3a7849547919 */c/Projects/AvP3DS/Source/AvP_Gold-YEET1.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET1.elf
+TIME: 2026-07-23 13:24:55.757782900 -0400  SIZE: 20467908
+db600ab50aaf8ff14fdc0bb930aa7ac5dbf34fe05b5083c5276ea1b3bc174e13 */c/Projects/AvP3DS/Source/AvP_Gold-YEET1.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET2.3dsx
+TIME: 2026-07-23 13:47:59.041514300 -0400  SIZE: 2337888
+985dfb69480c91077f84fec3cd1a281fa62bd63984ef0457b25a03db261046f3 */c/Projects/AvP3DS/Source/AvP_Gold-YEET2.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET2.elf
+TIME: 2026-07-23 13:47:58.976629600 -0400  SIZE: 20483820
+eeace083b91cecaee22a66346368b1805a6514f5c1e4073c70fe7e7092b5ee89 */c/Projects/AvP3DS/Source/AvP_Gold-YEET2.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET3.3dsx
+TIME: 2026-07-23 13:57:17.063665800 -0400  SIZE: 2337412
+dc2839b409ea32c53f325cf65e020c7176e6f5b343bbb4a543ca5fd5ec3795cf */c/Projects/AvP3DS/Source/AvP_Gold-YEET3.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET3.elf
+TIME: 2026-07-23 13:57:16.993436900 -0400  SIZE: 20483316
+bea6edcc7f30a0b6990477247e3bf217176fb53bea7c68734d201759e8339022 */c/Projects/AvP3DS/Source/AvP_Gold-YEET3.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET4.3dsx
+TIME: 2026-07-23 14:23:44.019070300 -0400  SIZE: 2337788
+0f6d136a8814031ed7230e760bc303da13e626092b2ba6ea49f8fbe1726fdd05 */c/Projects/AvP3DS/Source/AvP_Gold-YEET4.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET4.elf
+TIME: 2026-07-23 14:23:43.958233100 -0400  SIZE: 20483684
+1279fa0bb8e9c76d80e34f0a3d839aa4eb9fd7c4614ab58b7e2ee326afb71278 */c/Projects/AvP3DS/Source/AvP_Gold-YEET4.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET5.3dsx
+TIME: 2026-07-23 14:40:50.125097400 -0400  SIZE: 2365316
+81806e51e00afcaf098f0bdcc105ada7554bf11902231488ad19674e8fee9c9b */c/Projects/AvP3DS/Source/AvP_Gold-YEET5.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET5.elf
+TIME: 2026-07-23 14:40:49.650744800 -0400  SIZE: 20928376
+e154b42c0655f1a621ecd7b3c9b4c7f4abf9fcbc75b0023eec9240781af38304 */c/Projects/AvP3DS/Source/AvP_Gold-YEET5.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET6.3dsx
+TIME: 2026-07-23 14:46:43.610595400 -0400  SIZE: 2365532
+f83941ebafeacc46ab945d0eb2453fdbfc93bca6cc94176aa095a05533bac328 */c/Projects/AvP3DS/Source/AvP_Gold-YEET6.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET6.elf
+TIME: 2026-07-23 14:46:43.544833000 -0400  SIZE: 20928636
+7e1ffaa301096bd22aba84a53379b72981082cc78d4b4e4d82af55b4b2f0529f */c/Projects/AvP3DS/Source/AvP_Gold-YEET6.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET7.3dsx
+TIME: 2026-07-23 15:58:14.773758000 -0400  SIZE: 2366920
+4a131529e61f942e859a6502d10e31f4e7c00e255ef0a1652e70613e3430fb7d */c/Projects/AvP3DS/Source/AvP_Gold-YEET7.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET7.elf
+TIME: 2026-07-23 15:58:14.694860300 -0400  SIZE: 20938688
+5cd28d8a696fb12f3fa084f753243927227ba1c9ac871749ce8ff07fcfacf96f */c/Projects/AvP3DS/Source/AvP_Gold-YEET7.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET8.3dsx
+TIME: 2026-07-23 16:35:23.222593700 -0400  SIZE: 2366480
+2509f8de4b29bc1ceb2f78e44015f04e19ad3385609f6ed6b917f538106cd1cf */c/Projects/AvP3DS/Source/AvP_Gold-YEET8.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET8.elf
+TIME: 2026-07-23 16:35:23.147910400 -0400  SIZE: 20938840
+f98074c091f5f70571beb16dd0b1ac77d6f0d6938fb22acc80db2aaa547629a7 */c/Projects/AvP3DS/Source/AvP_Gold-YEET8.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET9.3dsx
+TIME: 2026-07-23 16:50:43.082540100 -0400  SIZE: 2366604
+4b84d798bf0632c9bbf6c9a90f94e110019d69f4adec215f7191368647dacecb */c/Projects/AvP3DS/Source/AvP_Gold-YEET9.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold-YEET9.elf
+TIME: 2026-07-23 16:50:43.014874400 -0400  SIZE: 20951768
+89f38012dec06ffaa61c95849ca31ccd91dd39564a659d1de429a0b9c46fcd05 */c/Projects/AvP3DS/Source/AvP_Gold-YEET9.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold.3dsx
+TIME: 2026-07-23 01:21:38.986130800 -0400  SIZE: 426784
+859e828e0cec48d2c1cd30e5d1215501796126d5d6aefe98dc874515b3f7d926 */c/Projects/AvP3DS/Source/AvP_Gold.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/AvP3DS/Source/AvP_Gold.elf
+TIME: 2026-07-23 16:50:42.647674900 -0400  SIZE: 20951768
+89f38012dec06ffaa61c95849ca31ccd91dd39564a659d1de429a0b9c46fcd05 */c/Projects/AvP3DS/Source/AvP_Gold.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/file/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/hidapi
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick/virtual
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/stdlib
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Builds/OGTEST/hello-world/hello-world.3dsx
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 124260
+8f3bb3b809aadd4710289b9107f2d05c9173b661b8d4eead394c9ccb986a6e48 */c/Projects/Citadel-Ship-16-1/Builds/OGTEST/hello-world/hello-world.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Builds/OGTEST/hello-world/hello-world.elf
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 839320
+7251254ced4463fc5594f397863538842f7a42e787375ae08924f58a03e86b0c */c/Projects/Citadel-Ship-16-1/Builds/OGTEST/hello-world/hello-world.elf
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/shocktrap_OLDWORKS.3dsx
+TIME: 2026-07-20 00:45:00.000000000 -0400  SIZE: 2017764
+adc0acee5fdc895db0dad43ceeb74cae18c32608d10fb3b220cc06ab3d8f14b2 */c/Projects/Citadel-Ship-16-1/shocktrap_OLDWORKS.3dsx
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+PROJECT CITADEL V6 START | build=%s %s
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 21 2026 00:44:07
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V4 START build=%s %s mouse=%d,%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resbuild.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/res.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resfile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resmake.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+TIME: 2026-07-23 16:45:26.338266100 -0400  SIZE: 80360
+9221c188208eaae9a0a00d68dab50c85bdbb7a382e256e4846cafb79e70f9dfa */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+MARKERS:
+NEWGAME_HOME_T2.log
+Project Citadel New Game normalization
+PROJECT CITADEL NEW GAME HOME T2 START build=%s %s
+PROJECT CITADEL NEW GAME HOME T2 COMPLETE
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+TIME: 2026-07-23 16:45:34.266489400 -0400  SIZE: 58804
+7844d5ce6f47fde03089eaa61d0139dc2e96f455094540a3e99d79096a062637 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+MARKERS:
+V4 mainloop build: Jul 23 2026 16:45:34
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+TIME: 2026-07-23 16:45:54.500429100 -0400  SIZE: 126964
+acd51d95466d33dff47ba6f18762a2af6999739e49f24170f266cfa6bf5831a3 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+TIME: 2026-07-23 16:46:06.100017300 -0400  SIZE: 242512
+bdc5b124181c11f709bb15840d0ea6f345f60206c94da3b8a6b9bf0c1c205b5c */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+TIME: 2026-07-23 16:48:04.765168300 -0400  SIZE: 153648
+ccf36edb21506aadad889ec4690767d9df7cf5ffeeb5e8c5979c478366791ed6 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/libGAME_LIB.a
+TIME: 2026-07-23 16:46:07.734971200 -0400  SIZE: 8212208
+5685d2b20f9cf76b38b964bfbff172939e5ad0daa47f1efceba7809f405c0c14 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/libGAME_LIB.a
+MARKERS:
+NEWGAME_HOME_T2.log
+Project Citadel New Game normalization
+PROJECT CITADEL NEW GAME HOME T2 START build=%s %s
+PROJECT CITADEL NEW GAME HOME T2 COMPLETE
+V4 mainloop build: Jul 23 2026 16:45:34
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/Project_Citadel_3DS.3dsx
+TIME: 2026-07-23 16:48:10.037020600 -0400  SIZE: 2108228
+61f6b05aeb4c6aed472a496d80219057bf06b510c38f88bbff7be8508e5ed552 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/Project_Citadel_3DS.3dsx
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V4 mainloop build: Jul 23 2026 16:45:34
+NEWGAME_HOME_T2.log
+Project Citadel New Game normalization
+PROJECT CITADEL NEW GAME HOME T2 START build=%s %s
+PROJECT CITADEL NEW GAME HOME T2 COMPLETE
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1/Source/shockolate/build/systemshock.elf
+TIME: 2026-07-23 16:48:09.346213300 -0400  SIZE: 20089472
+e3f1618181a9653680caf07cde6e1444285ad30f78c65350728dbfeb87127e90 */c/Projects/Citadel-Ship-16-1/Source/shockolate/build/systemshock.elf
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V4 mainloop build: Jul 23 2026 16:45:34
+NEWGAME_HOME_T2.log
+Project Citadel New Game normalization
+PROJECT CITADEL NEW GAME HOME T2 START build=%s %s
+PROJECT CITADEL NEW GAME HOME T2 COMPLETE
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/main/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Builds/OGTEST/hello-world/hello-world.3dsx
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 124260
+8f3bb3b809aadd4710289b9107f2d05c9173b661b8d4eead394c9ccb986a6e48 */c/Projects/Citadel-Ship-16-1 - Copy/Builds/OGTEST/hello-world/hello-world.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Builds/OGTEST/hello-world/hello-world.elf
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 839320
+7251254ced4463fc5594f397863538842f7a42e787375ae08924f58a03e86b0c */c/Projects/Citadel-Ship-16-1 - Copy/Builds/OGTEST/hello-world/hello-world.elf
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/shocktrap_OLDWORKS.3dsx
+TIME: 2026-07-20 00:45:00.000000000 -0400  SIZE: 2017764
+adc0acee5fdc895db0dad43ceeb74cae18c32608d10fb3b220cc06ab3d8f14b2 */c/Projects/Citadel-Ship-16-1 - Copy/shocktrap_OLDWORKS.3dsx
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+PROJECT CITADEL V6 START | build=%s %s
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 21 2026 00:44:07
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V4 START build=%s %s mouse=%d,%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resbuild.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/res.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resfile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resmake.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+TIME: 2026-07-23 01:13:57.337343100 -0400  SIZE: 77588
+6587fe9a4046795ad0dc16f395c3e3bb910e3bda697e3040ce6be9d0a8f07a5d */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+TIME: 2026-07-23 01:14:01.619889000 -0400  SIZE: 59420
+cb54804da088e3652b5164569161e1ab0461be2d48ac5a3e8b77d8c8e6d8c50e */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+MARKERS:
+V4 mainloop build: Jul 23 2026 01:14:01
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+TIME: 2026-07-23 01:14:14.144390600 -0400  SIZE: 127104
+d4adb361739a1b444063891f9244e796b41f0fe229234269684270de3bed2837 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+MARKERS:
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_arm_newgame_home_t7
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+TIME: 2026-07-23 01:14:18.652333100 -0400  SIZE: 260884
+c5b24ac9df83baa94af3bf99dfe438bf25c48794ed1fdca0898cb9f55bf55e26 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+MARKERS:
+NEWGAME_HOME_T7.log
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+.rel.text.citadel_3ds_newgame_home_t7_mask_active
+.rel.text.citadel_3ds_newgame_home_t7_mask_step
+.rel.text.citadel_3ds_arm_newgame_home_t7
+.rel.text.citadel_3ds_newgame_home_t7_post_frame
+.rel.text.citadel_3ds_newgame_home_t7_pre_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+TIME: 2026-07-23 01:14:20.905552900 -0400  SIZE: 160080
+44aaa5bae6b416ac2d5dc3c8e99207130081a628eb50d2a2411fcdc831cec4f5 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_active
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/libGAME_LIB.a
+TIME: 2026-07-23 01:14:19.182115900 -0400  SIZE: 8228772
+5bb68759823d290d12344a108e0a04c34425a997504f0d2a71d85249ddc3fd04 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/libGAME_LIB.a
+MARKERS:
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+V4 mainloop build: Jul 23 2026 01:14:01
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_arm_newgame_home_t7
+NEWGAME_HOME_T7.log
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+.rel.text.citadel_3ds_newgame_home_t7_mask_active
+.rel.text.citadel_3ds_newgame_home_t7_mask_step
+.rel.text.citadel_3ds_arm_newgame_home_t7
+.rel.text.citadel_3ds_newgame_home_t7_post_frame
+.rel.text.citadel_3ds_newgame_home_t7_pre_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/Project_Citadel_3DS.3dsx
+TIME: 2026-07-23 01:14:23.424477100 -0400  SIZE: 2111652
+a01446716eb98fbef9d7a4eff6579b45e54bd0b07f4d0c33f2b5ff4814328fa5 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/Project_Citadel_3DS.3dsx
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V4 mainloop build: Jul 23 2026 01:14:01
+NEWGAME_HOME_T7.log
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/systemshock.elf
+TIME: 2026-07-23 01:14:22.685134800 -0400  SIZE: 20110596
+2ccc6be761f6143c4e53db015f48789018061c08aaace7e92469e07208a3e546 */c/Projects/Citadel-Ship-16-1 - Copy/Source/shockolate/build/systemshock.elf
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V4 mainloop build: Jul 23 2026 01:14:01
+NEWGAME_HOME_T7.log
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/main/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Builds/OGTEST/hello-world/hello-world.3dsx
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 124260
+8f3bb3b809aadd4710289b9107f2d05c9173b661b8d4eead394c9ccb986a6e48 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Builds/OGTEST/hello-world/hello-world.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Builds/OGTEST/hello-world/hello-world.elf
+TIME: 2026-07-20 12:11:40.000000000 -0400  SIZE: 839320
+7251254ced4463fc5594f397863538842f7a42e787375ae08924f58a03e86b0c */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Builds/OGTEST/hello-world/hello-world.elf
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/shocktrap_OLDWORKS.3dsx
+TIME: 2026-07-20 00:45:00.000000000 -0400  SIZE: 2017764
+adc0acee5fdc895db0dad43ceeb74cae18c32608d10fb3b220cc06ab3d8f14b2 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/shocktrap_OLDWORKS.3dsx
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+PROJECT CITADEL V6 START | build=%s %s
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 21 2026 00:44:07
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V4 START build=%s %s mouse=%d,%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resbuild.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/res.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resfile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resmake.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+TIME: 2026-07-23 14:40:27.624067800 -0400  SIZE: 77588
+6587fe9a4046795ad0dc16f395c3e3bb910e3bda697e3040ce6be9d0a8f07a5d */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+MARKERS:
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+TIME: 2026-07-23 14:40:35.499590700 -0400  SIZE: 63788
+02556b9abde779bc965609805f79e1ca27161495a9a6f2dc2b71b02c2f616d18 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+MARKERS:
+V21A PRIMER BEGIN: waiting for completed Journey VBlank
+V21A PRIMER ABORTED: application does not own GPU right
+V21A PRIMER RESULTS save=0x%08lX capture=0x%08lX release=0x%08lX acquire=0x%08lX restore=0x%08lX topL=%p topR=%p bottom=%p
+V21A PRIMER COMPLETE
+V21A PRIMER COMPLETE WITH ERROR; do not treat as primed
+V4 mainloop build: Jul 23 2026 14:40:35
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+TIME: 2026-07-23 14:40:56.831581500 -0400  SIZE: 127104
+d4adb361739a1b444063891f9244e796b41f0fe229234269684270de3bed2837 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+MARKERS:
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_arm_newgame_home_t7
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+TIME: 2026-07-23 14:41:08.277132900 -0400  SIZE: 260884
+e2a45746f0b45c54ab9b6292205c935ca98a55a3a3957fdbe92bf3c441ad0814 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+MARKERS:
+NEWGAME_HOME_T7.log
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+.rel.text.citadel_3ds_newgame_home_t7_mask_active
+.rel.text.citadel_3ds_newgame_home_t7_mask_step
+.rel.text.citadel_3ds_arm_newgame_home_t7
+.rel.text.citadel_3ds_newgame_home_t7_post_frame
+.rel.text.citadel_3ds_newgame_home_t7_pre_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+TIME: 2026-07-23 14:41:21.406156500 -0400  SIZE: 153648
+75adbb146eb0537e45f1629f8bea0942d6663e9cc9e9b0097b248049a3725d5c */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/libGAME_LIB.a
+TIME: 2026-07-23 14:41:09.805114600 -0400  SIZE: 8233140
+5cd5d3165255ff58451365dad7480a27a62e4a2e2bed34fdcc6c9ed33ce48c68 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/libGAME_LIB.a
+MARKERS:
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+V21A PRIMER BEGIN: waiting for completed Journey VBlank
+V21A PRIMER ABORTED: application does not own GPU right
+V21A PRIMER RESULTS save=0x%08lX capture=0x%08lX release=0x%08lX acquire=0x%08lX restore=0x%08lX topL=%p topR=%p bottom=%p
+V21A PRIMER COMPLETE
+V21A PRIMER COMPLETE WITH ERROR; do not treat as primed
+V4 mainloop build: Jul 23 2026 14:40:35
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_arm_newgame_home_t7
+NEWGAME_HOME_T7.log
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_pre_frame
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_mask_active
+citadel_3ds_newgame_home_t7_mask_step
+citadel_3ds_arm_newgame_home_t7
+citadel_3ds_newgame_home_t7_post_frame
+citadel_3ds_newgame_home_t7_pre_frame
+.rel.text.citadel_3ds_newgame_home_t7_mask_active
+.rel.text.citadel_3ds_newgame_home_t7_mask_step
+.rel.text.citadel_3ds_arm_newgame_home_t7
+.rel.text.citadel_3ds_newgame_home_t7_post_frame
+.rel.text.citadel_3ds_newgame_home_t7_pre_frame
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/Project_Citadel_3DS.3dsx
+TIME: 2026-07-23 14:41:26.884075600 -0400  SIZE: 2111500
+0131ee45f4f4c0acb88599e6a44bb776064566ae5c34b3f4515c1a5866ffa332 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/Project_Citadel_3DS.3dsx
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V21A PRIMER BEGIN: waiting for completed Journey VBlank
+V21A PRIMER ABORTED: application does not own GPU right
+V21A PRIMER RESULTS save=0x%08lX capture=0x%08lX release=0x%08lX acquire=0x%08lX restore=0x%08lX topL=%p topR=%p bottom=%p
+V21A PRIMER COMPLETE
+V21A PRIMER COMPLETE WITH ERROR; do not treat as primed
+V4 mainloop build: Jul 23 2026 14:40:35
+NEWGAME_HOME_T7.log
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/systemshock.elf
+TIME: 2026-07-23 14:41:26.183584500 -0400  SIZE: 20107768
+9bd1f1ae4e28866505cd6a51a3108ef276efae95307fb81e9d7a4143eea1e627 */c/Projects/Citadel-Ship-16-1_PROBFUCKED/Source/shockolate/build/systemshock.elf
+MARKERS:
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+V21A PRIMER BEGIN: waiting for completed Journey VBlank
+V21A PRIMER ABORTED: application does not own GPU right
+V21A PRIMER RESULTS save=0x%08lX capture=0x%08lX release=0x%08lX acquire=0x%08lX restore=0x%08lX topL=%p topR=%p bottom=%p
+V21A PRIMER COMPLETE
+V21A PRIMER COMPLETE WITH ERROR; do not treat as primed
+V4 mainloop build: Jul 23 2026 14:40:35
+NEWGAME_HOME_T7.log
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/main/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/timer
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/haptic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/joystick
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/sensor
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/atomic
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/thread/n3ds
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/audio
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/events
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/build-3ds/include/SDL2
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/video
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Builds/OGTEST/hello-world/hello-world.3dsx
+TIME: 2026-07-20 12:11:41.683875300 -0400  SIZE: 124260
+8f3bb3b809aadd4710289b9107f2d05c9173b661b8d4eead394c9ccb986a6e48 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Builds/OGTEST/hello-world/hello-world.3dsx
+MARKERS:
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Builds/OGTEST/hello-world/hello-world.elf
+TIME: 2026-07-20 12:11:40.858598800 -0400  SIZE: 839320
+7251254ced4463fc5594f397863538842f7a42e787375ae08924f58a03e86b0c */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Builds/OGTEST/hello-world/hello-world.elf
+MARKERS:
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/shocktrap_OLDWORKS.3dsx
+TIME: 2026-07-20 00:45:00.000000000 -0400  SIZE: 2017764
+adc0acee5fdc895db0dad43ceeb74cae18c32608d10fb3b220cc06ab3d8f14b2 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/shocktrap_OLDWORKS.3dsx
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+PROJECT CITADEL V6 START | build=%s %s
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 21 2026 00:44:07
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V4 START build=%s %s mouse=%d,%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resacc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resbuild.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/res.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resfile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/resmake.c
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/src/render/software/SDL_render_sw.c
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+TIME: 2026-07-22 12:00:08.691429900 -0400  SIZE: 77744
+da69197a90cfa7509f2a9ea3616b2956c90ba0a4209bf601855a3836587273ec */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/gamewrap.o
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/EDMS/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+TIME: 2026-07-22 12:00:17.192333900 -0400  SIZE: 58936
+e64bf4b6df32c519dfd9dafe998ee74402d88ebbab5c8ae9224dc9d6cc75245e */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/mainloop.o
+MARKERS:
+V4 mainloop build: Jul 22 2026 12:00:17
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/INPUT/Source
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mainloop.c
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+TIME: 2026-07-22 12:00:40.387629100 -0400  SIZE: 127156
+67d3d87887bbe9e548816d489ccfc9da4472344ab5799a5e342eecfe7e0dcb30 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/setup.o
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/INPUT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+TIME: 2026-07-22 12:00:53.236349400 -0400  SIZE: 242704
+35d100d4b79e66cd73a5ebdbb93a067b7a322979c5868dc3d0313adf431d5d79 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/GAME_LIB.dir/src/GameSrc/wrapper.o
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/INPUT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+TIME: 2026-07-22 12:00:58.934410300 -0400  SIZE: 153780
+d38fca39d87b8dd0d13184aff94c983c1828df60ed1bf847070181b234ad2335 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/CMakeFiles/systemshock.dir/src/MacSrc/Shock.o
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/libGAME_LIB.a
+TIME: 2026-07-22 12:00:54.855988800 -0400  SIZE: 8225336
+01ceaa14ec25e7ae95a2819ebe6ed356fb5d99fe2ae4c15cba0fb5eb4c5994e3 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/libGAME_LIB.a
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/EDMS/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/airupt.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amap.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ammomfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/H
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/LOG/src
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/DSTRUCT/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/INPUT/Source
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source
+C:/Users/benny/Desktop/Project Citadel 3D/Libraries/SDL2/include
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/Headers
+C:\Users\benny\Desktop\Project Citadel 3D\Source\shockolate\build
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/Project_Citadel_3DS.3dsx
+TIME: 2026-07-22 12:01:04.804114000 -0400  SIZE: 2108380
+f9f3607d8a15c916c6d3c447b06113cf3fcae058d5752949bb05a92c84447432 */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/Project_Citadel_3DS.3dsx
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 22 2026 12:00:17
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+
+============================================================
+FILE: /c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/systemshock.elf
+TIME: 2026-07-22 12:01:04.114889500 -0400  SIZE: 20116140
+acc595ec9a4a06f57de5851a0e16265584b48ac558119c7c8f96c5ce16e6d51f */c/Users/benny/Desktop/Project Citadel 3D - BACKUP - V16-1Ship/Source/shockolate/build/systemshock.elf
+MARKERS:
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/ShockBitmap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/InitMac.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Shock.c
+GPU V16.1 SPLASH begin duration_ms=%u ready=%d
+GPU V16.1 SPLASH presentation failed; continuing to game
+GPU V16.1 SPLASH complete; beginning System Shock presentation
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=RED state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE complete; normal live presentation resumed
+GPU V16.1 PHASE begin=%s duration_ms=6000 loader=C3D_TexLoadImage flush=C3D_TexFlush bind=AFTER_C2D_SceneBegin draw=C2D_DrawImageAt bottom_marker=GREEN
+GPU V16.1 PHASE complete; normal live RGB565 presentation resumed
+GPU V16.1 PALETTE SYNC refresh=%lu mismatches=%u rgb565[0]=0x%04X rgb565[1]=0x%04X rgb565[255]=0x%04X
+GPU V16.1 PHASE begin=%s duration_ms=6000 marker=BLUE loader=C2D_SpriteSheetLoad state_reset=C2D_Prepare bind_owner=C2D_DrawImageAt
+GPU V16.1 PHASE SKIPPED reason=asset-unavailable
+GPU V16.1 FIRST LIVE FEED src=%dx%d pitch=%d linear=%dx%d texture=%dx%d palette=AUTHORITATIVE_EVERY_FRAME initial_mismatches=%u hash=0x%08lX
+GPU V16.1 SYNC ORDER confirmed: FrameBegin(SYNCDRAW) -> direct texture write -> forced texture rebind -> draw
+GPU V16.1 CACHE REBIND active: C3D_TexBind(0, live_texture) after every live upload
+PROJECT CITADEL V16.1 LAUNCH POLISH START | build=%s %s
+GPU V16.1 SCREEN FORMAT before-targets top=%u bottom=%u expected_rgba8=%u
+GPU V16.1 TARGET OUTPUT transfer_in=RGBA8 transfer_out=RGBA8 screen_framebuffer=SDL_RGBA8
+GPU V16.1 SPLASH LOAD path=%s result=FAIL
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=no-images
+GPU V16.1 SPLASH LOAD path=%s result=FAIL reason=invalid-image
+GPU V16.1 SPLASH LOAD path=%s result=SUCCESS image=%ux%u texture=%ux%u
+GPU V16.1 SPLASH unavailable; continuing directly to game
+GPU V16.1 LAUNCH PIPELINE ready texture=%dx%d content=%dx%d default-mode=640x400 source-resample=none filter=NEAREST
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Prefs.c
+PROJECT CITADEL AUDIO V13A+SUSPENDV2 START build=%s %s voices=%d
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/MacSrc/Xmi.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/audiolog.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cutsloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frsetup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/fullscrn.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gameloop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/hud.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/init.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/leanmetr.c
+V4 mainloop build: Jul 22 2026 12:00:17
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/mfdfunc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/musicai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/newmfd.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objects.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objsim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/physics.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/saveload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/schedule.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/setup.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/textmaps.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/trigger.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/wrapper.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamerend.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/ai.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/amaploop.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/bark.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/citres.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/cone.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/damage.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/email.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frcamera.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/frclip.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamesort.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/gamewrap.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/objload.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/vmail.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/GameSrc/anim.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/UI/Source/region.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/GR/grnull.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/Flat8/fl8dbl.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/2D/Source/MacDev.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/stack.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/LG/Source/tmpalloc.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/interp.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/matrix.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/3D/Source/polygon.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/afile.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/amov.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/AFILE/Source/compose.c
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/FIX/Source/fix_sqrt.c
+PROJECT CITADEL INPUT V16.1 START build=%s %s mouse=%d,%d
+SDL_QUIT received; requesting V16.1 HOME cleanup
+C:/Users/benny/Desktop/Project Citadel 3D/Source/shockolate/src/Libraries/RES/Source/refacc.c
+

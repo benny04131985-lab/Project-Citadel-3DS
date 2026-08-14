@@ -1,0 +1,35 @@
+--- src/GameSrc/render.c (S2.1)
++++ src/GameSrc/render.c (S3)
+@@ -47,6 +47,10 @@
+ #pragma pop_macro("KEY_LEFT")
+ #pragma pop_macro("KEY_DOWN")
+ #pragma pop_macro("KEY_UP")
++#endif
++
++#if defined(__3DS__) || defined(_3DS)
++#warning "PROJECT CITADEL 3D S3: ship-safe exceptional-view flattening is ACTIVE"
+ #endif
+ 
+ #include "gamerend.h"
+@@ -373,12 +377,17 @@
+         // printf("fr_rend\n");
+ #if defined(__3DS__) || defined(_3DS)
+         /*
+-         * S2 performs a second geometry pass only while the physical slider
+-         * is raised and the player is in the ordinary station world.
+-         * Cyberspace remains on S1 identical-eye transport for this stage.
++         * S3 keeps ordinary station gameplay on the proven dual-camera path.
++         * Exceptional full-view modes that draw outside the normal world/HUD
++         * compositor deliberately fall back to S1 identical-eye transport:
++         * cyberspace, the 360-degree view, and security-camera takeover.
+          */
+         citadel_3ds_stereo_begin_frame(
+-            global_fullmap->cyber ? 0.0f : osGet3DSliderState());
++            (global_fullmap->cyber ||
++             view360_render_on ||
++             hack_takeover)
++                ? 0.0f
++                : osGet3DSliderState());
+ 
+         if (citadel_3ds_stereo_frame_enabled()) {
+             citadel_3ds_stereo_begin_right_pass();

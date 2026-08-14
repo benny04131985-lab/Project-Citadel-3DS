@@ -1,0 +1,41 @@
+{
+  "milestone": "CITADEL-C3D-R3D4A-TERRAIN-ERASE-MASK1",
+  "created": "2026-08-04T21:08:32.609681-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "architecture": {
+    "software_terrain_texture_mapping": "SUPPRESSED",
+    "terrain_occlusion": "FLAT_KEY_ZERO_POLYGON_ERASE",
+    "terrain_reference_canvas": "DISABLED",
+    "per_pixel_reference_comparison": "DISABLED",
+    "foreground_format": "RGBA5551",
+    "foreground_key": 0
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "45d78fe17440e64c0e864faa0bdad20d509a2b39ca68b5d348dbfcef3118ce8a",
+      "after_sha256": "673cbe360a3cd7192ac6031cc22df54670a191fdb0a77475af0585fce2e23b9b"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "9e47871fe44e1021d0e4471b788d726a39552f0da938188079f1afa59946cfa2",
+      "after_sha256": "918226c866dd79490e5695bf42a4bb87afeeb18b8f62a86c1b0dcde5d2c69bc3"
+    },
+    "src/GameSrc/frsetup.c": {
+      "before_sha256": "9688c24125a2aa125e497c0d68ccf6556769effdadd8e86d9c51178d9696f345",
+      "after_sha256": "062c0a75d1f83ac07512440860085c6a625c6a17fe01eda80a6b43e517f5ddf1"
+    },
+    "src/Libraries/3D/Source/tmap.c": {
+      "before_sha256": "15cc6282adedefc6f83afa78c40106b1348ad97359a25c8a8ea10b9de04d39f0",
+      "after_sha256": "9234623895b099955d302dc5c60c75409135f8ee1bfd7ce2e004fc837851d9be"
+    }
+  },
+  "preserved": [
+    "R3D2B bitmap descriptor snapshots",
+    "native RGB565 terrain textures",
+    "original software painter ordering",
+    "unsupported and transparent terrain software fallback",
+    "pause and wrapper complete-software fallback",
+    "stereo complete-software fallback",
+    "Legacy complete-software path",
+    "Dual-screen layout and lower-screen UI"
+  ]
+}

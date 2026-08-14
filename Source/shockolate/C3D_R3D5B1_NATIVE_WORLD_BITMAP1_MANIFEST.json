@@ -1,0 +1,57 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B1-NATIVE-WORLD-BITMAP1",
+  "created": "2026-08-05T13:52:42.108432-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "native_category": "STANDARD_NONHUD_BINARY_ALPHA_FAUBJ_BITMAP",
+  "geometry": {
+    "source": "G3_BITMAP_COMMON_FINAL_PROJECTED_QUAD",
+    "placement": "EXACT_SOFTWARE_SCREEN_COORDINATES",
+    "perspective_w": "OBJECT_ANCHOR_CAMERA_Z",
+    "draw_order": "ORIGINAL_PAINTER_STREAM"
+  },
+  "texture": {
+    "snapshot": "STABLE_FLAT8_BEFORE_RESOURCE_RELEASE",
+    "format": "RGBA5551",
+    "alpha_key": "PALETTE_INDEX_ZERO",
+    "cache_identity": "FNV1A64_CONTENT_HASH",
+    "maximum_snapshots_per_frame": 32,
+    "maximum_dimensions": "256x256"
+  },
+  "foreground_occlusion": {
+    "operation": "AFFINE_ALPHA_MASK_TO_KEY_ZERO",
+    "failure_policy": "KEEP_COMPLETE_SOFTWARE_BITMAP"
+  },
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "2f457c0cef10f31af15b7d5360e632a08174d3cf569c1f4a1a2bc42e3c533ba3",
+      "after_sha256": "f34c1b7e4e9f8f914e44d910139c0ea28fd401e59ea651414e9ebfefcffc5b9c"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "aabc2833ddc3adb49e5b255d3eccb0fb52434acc4051c1e10225a91b14890bd4",
+      "after_sha256": "686ed09952bdfb563f4b0fc3d7aad20373e2a0e834b457d7c51096800df2c656"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "a1a530c8a1b02e971433665be415f9a83295347ceaa7b982b55a3c9421b203bd",
+      "after_sha256": "06cfc035b90d6fc68a9a20f407382c22ecd3cbd3b8042615f7d50a8d7ecdab3b"
+    },
+    "src/GameSrc/gameobj.c": {
+      "before_sha256": "efd30bb00f68e45e93dc4194624be5b144f48e74d5ae2907935fade8ec71d730",
+      "after_sha256": "0d1971b4100baf2f87b7bb3bf98249eee497b54a539f7a4a453b707935e2430c"
+    },
+    "src/Libraries/3D/Source/Bitmap.c": {
+      "before_sha256": "e845ccdaabaaea824ac122d4f7ca5500781345dbd01a1ac43272ffebebb0c37d",
+      "after_sha256": "10e7656ab6261bff4cbbf345d842b8dcb9cc0c90113b1cb0aced3ff95af57d8e"
+    }
+  },
+  "preserved": [
+    "R3D4D exact projected terrain and door placement",
+    "R3D5A3 opaque and keyed native door paths",
+    "terrain and door foreground erases",
+    "all critter and model paths",
+    "HUD, MFD, weapon and effect paths",
+    "pause and wrapper software fallback",
+    "stereo software fallback",
+    "Legacy software path",
+    "Dual-screen lower UI"
+  ]
+}

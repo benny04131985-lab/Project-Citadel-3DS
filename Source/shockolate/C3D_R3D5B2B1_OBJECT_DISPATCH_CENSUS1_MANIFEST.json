@@ -1,0 +1,43 @@
+{
+  "milestone": "CITADEL-C3D-R3D5B2B1-OBJECT-DISPATCH-CENSUS1",
+  "created": "2026-08-06T09:49:33.098464-04:00",
+  "source_root": "/c/Projects/Citadel_Citro3D_NATIVE_DEV/Source/shockolate",
+  "behavioral_change": false,
+  "census": {
+    "visible_dispatch_buckets": 14,
+    "active_inventory_buckets": 14,
+    "inventory_period_dispatches": 4096,
+    "object_slots_scanned": 872,
+    "multiview_inventory_samples": 8,
+    "multiview_visible_samples": 8
+  },
+  "preserved": [
+    "R3D4D exact native terrain",
+    "R3D5A3 native opaque and keyed doors",
+    "R3D5B1E native standard world sprites",
+    "R3D5B2A native animated critters",
+    "R3D5B2B multiview candidate routing",
+    "all safe software fallbacks",
+    "HUD, MFD, weapon, effects, models and voxels",
+    "pause, stereo, Legacy and DIAG3 behavior",
+    "shaders and CMake"
+  ],
+  "files": {
+    "src/MacSrc/Shock.c": {
+      "before_sha256": "9739ce118fa498a13d0261bfa347284a61a905718257e5d18b44efe8fde28290",
+      "after_sha256": "bb8098d75b19b7937aba5489efd1cd166e3d928af6e13b4c3d2a18b49fe0dc96"
+    },
+    "src/MacSrc/Citro3DNative.c": {
+      "before_sha256": "57b92b1ee60152134fd8303877c929b472304e6c0705e466ed576f04ae71905b",
+      "after_sha256": "7f0eb313f535c5557187cb53474494ed91fe530eb50ea17ca14d6b1f62f6864a"
+    },
+    "src/MacSrc/Citro3DNative.h": {
+      "before_sha256": "10ad6aad2f392973decd402b2a27e9c9026a0949fdae98891f7578e001924300",
+      "after_sha256": "7f046fbd03ae6bd03890ef32364738cb9a2a5a1e27abe7e782d17c6d45c53bfe"
+    },
+    "src/GameSrc/gameobj.c": {
+      "before_sha256": "3b9c8c53787cb435a45ac4030960596c2cbd9a8c4b61431c5e74818815e0cb57",
+      "after_sha256": "d820192ea6defa1fc4983be6634375727a8d676935f7ec905bdbf51753c5eb50"
+    }
+  }
+}
